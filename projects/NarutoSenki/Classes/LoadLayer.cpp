@@ -237,6 +237,12 @@ void LoadLayer::perloadCharIMG(const string &name)
 	{
 		addSprites(mk_kuchiyose_plist("Akamaru"));
 	}
+	else if (name == HeroEnum::Zetsu)
+	{
+		addSprites(mk_kuchiyose_plist("WhiteZetsu"));
+		addSprites(mk_ninja_plist("Zetsu2"));
+		addSprites(mk_skill_plist("Zetsu2"));
+	}
 
 	// Aset tambahan dari Lua, mis. Guy -> Guy8Gates.plist + Guy8Gates_Skill.plist + suara Guy8Gates
 	applyLuaCharAssets(name, false);

@@ -5,6 +5,8 @@ namespace SummonEnum
 {
 	// Kiba
 	mk_const(Akamaru);
+	
+	// Zetsu
     mk_const(WhiteZetsu);
 
 	// Deidara

@@ -95,7 +95,7 @@ public:
 		bool aiFallback = false;
 
 		__begin__
-		is_or(" WhiteZetsu", "Akamaru") 						ptr = new Akamaru();
+		is("Akamaru") 						ptr = new Akamaru();
 		is("Asuma") 						ptr = new Asuma();
 		is("Centipede") 					ptr = new Centipede();
 		is("Chiyo") 						ptr = new Chiyo();
@@ -153,6 +153,7 @@ public:
 		is("Tobirama") 						ptr = new Tobirama();
 		is("Tsunade") 						ptr = new Tsunade();
 		is_or("Zetsu", " Zetsu2") 						ptr = new Zetsu();
+		is("WhiteZetsu") 						ptr = new WhiteZetsu();
 		is("Juubi")				ptr = new Guardian();
 		else								{ aiFallback = true; ptr = new DefaultAI(); }
 

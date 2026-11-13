@@ -1,5 +1,6 @@
 #pragma once
 #include "Hero.hpp"
+#include "Kuchiyose/WhiteZetsu.hpp"
 
 class Zetsu : public Hero
 {
