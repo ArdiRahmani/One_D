@@ -1,6 +1,5 @@
 #pragma once
 #include "Hero.hpp"
-#include "Kuchiyose/WhiteZetsu.hpp"
 
 class Zetsu : public Hero
 {
@@ -15,7 +14,7 @@ class Zetsu : public Hero
 }
 	void perform() override
 	{
-	bif (getName() == HeroEnum::Zetsu2)
+	if (getName() == HeroEnum::Zetsu2)
     {
         perform_Zetsu2();
         return;
@@ -401,7 +400,7 @@ void perform_Zetsu2()
 	{
 	if (getName() == HeroEnum::Zetsu)
 		{
-		auto clone = createCloneHero<Akamaru>(SummonEnum::WhiteZetsu);
+		auto clone = createCloneHero<WhiteZetsu>(SummonEnum::WhiteZetsu);
 		clone->_isArmored = true;
 		_monsterArray.push_back(clone);
 		return clone;
