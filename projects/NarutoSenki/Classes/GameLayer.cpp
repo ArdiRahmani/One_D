@@ -216,9 +216,8 @@ void GameLayer::initTileMap()
 
 void GameLayer::initGard()
 {
-	setRand();
-	int index = random(2);
-	auto guardianName = index == 0 ? GuardianEnum::Juubi : GuardianEnum::Juubi;
+	// Hanya ada satu Guardian: Juubi
+	auto guardianName = GuardianEnum::Juubi;
 	auto guardianGroup = playerGroup == Group::Konoha ? Group::Akatsuki : Group::Konoha;
 	auto guardian = Provider::create(guardianName, Role::Com, guardianGroup);
 
@@ -829,8 +828,6 @@ void GameLayer::onLeft()
 	if (_isHardCoreGame)
 	{
 		removeSprites(kGuardian_Juubi);
-		removeSprites(kGuardian_Juubi);
-		KTools::prepareFileOGG(GuardianEnum::Juubi, true);
 		KTools::prepareFileOGG(GuardianEnum::Juubi, true);
 	}
 

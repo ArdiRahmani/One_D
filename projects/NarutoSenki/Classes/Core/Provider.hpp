@@ -48,7 +48,7 @@
 #include "Shinobi/Bunshin/RikudoNarutoClone.hpp"
 
 // Guardian
-// Han, Juubi
+// Juubi
 #include "Guardian/Guardian.hpp"
 
 #include "Data/UnitDefines.h"

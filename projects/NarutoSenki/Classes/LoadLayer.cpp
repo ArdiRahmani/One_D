@@ -96,8 +96,6 @@ void LoadLayer::preloadIMG()
 	if (_isHardCoreMode)
 	{
 		addSprites(kGuardian_Juubi);
-		addSprites(kGuardian_Juubi);
-		KTools::prepareFileOGG(GuardianEnum::Juubi);
 		KTools::prepareFileOGG(GuardianEnum::Juubi);
 	}
 	addSprites(kFlog_Kotetsu);
@@ -248,8 +246,8 @@ void LoadLayer::unloadCharIMG(CharacterBase *c)
 {
 	if (c == nullptr || c->isClone() || c->isSummon() || c->isGuardian())
 	{
-		// Guardians (Han/Juubi) live under "Unit/Guardian/..." and are
-		// unloaded separately via kGuardian_Han/kGuardian_Juubi in
+		// Guardian (Juubi) lives under "Unit/Guardian/..." and is
+		// unloaded separately via kGuardian_Juubi in
 		// GameLayer::onLeft(). Building a "Unit/Ninja/..." path for them
 		// here points to a nonexistent plist, which fails to load and
 		// crashes (SIGSEGV null deref in CCSpriteFrameCache) when cocos2d-x

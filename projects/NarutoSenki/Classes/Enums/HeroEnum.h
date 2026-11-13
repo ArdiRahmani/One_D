@@ -72,6 +72,6 @@ namespace HeroEnum
 	mk_const(RikudoNarutoClone);
 
 	// Guardian
-	// Han, Roshi
+	// Juubi
 	mk_const(Guardian);
 } // namespace HeroEnum
