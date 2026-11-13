@@ -67,6 +67,8 @@
 #include "Kuchiyose/Sanshouuo.hpp"
 #include "Kuchiyose/Saso.hpp"
 #include "Kuchiyose/Slug.hpp"
+#include "Kuchiyose/WhiteZetsu.hpp"
+
 
 
 
@@ -150,9 +152,9 @@ public:
 		is("Suigetsu") 						ptr = new Suigetsu();
 		is("Tenten") 						ptr = new Tenten();
 		is("Tobi") 							ptr = new Tobi();
-		is("Tobirama") 						ptr = new Tobirama();
+		is("Tobirama") 					ptr = new Tobirama();
 		is("Tsunade") 						ptr = new Tsunade();
-		is_or("Zetsu", " Zetsu2") 						ptr = new Zetsu();
+		is_or("Zetsu", " Zetsu2") 			ptr = new Zetsu();
 		is("WhiteZetsu") 						ptr = new WhiteZetsu();
 		is("Juubi")				ptr = new Guardian();
 		else								{ aiFallback = true; ptr = new DefaultAI(); }

@@ -147,7 +147,7 @@ class Zetsu : public Hero
 		checkHealingState();
 	}
 
-void perform_Zetsu2()
+    void perform_Zetsu2()
 	{
 		_mainTarget = nullptr;
 		findHeroHalf();
@@ -407,6 +407,7 @@ void perform_Zetsu2()
 		return clone;
 	}
 }
+
 private:
 	void tryLockSkillButton()
 	{
