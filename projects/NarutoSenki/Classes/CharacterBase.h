@@ -606,7 +606,7 @@ public:
 		else
 			_defense = 0;
 	}
-	bool isGuardian() { return _name == GuardianEnum::Juubi; }
+	bool isGuardian() { return _name == GuardianEnum::Juubi || _name == GuardianEnum::Juubi; }
 	bool isNotGuardian() { return !isGuardian(); }
 	// role extensions
 	bool isCom() { return _role == Role::Com; }

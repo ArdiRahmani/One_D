@@ -96,6 +96,8 @@ void LoadLayer::preloadIMG()
 	if (_isHardCoreMode)
 	{
 		addSprites(kGuardian_Juubi);
+		addSprites(kGuardian_Juubi);
+		KTools::prepareFileOGG(GuardianEnum::Juubi);
 		KTools::prepareFileOGG(GuardianEnum::Juubi);
 	}
 	addSprites(kFlog_Kotetsu);
