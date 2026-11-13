@@ -115,8 +115,7 @@ namespace FlogEnum
 
 namespace GuardianEnum
 {
-	mk_const(Han);
-	mk_const(Roshi);
+	mk_const(Juubi);
 } // namespace GuardianEnum
 
 #define make_path(name, type, ext) "Unit/" type "/" name ext
@@ -136,8 +135,7 @@ constexpr auto kFlog_FemalePain = mk_flog_plist("FemalePainFlog");
 constexpr auto kFlog_Pain = mk_flog_plist("PainFlog");
 constexpr auto kFlog_Obito = mk_flog_plist("ObitoFlog");
 // Guardians
-constexpr auto kGuardian_Han = mk_guardian_plist("Han");
-constexpr auto kGuardian_Roshi = mk_guardian_plist("Roshi");
+constexpr auto kGuardian_Juubi = mk_guardian_plist("Juubi");
 
 enum class ActionFlag : uint32_t
 {

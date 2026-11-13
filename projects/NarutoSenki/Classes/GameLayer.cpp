@@ -216,9 +216,7 @@ void GameLayer::initTileMap()
 
 void GameLayer::initGard()
 {
-	setRand();
-	int index = random(2);
-	auto guardianName = index == 0 ? GuardianEnum::Roshi : GuardianEnum::Han;
+guardianName = GuardianEnum::Juubi;
 	auto guardianGroup = playerGroup == Group::Konoha ? Group::Akatsuki : Group::Konoha;
 	auto guardian = Provider::create(guardianName, Role::Com, guardianGroup);
 
@@ -828,9 +826,7 @@ void GameLayer::onLeft()
 
 	if (_isHardCoreGame)
 	{
-		removeSprites(kGuardian_Han);
 		removeSprites(kGuardian_Roshi);
-		KTools::prepareFileOGG(GuardianEnum::Han, true);
 		KTools::prepareFileOGG(GuardianEnum::Roshi, true);
 	}
 
