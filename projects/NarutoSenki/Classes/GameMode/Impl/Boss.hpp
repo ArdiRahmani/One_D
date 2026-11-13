@@ -13,7 +13,7 @@ public:
 
 	void onInitHeros()
 	{
-		initHeros(3, 1);
+		initHeros(5, 5);
 	}
 
 	void onGameStart()
