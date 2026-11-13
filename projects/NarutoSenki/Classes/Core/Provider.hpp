@@ -128,7 +128,7 @@ public:
 		is("RikudoNaruto") 					is_role(Role::Clone) ptr = new RikudoNarutoClone();	else ptr = new Naruto();
 		is("SageNaruto") 					is_role(Role::Clone) ptr = new SageNarutoClone();	else ptr = new Naruto();
 		is("Neji") 							ptr = new Neji();
-		is("Orochimaru") 					ptr = new Orochimaru();
+		is_or("Guy", "Orochimaru") 					ptr = new Orochimaru();
 		is("Pakura") 					ptr = new Pakura();
 		is_or("Pain", "Nagato") 			ptr = new Pain();
 		is("AnimalPath") 					ptr = new AnimalPath();
