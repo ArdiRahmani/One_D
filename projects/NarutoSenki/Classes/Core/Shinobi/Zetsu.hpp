@@ -5,13 +5,12 @@
 class Zetsu : public Hero
 {
 	void setID(const string &name, Role role, Group group) override
-	{
-	if (getName() == HeroEnum::Zetsu)
+{
+    if (getName() == HeroEnum::Zetsu)
 		{
-		Hero::setID(name, role, group);
-
-		getGameLayer()->onHUDInitialized(BIND(Zetsu::tryLockSkillButton));
-	}
+        Hero::setID(name, role, group);
+        getGameLayer()->onHUDInitialized(BIND(Zetsu::tryLockSkillButton));
+    }
 }
 	void perform() override
 	{
@@ -398,26 +397,25 @@ class Zetsu : public Hero
 	}
 }
 	Hero *createClone(int cloneTime) override
-	{
-	if (getName() == HeroEnum::Zetsu)
-		{
-		auto clone = createCloneHero<WhiteZetsu>(SummonEnum::WhiteZetsu);
-		clone->_isArmored = true;
-		_monsterArray.push_back(clone);
-		return clone;
-	}
+{
+    if (getName() == HeroEnum::Zetsu)
+    {
+        auto clone = createCloneHero<WhiteZetsu>(SummonEnum::WhiteZetsu);
+        clone->_isArmored = true;
+        _monsterArray.push_back(clone);
+        return clone;
+    }
+
+    return nullptr;
 }
 
 private:
 	void tryLockSkillButton()
 	{
-	if (getName() == HeroEnum::Zetsu)
-		{
 		if (isPlayer())
 		{
 			getGameLayer()->getHudLayer()->skill2Button->setLock();
 			getGameLayer()->getHudLayer()->skill3Button->setLock();
-		}
 	}
  }
 };
