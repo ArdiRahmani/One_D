@@ -1756,6 +1756,7 @@ void CharacterBase::setItem(ABType type)
 	if (getName() == HeroEnum::Kankuro ||
 		getName() == HeroEnum::Chiyo ||
 		getName() == HeroEnum::Kiba ||
+		getName() == HeroEnum::Zetsu ||
 		getName() == HeroEnum::Kakuzu)
 	{
 		if (hasMonsterArrayAny())
@@ -2398,7 +2399,8 @@ void CharacterBase::setBuff(int buffValue)
 				scheduleOnce(schedule_selector(CharacterBase::resumeAction), buffStayTime);
 			}
 		}
-		else if (getName() == HeroEnum::Kiba)
+		else if (getName() == HeroEnum::Kiba ||
+				  getName() == HeroEnum::Zetsu)
 		{
 			if (_skillChangeBuffValue == 18)
 			{
@@ -3831,7 +3833,8 @@ void CharacterBase::setMonAttack(int skillNum)
 	{
 		if (mo->getName() != "Traps")
 		{
-			if (getName() == HeroEnum::Kiba)
+			if (getName() == HeroEnum::Kiba ||
+				  getName() == HeroEnum::Zetsu)
 			{
 				mo->attack(SKILL1);
 			}
@@ -3919,6 +3922,8 @@ void CharacterBase::setTransform()
 		setID(HeroEnum::Lee, _role, _group);
 	else if (getName() == HeroEnum::Pain)
 		setID(HeroEnum::Nagato, _role, _group);
+	else if (getName() == HeroEnum::Zetsu)
+		setID(HeroEnum::Zetsu2, _role, _group);	
 
 	setNAttackValue(oldNAttackValue);
 	setMaxHPValue(oldMaxHP, false);

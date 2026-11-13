@@ -30,6 +30,9 @@ local list = {
     Jinpachi = 'Jibaku',
     Cyclone = 'JibakuEX',
     Typhoon = 'Jibaku',
+    Tiger8Gates = 'Hasan',
+    TigerStream = 'Jibaku',
+    Trunk = 'SansyoGreen',
     
 }
 

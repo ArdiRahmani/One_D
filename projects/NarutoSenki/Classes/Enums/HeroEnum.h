@@ -65,6 +65,8 @@ namespace HeroEnum
 	mk_const(Tobi);
 	mk_const(Tobirama);
 	mk_const(Tsunade);
+	mk_const(Zetsu);
+	mk_const(Zetsu2);
 
 	// Bunshin
 	mk_const(NarutoClone);

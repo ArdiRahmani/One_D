@@ -5,7 +5,7 @@ class Hashirama : public Hero
 {
 	// Hashirama
 
-		void perform() override
+void perform() override
 	{
 	if (getName() == HeroEnum::SageHashirama)
     {
@@ -15,8 +15,7 @@ class Hashirama : public Hero
 		_mainTarget = nullptr;
 		findHeroHalf();
 
-		tryUseGear6();
-		tryBuyGear(GearType::Gear06, GearType::Gear01, GearType::Gear02);
+		tryBuyGear(GearType::Gear00, GearType::Gear02, GearType::Gear08);
 
 		if (needBackToTowerToRestoreHP() ||
 			needBackToDefendTower())
@@ -29,7 +28,43 @@ class Hashirama : public Hero
 
 			if (isFreeState())
 			{
-				if (_isCanSkill3 && _mainTarget->getDEF() < 5000 && !_skillChangeBuffValue)
+				if (_isCanOugis2 && !_isControlled && getGameLayer()->_isOugis2Game && !_isArmored && _mainTarget->getHP() < 10000 && !_mainTarget->_isCanGear06)
+				{
+					if (abs(sp.x) < 32)
+					{
+						stepBack();
+						return;
+					}
+					else if (abs(sp.x) > 96 || abs(sp.y) > 32)
+					{
+						if (_isCanGear00)
+							useGear(GearType::Gear00);
+
+						moveDirection = sp.getNormalized();
+						walk(moveDirection);
+						return;
+					}
+
+					changeSide(sp);
+					attack(OUGIS2);
+					return;
+				}
+				else if (_isCanOugis1 && !_isControlled && _mainTarget->getDEF() < 5000 && !_isArmored)
+				{
+					if (abs(sp.x) > 48 || abs(sp.y) > 16)
+					{
+						if (_isCanGear00)
+							useGear(GearType::Gear00);
+
+						moveDirection = sp.getNormalized();
+						walk(moveDirection);
+						return;
+					}
+					changeSide(sp);
+					attack(OUGIS1);
+					return;
+				}
+				else if (_isCanSkill3 && _mainTarget->getDEF() < 5000 && !_isArmored && !_skillChangeBuffValue)
 				{
 					changeSide(sp);
 					attack(SKILL3);
@@ -52,43 +87,30 @@ class Hashirama : public Hero
 						return;
 					}
 
-					if (_isCanOugis2 && !_isControlled && getGameLayer()->_isOugis2Game && !_skillChangeBuffValue && _mainTarget->getDEF() < 5000 && !_mainTarget->_isArmored && _mainTarget->getState() != State::KNOCKDOWN && !_mainTarget->_isSticking)
+					if (_isCanSkill1 && _mainTarget->getDEF() < 5000 && !_isArmored)
 					{
-						if (abs(sp.x) > 32 || abs(sp.y) > 32)
+						if ((abs(sp.x) > 32 || abs(sp.y) > 32))
 						{
 							moveDirection = sp.getNormalized();
 							walk(moveDirection);
 							return;
 						}
-						changeSide(sp);
-						attack(OUGIS2);
-					}
-					else if (_isCanOugis1 && !_isControlled && _mainTarget->getDEF() < 5000 && !_skillChangeBuffValue)
-					{
-						if (abs(sp.x) > 32 || abs(sp.y) > 32)
-						{
-							moveDirection = sp.getNormalized();
-							walk(moveDirection);
-							return;
-						}
-
-						changeSide(sp);
-						attack(OUGIS1);
-					}
-					else if (_isCanSkill2 && _mainTarget->getDEF() < 5000 && !_skillChangeBuffValue)
-					{
-						changeSide(sp);
-						attack(SKILL2);
-						return;
-					}
-					else if (_isCanSkill1 && _mainTarget->getDEF() < 5000 && !_skillChangeBuffValue)
-					{
 						changeSide(sp);
 						attack(SKILL1);
 					}
+					else if (_isCanSkill2 && _mainTarget->getDEF() < 5000 && !_isArmored)
+					{
+						if (abs(sp.x) < 32)
+						{
+							stepBack();
+							return;
+						}
+						changeSide(sp);
+						attack(SKILL2);
+					}
 					else
 					{
-						if (abs(sp.x) > 48 || abs(sp.y) > 32)
+						if (abs(sp.x) > 32 || abs(sp.y) > 32)
 						{
 							moveDirection = sp.getNormalized();
 							walk(moveDirection);
@@ -123,10 +145,15 @@ class Hashirama : public Hero
 
 			if (isFreeState())
 			{
-				if (_mainTarget->isFlog() && _isCanSkill1 && !_skillChangeBuffValue)
+				if (_mainTarget->isFlog() && _isCanSkill1 && !_isArmored)
 				{
 					changeSide(sp);
 					attack(SKILL1);
+				}
+				else if (_isCanSkill2 && _mainTarget->getDEF() < 5000 && !_isArmored && _mainTarget->isFlog() && isBaseDanger)
+				{
+					changeSide(sp);
+					attack(SKILL2);
 				}
 				else
 				{
@@ -140,8 +167,6 @@ class Hashirama : public Hero
 
 		checkHealingState();
 	}
-
-
 	// Hashirama Sage
 
 	void perform_SageHashirama()
@@ -150,7 +175,7 @@ class Hashirama : public Hero
 		findHeroHalf();
 
 		tryUseGear6();
-		tryBuyGear(GearType::Gear06, GearType::Gear08, GearType::Gear01);
+		tryBuyGear(GearType::Gear00, GearType::Gear08, GearType::Gear02);
 
 		if (needBackToTowerToRestoreHP() ||
 			needBackToDefendTower())
@@ -302,50 +327,45 @@ class Hashirama : public Hero
 	{
 	if (getName() == HeroEnum::Hashirama)
 		{
-		setTempAttackValue1(getNAttackValue());
-		setNAttackValue(1960);
-
-		_isOnlySkillLocked = true;
-
+		_isArmored = true;
 		_nAttackRangeX = 16;
 		_nAttackRangeY = 48;
+		setTempAttackValue1(getNAttackValue());
+		setNAttackValue(560);
+
+		_isOnlySkillLocked = true;
 
 		setIdleAction(createAnimation(skillSPC1Array, 5, true, false));
 		setWalkAction(createAnimation(skillSPC2Array, 10, true, false));
 		setNAttackAction(createAnimation(skillSPC3Array, 10, false, true));
 
-		setWalkSpeed(320);
+    	setWalkSpeed(320);
 		_originSpeed = 320;
-
 		lockOugisButtons();
 	}
 }
+
 	void setActionResume() override
 	{
 	if (getName() == HeroEnum::Hashirama)
 		{
-		if (_skillChangeBuffValue == 0)
-			return;
-
+		_isArmored = false;
+		_isOnlySkillLocked = false;
 		if (hasTempAttackValue1())
 		{
 			setNAttackValue(getTempAttackValue1());
 			setTempAttackValue1(0);
 		}
-		_isOnlySkillLocked = false;
-		unlockOugisButtons();
-
-		_nAttackRangeX = 16;
-		_nAttackRangeY = 48;
-
 		setIdleAction(createAnimation(idleArray, 5, true, false));
 		setWalkAction(createAnimation(walkArray, 10, true, false));
 		setNAttackAction(createAnimation(nattackArray, 10, false, true));
 
-		_skillChangeBuffValue = 0;
+		unlockOugisButtons();
 
+		_skillChangeBuffValue = 0;
+		
 		setWalkSpeed(224);
 		_originSpeed = 224;
 	}
-	}
+}
 };

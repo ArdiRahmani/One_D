@@ -41,6 +41,7 @@
 #include "Shinobi/Tobi.hpp"
 #include "Shinobi/Tobirama.hpp"
 #include "Shinobi/Tsunade.hpp"
+#include "Shinobi/Zetsu.hpp"
 
 // Bunshin
 #include "Shinobi/Bunshin/NarutoClone.hpp"
@@ -67,6 +68,8 @@
 #include "Kuchiyose/Saso.hpp"
 #include "Kuchiyose/Slug.hpp"
 
+
+
 #define __begin__ if(0) {}
 #define is(var) else if (aiName == var)
 #define is_or(var1, var2) else if (aiName == var1 || aiName == var2)
@@ -92,7 +95,7 @@ public:
 		bool aiFallback = false;
 
 		__begin__
-		is("Akamaru") 						ptr = new Akamaru();
+		is_or(" WhiteZetsu", "Akamaru") 						ptr = new Akamaru();
 		is("Asuma") 						ptr = new Asuma();
 		is("Centipede") 					ptr = new Centipede();
 		is("Chiyo") 						ptr = new Chiyo();
@@ -149,6 +152,7 @@ public:
 		is("Tobi") 							ptr = new Tobi();
 		is("Tobirama") 						ptr = new Tobirama();
 		is("Tsunade") 						ptr = new Tsunade();
+		is_or("Zetsu", " Zetsu2") 						ptr = new Zetsu();
 		is("Juubi")				ptr = new Guardian();
 		else								{ aiFallback = true; ptr = new DefaultAI(); }
 
