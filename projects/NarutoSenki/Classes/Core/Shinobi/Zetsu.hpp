@@ -4,6 +4,15 @@
 
 class Zetsu : public Hero
 {
+
+void setID(const string &name, Role role, Group group) override
+	{
+		Hero::setID(name, role, group);
+if (getName() == HeroEnum::Zetsu)
+		{
+		getGameLayer()->onHUDInitialized(BIND(Zetsu::tryLockSkillButton));
+	}
+}
 	void perform() override
 	{
 	if (getName() == HeroEnum::Zetsu2)
@@ -320,7 +329,7 @@ class Zetsu : public Hero
 		{
 			for (auto mo : _monsterArray)
 			{
-				if (mo->getName() == SummonEnum::Akamaru)
+				if (mo->getName() == SummonEnum::WhiteZetsu)
 				{
 					mo->attack(SKILL2);
 				}
