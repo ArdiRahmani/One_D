@@ -216,7 +216,7 @@ void GameLayer::initTileMap()
 
 void GameLayer::initGard()
 {
-guardianName = GuardianEnum::Juubi;
+    auto guardianName = GuardianEnum::Juubi;
 	auto guardianGroup = playerGroup == Group::Konoha ? Group::Akatsuki : Group::Konoha;
 	auto guardian = Provider::create(guardianName, Role::Com, guardianGroup);
 
