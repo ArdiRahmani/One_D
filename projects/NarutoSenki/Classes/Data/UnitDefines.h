@@ -248,6 +248,85 @@ namespace MonAIRegistry
 } // namespace MonAIRegistry
 
 /**
+ * Peta alias generik "nama -> nama lain" (satu tingkat, tidak berantai).
+ * Dipakai BulletRegistry dan CatchRegistry di bawah; jembatan Lua-nya ada di
+ * Systems/AliasBridge.hpp.
+ */
+class AliasMap
+{
+public:
+	size_t count() const { return _map.size(); }
+
+	// Return false kalau input tidak valid. alias == name berarti alias dihapus.
+	bool set(const std::string &name, const std::string &alias)
+	{
+		if (name.empty() || alias.empty())
+			return false;
+		if (name == alias)
+		{
+			_map.erase(name);
+			return true;
+		}
+		_map[name] = alias;
+		return true;
+	}
+
+	bool remove(const std::string &name) { return _map.erase(name) > 0; }
+	void clear() { _map.clear(); }
+	bool has(const std::string &name) const { return _map.find(name) != _map.end(); }
+
+	// Nama yang dipakai `name`; kalau tidak ada alias, kembali ke `name` sendiri.
+	// PERHATIAN: yang dikembalikan bisa referensi ke argumen `name`; simpan sebagai
+	// std::string (salinan) kalau argumen yang diberikan adalah objek sementara.
+	const std::string &resolve(const std::string &name) const
+	{
+		auto it = _map.find(name);
+		return it != _map.end() ? it->second : name;
+	}
+
+private:
+	std::unordered_map<std::string, std::string> _map;
+};
+
+/**
+ * Alias peluru (CloneBullet): "peluru X memakai cabang spawn peluru Y".
+ *
+ * Contoh: BulletRegistry::set("Sanpu", "TentenSRK") -> CharacterBase::setBullet("Sanpu")
+ * membuat Bullet dengan ID/nama "Sanpu" (sprite, data, resource tetap dari "Sanpu"),
+ * tapi posisi spawn, skala, dan gerakan (setEaseIn/setMove/attack) mengikuti cabang
+ * "TentenSRK".
+ *
+ * Diisi dari Lua lewat tabel global `CloneBullet` (lihat lua/Hook/Bullet.lua).
+ */
+namespace BulletRegistry
+{
+	inline AliasMap &map()
+	{
+		static AliasMap m;
+		return m;
+	}
+} // namespace BulletRegistry
+
+/**
+ * Alias tangkapan "ct_hit" (CloneCatch): "master X diperlakukan seperti master Y".
+ *
+ * Contoh: CatchRegistry::set("Guy", "Itachi") -> di CharacterBase::onHurt untuk hit
+ * "ct_hit", peluru/summon milik master "Guy" memakai cabang Itachi
+ * (hardHurt 3000 + target ditarik ke posisi attacker), padahal nama master tetap "Guy".
+ * Cabang yang bisa dituju: Itachi (3000) dan Chiyo (2000).
+ *
+ * Diisi dari Lua lewat tabel global `CloneCatch` (lihat lua/Hook/Catch.lua).
+ */
+namespace CatchRegistry
+{
+	inline AliasMap &map()
+	{
+		static AliasMap m;
+		return m;
+	}
+} // namespace CatchRegistry
+
+/**
  * Daftar transformasi karakter (Transform): "karakter X berubah menjadi Y".
  *
  * Contoh: TransformRegistry::set("Guy", "Guy8Gates") -> saat CharacterBase::setTransform()

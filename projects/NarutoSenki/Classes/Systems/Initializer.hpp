@@ -1,4 +1,5 @@
 #pragma once
+#include "Systems/AliasBridge.hpp"
 #include "Systems/AssetSystem.hpp"
 #include "Systems/CommandSystem.hpp"
 #include "Systems/HeroSystem.hpp"
@@ -20,6 +21,10 @@ namespace Internal
 		MonsterSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/MonsterAI.lua mengisi alias Monster::setAI lewat tabel `CloneMonAI`
 		MonsterAISystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/Bullet.lua mengisi alias peluru lewat tabel `CloneBullet`
+		AliasBridge<BulletRegistry::map>::registerLua("CloneBullet");
+		// Harus sebelum main.lua: lua/Hook/Catch.lua mengisi alias master tangkapan lewat tabel `CloneCatch`
+		AliasBridge<CatchRegistry::map>::registerLua("CloneCatch");
 		// Harus sebelum main.lua: lua/Hook/Transform.lua mengisi daftar transformasi lewat tabel `Transform`
 		TransformSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/Assets.lua mengisi aset per karakter lewat tabel `Assets`

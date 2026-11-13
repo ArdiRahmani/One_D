@@ -846,12 +846,14 @@ void CharacterBase::acceptAttack(Ref *object)
 												getGameLayer()->reorderChild(this, -getPositionY());
 											}
 										}
-										else if (attacker->_master->getName() == HeroEnum::Itachi ||
-												 attacker->_master->getName() == HeroEnum::Chiyo)
+										else if (CatchRegistry::map().resolve(attacker->_master->getName()) == HeroEnum::Itachi ||
+												 CatchRegistry::map().resolve(attacker->_master->getName()) == HeroEnum::Chiyo)
 										{
 											bool underAttack = false;
 
-											if (attacker->_master->getName() == HeroEnum::Chiyo)
+											// CloneCatch (lua/Hook/Catch.lua): master alias (mis. Guy -> Itachi)
+											// diperlakukan seperti master aslinya di cabang ini.
+											if (CatchRegistry::map().resolve(attacker->_master->getName()) == HeroEnum::Chiyo)
 											{
 												underAttack = hardHurt(2000, false, false, true, false);
 											}
@@ -2956,6 +2958,34 @@ void CharacterBase::stopJump(int stopTime)
 	}
 }
 
+// Nama cabang peluru yang dikenal setBullet. Dipakai untuk mencocokkan target
+// CloneBullet tanpa peduli huruf besar/kecil (mis. 'TentenSrk' -> "TentenSRK").
+static string canonicalBulletBranch(const string &name)
+{
+	static const char *kBranches[] = {
+		"PaperSrk",
+		"PaperSpear",
+		"HugeSRK",
+		"FlyKnife",
+		"TentenSRK",
+		ProjectileEnum::HiraishinKunai,
+		ProjectileEnum::Shintenshin,
+	};
+
+	for (const char *branch : kBranches)
+	{
+		const string candidate = branch;
+		if (candidate.size() == name.size() &&
+			std::equal(name.begin(), name.end(), candidate.begin(),
+					   [](char a, char b)
+					   { return std::tolower((unsigned char)a) == std::tolower((unsigned char)b); }))
+		{
+			return candidate;
+		}
+	}
+	return name;
+}
+
 void CharacterBase::setBullet(const string &bulletName)
 {
 	auto bullet = Bullet::create();
@@ -2971,7 +3001,11 @@ void CharacterBase::setBullet(const string &bulletName)
 
 	getGameLayer()->addChild(bullet, -getPositionY());
 
-	if (bulletName == "PaperSrk")
+	// CloneBullet (lua/Hook/Bullet.lua): nama/resource tetap `bulletName`,
+	// tapi cabang spawn di bawah mengikuti nama alias (mis. Sanpu -> TentenSRK).
+	const string branch = canonicalBulletBranch(BulletRegistry::map().resolve(bulletName));
+
+	if (branch == "PaperSrk")
 	{
 		bullet->setScale(0.8f);
 		bullet->setPosition(Vec2(getPositionX() + (_isFlipped ? -32 : 32),
@@ -2979,7 +3013,7 @@ void CharacterBase::setBullet(const string &bulletName)
 		bullet->attack(NAttack);
 		bullet->setMove(192, 2.0f, false);
 	}
-	else if (bulletName == "PaperSpear")
+	else if (branch == "PaperSpear")
 	{
 		bullet->setScale(0.8f);
 		bullet->setPosition(Vec2(getPositionX() + (_isFlipped ? -68 : 68),
@@ -2987,7 +3021,7 @@ void CharacterBase::setBullet(const string &bulletName)
 		bullet->attack(NAttack);
 		bullet->setMove(192, 2.0f, false);
 	}
-	else if (bulletName == "HugeSRK")
+	else if (branch == "HugeSRK")
 	{
 		bullet->setScale(0.8f);
 		bullet->setPosition(Vec2(getPositionX() + (_isFlipped ? -76 : 76),
@@ -2999,8 +3033,8 @@ void CharacterBase::setBullet(const string &bulletName)
 		scheduleOnce(schedule_selector(CharacterBase::setBulletGroup), 0.2f);
 		bullet->setEaseIn(224, 5.0f);
 	}
-	else if (bulletName == "FlyKnife" ||
-			 bulletName == "TentenSRK")
+	else if (branch == "FlyKnife" ||
+			 branch == "TentenSRK")
 	{
 		bullet->setScale(0.8f);
 		bullet->setPosition(Vec2(getPositionX() + (_isFlipped ? -32 : 32),
@@ -3009,10 +3043,10 @@ void CharacterBase::setBullet(const string &bulletName)
 		bullet->setEaseIn(224, 2.0f);
 		bullet->attack(NAttack);
 	}
-	else if (bulletName == ProjectileEnum::HiraishinKunai ||
-			 bulletName == ProjectileEnum::Shintenshin)
+	else if (branch == ProjectileEnum::HiraishinKunai ||
+			 branch == ProjectileEnum::Shintenshin)
 	{
-		if (bulletName == ProjectileEnum::HiraishinKunai)
+		if (branch == ProjectileEnum::HiraishinKunai)
 		{
 			bullet->setScale(0.8f);
 			bullet->setPosition(Vec2(getPositionX() + (_isFlipped ? -42 : 42),

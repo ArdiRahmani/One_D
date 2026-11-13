@@ -18,6 +18,12 @@ require 'Hook.Monster'
 -- Alias AI per-tick monster (Monster::setAI), mis. Shakuton = Rocket (dikirim ke C++ lewat CloneMonAI)
 require 'Hook.MonsterAI'
 
+-- Alias peluru (CharacterBase::setBullet), mis. Sanpu = TentenSRK (dikirim ke C++ lewat CloneBullet)
+require 'Hook.Bullet'
+
+-- Alias master tangkapan ct_hit (blok Itachi/Chiyo), mis. Guy = Itachi (dikirim ke C++ lewat CloneCatch)
+require 'Hook.Catch'
+
 -- Transformasi karakter, mis. Guy = Guy8Gates (dikirim ke C++ lewat Transform)
 require 'Hook.Transform'
 
