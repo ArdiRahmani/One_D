@@ -42,6 +42,7 @@
 #include "Shinobi/Tobirama.hpp"
 #include "Shinobi/Tsunade.hpp"
 #include "LuaHero/LuaTsunade.hpp"
+#include "LuaHero/LuaHero.hpp"
 #include "Shinobi/Zetsu.hpp"
 
 // Bunshin
@@ -158,6 +159,7 @@ public:
 		is_or("Zetsu", " Zetsu2") 			ptr = new Zetsu();
 		is("WhiteZetsu") 						ptr = new WhiteZetsu();
 		is("Juubi")				ptr = new Guardian();
+		else if (LuaAISystem::has(aiName))	ptr = new LuaHero(aiName); // AI 100% Lua untuk nama apa pun yang terdaftar di LuaAI (Hook/AI.lua)
 		else								{ aiFallback = true; ptr = new DefaultAI(); }
 
 		if (aiFallback && aiName != name)

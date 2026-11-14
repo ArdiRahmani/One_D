@@ -24,7 +24,6 @@
 local CloneAIHook = {}
 
 local list = {
- --   Guy = 'Ino',
     Temari = 'Pakura', 
 }
 

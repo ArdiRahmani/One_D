@@ -14,8 +14,9 @@
 --   * CloneAI -> "unit X memakai class C++ milik Y"
 --   * LuaAI   -> "class C++ Y dijalankan dari Lua"   (nama = nama class AI hasil resolve CloneAI)
 --
--- Catatan: AI yang menggantikan class C++ hanya aktif untuk hero yang ada subclass-nya di
--- Classes/Core/LuaHero/. Saat ini: Tsunade.
+-- Catatan: nama yang punya class C++ di Provider.hpp (mis. Tsunade) memakai subclass di
+-- Classes/Core/LuaHero/ (saat ini hanya Tsunade). Nama yang TIDAK punya class C++ (mis. Guy)
+-- otomatis dijalankan oleh LuaHero (generik) selama terdaftar di sini.
 --
 local AIHook = {}
 
@@ -23,6 +24,7 @@ local B = require 'binding.hero'
 
 local list = {
     Tsunade = 'AI.Tsunade',
+    Guy = 'AI.Tsunade', -- Guy tidak punya class C++: dijalankan penuh oleh LuaHero memakai Tsunade.lua
 }
 
 if not LuaAI then
