@@ -41,6 +41,7 @@
 #include "Shinobi/Tobi.hpp"
 #include "Shinobi/Tobirama.hpp"
 #include "Shinobi/Tsunade.hpp"
+#include "LuaHero/LuaTsunade.hpp"
 #include "Shinobi/Zetsu.hpp"
 
 // Bunshin
@@ -153,7 +154,7 @@ public:
 		is("Tenten") 						ptr = new Tenten();
 		is("Tobi") 							ptr = new Tobi();
 		is("Tobirama") 					ptr = new Tobirama();
-		is("Tsunade") 						ptr = new Tsunade();
+		is("Tsunade") 						ptr = LuaAISystem::has("Tsunade") ? static_cast<Hero *>(new LuaTsunade()) : static_cast<Hero *>(new Tsunade()); // Lua AI (lua/AI/Tsunade.lua) bila terdaftar, kalau tidak C++ asli
 		is_or("Zetsu", " Zetsu2") 			ptr = new Zetsu();
 		is("WhiteZetsu") 						ptr = new WhiteZetsu();
 		is("Juubi")				ptr = new Guardian();

@@ -2,7 +2,9 @@
 #include "Systems/AliasBridge.hpp"
 #include "Systems/AssetSystem.hpp"
 #include "Systems/CommandSystem.hpp"
+#include "Systems/HeroBinding.hpp"
 #include "Systems/HeroSystem.hpp"
+#include "Systems/LuaAISystem.hpp"
 #include "Systems/MonsterAISystem.hpp"
 #include "Systems/MonsterSystem.hpp"
 #include "Systems/ProviderSystem.hpp"
@@ -29,5 +31,10 @@ namespace Internal
 		TransformSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/Assets.lua mengisi aset per karakter lewat tabel `Assets`
 		AssetSystem::registerLua();
+		// Harus sebelum main.lua: method CharacterBase (walk, attack, findHeroHalf, createSummonHero, ...)
+		// + konstanta ABType/GearType/State dipakai AI Lua (lua/AI/*.lua). Lihat Systems/HeroBinding.hpp
+		HeroBinding::registerLua();
+		// Harus sebelum main.lua: lua/Hook/AI.lua mendaftarkan handler AI Lua lewat tabel `LuaAI`
+		LuaAISystem::registerLua();
 	}
 } // namespace Internal

@@ -28,6 +28,7 @@ class Hero;
 class CharacterBase : public Sprite
 {
 friend class CommandSystem;
+friend class HeroBinding; // Lua binding (Systems/HeroBinding.hpp): helper AI protected dipakai dari Lua
 
 using ActionMap = Map<ActionFlag, FiniteTimeAction *>;
 

@@ -24,6 +24,9 @@ require 'Hook.Bullet'
 -- Alias master tangkapan ct_hit (blok Itachi/Chiyo), mis. Guy = Itachi (dikirim ke C++ lewat CloneCatch)
 require 'Hook.Catch'
 
+-- AI hero yang dijalankan dari Lua, mis. Tsunade = AI.Tsunade (dikirim ke C++ lewat LuaAI)
+require 'Hook.AI'
+
 -- Transformasi karakter, mis. Guy = Guy8Gates (dikirim ke C++ lewat Transform)
 require 'Hook.Transform'
 
