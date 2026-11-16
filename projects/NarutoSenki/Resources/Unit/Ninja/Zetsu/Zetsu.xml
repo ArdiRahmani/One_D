@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action value="Idle">
+	 <data>
+	    <p type="attackType">Zetsu</p>
+        <p type="attackValue">5000</p>
+        <p type="attackRangeX">63</p>
+        <p type="attackRangeY">80</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>Zetsu_Idle_001</f>
+        <f>Zetsu_Idle_002</f>
+        <f>Zetsu_Idle_003</f>
+   
+      </frame>
+    </action>
+   
+    <action value="Walk">
+      <frame>
+        <f>Zetsu_Walk_01</f>
+        <f>Zetsu_Walk_02</f>
+        <f>Zetsu_Walk_03</f>
+        <f>Zetsu_Walk_04</f>
+        <f>Zetsu_Walk_05</f>
+        <f>Zetsu_Walk_06</f>
+
+      </frame>
+    </action>
+   
+    <action value="Hurt">
+      <frame>
+        <e type="setMove">32</e>
+        <f>Zetsu_Hurt_01</f>
+        <f>Zetsu_Hurt_02</f>
+        <e type="setSound">Audio/Zetsu/Zetsu_hurt.ogg</e>
+      </frame>
+    </action>
+   
+   <action value="AirHurt">
+     <frame>
+         <f>Zetsu_AirHurt_001</f>
+     </frame>
+   </action>
+   
+   <action value="KnockDown">
+      <frame>
+          <f>Zetsu_KnockDown_001</f>
+           <e type="setDelay">10</e>
+          <f>Zetsu_KnockDown_002</f>
+          <f>Zetsu_KnockDown_003</f>
+          <e type="setDelay">60</e>
+          <f>Zetsu_KnockDown_004</f>
+          <f>Zetsu_KnockDown_005</f>
+            
+      </frame>
+    </action>
+   
+    <action value="Float">
+      <frame>
+          <f>Zetsu_Float_001</f>
+          <e type="setDelay">10</e>
+          <f>Zetsu_Float_002</f>
+        
+      </frame>
+    </action>
+   
+    <action value="Dead">
+      <frame>
+          <f>Zetsu_KnockDown_001</f>
+          <f>Zetsu_KnockDown_002</f>
+ <f>Zetsu_KnockDown_003</f>
+          <e type="setSound">Audio/Zetsu/Zetsu_dead.ogg</e>
+      </frame>
+    </action>
+   
+    <action value="nAttack">
+      <data>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">80</p>
+        <p type="attackRangeX">0</p>
+        <p type="attackRangeY">16</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+       <f>Zetsu_NAttack2_001</f>     
+      <f>Zetsu_NAttack2_002</f>
+<e type="setMove">8</e>
+      <f>Zetsu_NAttack2_003</f>
+      <e type="setAttackBox">n_hit</e>
+ <f>Zetsu_NAttack2_004</f>
+ <f>Zetsu_NAttack2_005</f>
+ <f>Zetsu_NAttack2_006</f>
+ <f>Zetsu_NAttack2_007</f>
+<e type="setMove">16</e>
+ <f>Zetsu_NAttack2_008</f>
+ <e type="setAttackBox">n_hit</e>
+ <f>Zetsu_NAttack2_009</f>
+<f>Zetsu_NAttack2_010</f>
+<f>Zetsu_NAttack2_011</f>
+       <e type="setDelay">10</e>
+<f>Zetsu_NAttack2_012</f>
+<f>Zetsu_NAttack2_013</f>
+<e type="setAttackBox">o_hit</e>
+<e type="setSound">Audio/Effect/blade_damage2.ogg</e>
+<f>Zetsu_NAttack2_014</f>
+<e type="setAttackBox">o_hit</e>
+<f>Zetsu_NAttack2_015</f>
+ <e type="setAttackBox">c_hit</e>
+ <e type="setDelay">10</e>
+      </frame>
+    </action>
+
+   <action value="skill01">
+     <data>
+	  <p type="attackType">cBuff</p>
+       <p type="attackValue">0</p>
+       <p type="attackRangeX">0</p>
+       <p type="attackRangeY">0</p>
+       <p type="cd">10</p>
+     </data>
+     <frame>
+        <e type="setSound">Audio/Zetsu/Zetsu_skill1.ogg</e>
+
+  <f>Zetsu_Skill01_001</f>
+<f>Zetsu_Skill01_002</f>
+<e type="setDelay">10</e>
+<f>Zetsu_Skill01_003</f>
+<f>Zetsu_Skill01_004</f>
+<f>Zetsu_Skill01_005</f>
+<f>Zetsu_Skill01_006</f>
+<f>Zetsu_Skill01_007</f>
+<e type="setDelay">10</e>
+<f>Zetsu_Skill01_008</f>
+<f>Zetsu_Skill01_009</f>
+<f>Zetsu_Skill01_010</f>
+<e type="setDelay">10</e>
+<f>Zetsu_Skill01_011</f>
+<f>Zetsu_Skill01_012</f>
+<f>Zetsu_Skill01_013</f>
+<f>Zetsu_Skill01_014</f>
+<e type="setDelay">10</e>
+<f>Zetsu_Skill01_015</f>
+        <e type="setSkillEffect">smk</e>
+    <e type="setClone">0</e>
+        <e type="setBuff">17</e>
+     </frame>
+   </action>
+   
+    <action value="skill02">
+        <data>
+          <p type="attackType">aAttack</p>
+          <p type="attackValue">300</p>
+          <p type="attackRangeX">16</p>
+          <p type="attackRangeY">32</p>
+          <p type="cd">10</p>
+        </data>
+        <frame>
+       <e type="setMonAttack">1</e> 
+        </frame>
+    </action>
+    
+    <action value="skill03">
+        <data>
+        <p type="attackType">cAttack</p>
+        <p type="attackValue">400</p>
+        <p type="attackRangeX">48</p>
+        <p type="attackRangeY">48</p>
+        <p type="cd">20</p>
+        </data>
+        <frame>
+        <e type="setSound">Audio/Zetsu/Zetsu_skill3.ogg</e>
+  <f>Zetsu_Skill11_001</f>
+      <f>Zetsu_Skill11_002</f>
+<e type="setDelay">10</e>
+<e type="setCommand">findTarget</e> 
+      <e type="setCommand">setTransport</e>
+ <f>Zetsu_Skill11_003</f>
+      <f>Zetsu_Skill11_004</f>
+   <e type="setAttackBox">b_hit</e> 
+ <f>Zetsu_Skill11_005</f>
+<e type="setAttackBox">b_hit</e>
+      <f>Zetsu_Skill11_006</f>
+<e type="setAttackBox">c_hit</e>
+ <f>Zetsu_Skill11_007</f>
+<e type="setAttackBox">c_hit</e>
+<e type="setDelay">10</e>
+<f>Zetsu_Skill11_008</f>
+  <e type="setAttackBox">o_hit</e>
+<e type="setSound">Audio/Zetsu/Zetsu_skill3_1.ogg</e>
+        <f>Zetsu_Skill11_009</f>
+  <e type="setAttackBox">o_hit</e>
+         <e type="setDelay">10</e>
+ <f>Zetsu_Skill11_010</f>
+  <e type="setAttackBox">b_hit</e>
+         <e type="setDelay">10</e>
+ <f>Zetsu_Skill11_009</f>
+  <e type="setAttackBox">c_hit</e>
+ <f>Zetsu_Skill11_008</f>
+  <e type="setAttackBox">c_hit</e>
+         <e type="setDelay">10</e>
+<e type="setCommand">setTransport</e>
+<f>Zetsu_Skill11_003</f>
+<f>Zetsu_Skill11_002</f>
+<f>Zetsu_Skill11_001</f>
+       </frame>
+    </action>
+    
+   <action value="skill04">
+     <data>
+    <p type="attackType">aAttack</p>
+        <p type="attackValue">300</p>
+        <p type="attackRangeX">0</p>
+        <p type="attackRangeY">32</p>
+        <p type="cd">0</p>
+     </data>
+     <frame>
+      <e type="setSound">Audio/Effect/ougis.ogg</e>
+      <f>Zetsu_Skill04_001</f>
+      <f>Zetsu_Skill04_002</f>    
+ <e type="setCommand">findTarget</e> 
+      <e type="setCommand">setTransport</e>
+      <f>Zetsu_Skill04_003</f>
+    <e type="setAttackBox">b_hit</e>
+   <e type="setSound">Audio/Zetsu/Zetsu_skill4.ogg</e>
+      <f>Zetsu_Skill04_004</f>
+      <e type="setAttackBox">b_hit</e>
+      <f>Zetsu_Skill04_005</f>
+ <e type="setAttackBox">c_hit</e>
+      <f>Zetsu_Skill04_006</f> 
+      <e type="setAttackBox">c_hit</e>
+<f>Zetsu_Skill04_007</f>
+  <e type="setAttackBox">c_hit</e>
+        <f>Zetsu_Skill04_008</f>
+  <e type="setAttackBox">c_hit</e>
+        <f>Zetsu_Skill04_009</f>
+  <e type="setAttackBox">c_hit</e>
+  <f>Zetsu_Skill04_010</f>
+  <e type="setAttackBox">c_hit</e>
+ <e type="setDelay">10</e>
+ <f>Zetsu_Skill04_010</f>
+  <e type="setAttackBox">c_hit</e>
+ <e type="setDelay">10</e>
+<f>Zetsu_Skill04_009</f>
+  <e type="setAttackBox">s_hit</e>
+<f>Zetsu_Skill04_008</f>
+  <e type="setAttackBox">s_hit</e>
+<f>Zetsu_Skill04_011</f>
+  <e type="setAttackBox">s_hit</e>
+<f>Zetsu_Skill04_007</f>
+  <e type="setAttackBox">s_hit</e>
+      <e type="setCommand">setTransport</e> 
+ <f>Zetsu_Skill04_005</f>
+ <f>Zetsu_Skill04_004</f>
+ <f>Zetsu_Skill04_003</f>
+ <f>Zetsu_Skill04_002</f>
+ <e type="setDelay">10</e> 
+     </frame>
+   </action>
+   
+    <action value="skill05">
+     <data>
+       <p type="attackType">aAttack</p>
+       <p type="attackValue">500</p>
+       <p type="attackRangeX">0</p>
+       <p type="attackRangeY">64</p>
+       <p type="cd">0</p>
+     </data>
+     <frame>
+      <e type="setSound">Audio/Effect/ougis.ogg</e>
+        <e type="setCommand">setInvincible</e>
+      <f>Zetsu_Skill05_001</f>
+      <f>Zetsu_Skill05_002</f>
+<e type="setOugis">10</e>
+      <f>Zetsu_Skill05_003</f>
+ <e type="setAttackBox">l_hit</e> 
+ <e type="setDelay">10</e>
+      <f>Zetsu_Skill05_004</f>
+ <e type="setAttackBox">l_hit</e> 
+      <f>Zetsu_Skill05_005</f>
+ <e type="setAttackBox">l_hit</e> 
+      <f>Zetsu_Skill05_006</f>
+ <e type="setAttackBox">c_hit</e> 
+      <f>Zetsu_Skill05_007</f>
+ <e type="setAttackBox">c_hit</e> 
+<e type="setSound">Audio/Zetsu/Zetsu_skill5.ogg</e>
+ <e type="setDelay">10</e>
+      <f>Zetsu_Skill05_008</f>
+ <e type="setAttackBox">c_hit</e> 
+      <f>Zetsu_Skill05_009</f>
+       <e type="setAttackBox">c_hit</e> 
+      <f>Zetsu_Skill05_010</f>
+      <e type="setAttackBox">c_hit</e>
+ <e type="setDelay">10</e>
+      <f>Zetsu_Skill05_011</f>
+ <e type="setAttackBox">c_hit</e> 
+      <f>Zetsu_Skill05_012</f>
+      <e type="setAttackBox">c_hit</e>
+<e type="setSound">Audio/Karin/wood2.ogg</e>
+      <f>Zetsu_Skill05_013</f>
+      <e type="setAttackBox">c_hit</e> 
+ <e type="setDelay">10</e> 
+<f>Zetsu_Skill05_012</f>
+      <e type="setAttackBox">c_hit</e>
+<f>Zetsu_Skill05_013</f>
+      <e type="setAttackBox">c_hit</e>
+<f>Zetsu_Skill05_012</f>
+      <e type="setAttackBox">c_hit</e>
+<f>Zetsu_Skill05_013</f>
+      <e type="setAttackBox">c_hit</e>
+        <e type="setCommand">reInvincible</e>
+     </frame>
+   </action>
+
+    <action value="skill06">
+        <frame></frame>
+    </action>
+    <action value="skill07">
+        <frame></frame>
+    </action>
+    <action value="skill08">
+        <frame></frame>
+    </action>
+    <action value="skill09">
+       <data>
+            <p type="attackType">nAttack</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+     <f>Zetsu_NAttack_001</f>
+
+          <f>Zetsu_NAttack_002</f>
+          <f>Zetsu_NAttack_003</f>
+          <e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/Effect/combo1.ogg</e>
+          <f>Zetsu_NAttack_004</f>
+ <e type="setDelay">10</e>
+          <f>Zetsu_NAttack_005</f>
+          <f>Zetsu_NAttack_006</f>
+<e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/Effect/combo2.ogg</e>
+ <f>Zetsu_NAttack_007</f>
+
+ <e type="setMove">8</e>
+          <f>Zetsu_NAttack_008</f>
+ <e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/Effect/combo2.ogg</e>
+          <f>Zetsu_NAttack_009</f>
+        </frame>
+    </action>
+    <action value="skill10">
+        <data>
+            <p type="attackType">Idle</p>
+            <p type="attackValue">660</p>
+            <p type="attackRangeX">16</p>
+            <p type="attackRangeY">32</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+            <f>Zetsu_Skill10_001</f>
+            <f>Zetsu_Skill10_002</f>
+ <f>Zetsu_Skill10_003</f>
+ <f>Zetsu_Skill10_004</f>
+        </frame>
+    </action>
+    <action value="skill11">
+        <data>
+            <p type="attackType">Walk</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+            <f>Zetsu_Run_01</f>
+            <f>Zetsu_Run_02</f>
+            <f>Zetsu_Run_03</f>
+            <f>Zetsu_Run_04</f>
+            <f>Zetsu_Run_05</f>
+            <f>Zetsu_Run_06</f>
+        </frame>
+
+    </action>
+    <action value="skill12">
+        <data>
+            <p type="attackType">nAttack</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+          <f>Zetsu_NAttack_001</f>
+
+          <f>Zetsu_NAttack_002</f>
+          <f>Zetsu_NAttack_003</f>
+          <e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/Effect/combo1.ogg</e>
+          <f>Zetsu_NAttack_004</f>
+ <e type="setDelay">10</e>
+
+          <f>Zetsu_NAttack_005</f>
+          <f>Zetsu_NAttack_006</f>
+<e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/Effect/combo2.ogg</e>
+ <f>Zetsu_NAttack_007</f>
+
+ <e type="setMove">8</e>
+          <f>Zetsu_NAttack_008</f>
+ <e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/Effect/combo2.ogg</e>
+          <f>Zetsu_NAttack_009</f>
+         
+        </frame>
+    </action>
+</unit>
