@@ -163,7 +163,8 @@ void Monster::setAI(float dt)
 	// CloneMonAI: nama AI yang dipakai. Default = getName(), bisa dialihkan dari Lua
 	// (CloneMonAI.set("Shakuton", "Rocket")). getName() tetap nama asli untuk sprite/resource,
 	// sedangkan seluruh percabangan AI di bawah memakai `charName`.
-	const string &charName = MonAIRegistry::resolve(getName());
+	// Prioritas: CloneMonAI (Lua) > attackType di XML Unit/Mon/<nama>.xml > getName().
+	const string &charName = MonXmlAI::resolveTick(getName(), _nAttackType);
 	if (charName == SkillEnum::Kage)
 	{
 		for (auto hero : getGameLayer()->_CharacterArray)

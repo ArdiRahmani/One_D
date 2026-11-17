@@ -250,7 +250,10 @@ void LoadLayer::perloadCharIMG(const string &name)
 
 void LoadLayer::unloadCharIMG(CharacterBase *c)
 {
-	if (c == nullptr || c->isClone() || c->isSummon() || c->isGuardian())
+	// Kugutsu (Karasu/Sanshouuo/Saso/Parents/Mask*) juga HARUS di-skip: plist-nya ada di
+	// "Unit/Kugutsu/..." dan dilepas lewat entri master-nya (Kankuro/Chiyo/Kakuzu) di bawah.
+	// Kalau tidak di-skip, path "Unit/Ninja/<Kugutsu>/<Kugutsu>.plist" tidak ada -> FC.
+	if (c == nullptr || c->isClone() || c->isSummon() || c->isKugutsu() || c->isGuardian())
 	{
 		// Guardian (Juubi) lives under "Unit/Guardian/..." and is
 		// unloaded separately via kGuardian_Juubi in
@@ -280,6 +283,10 @@ void LoadLayer::unloadCharIMG(CharacterBase *c)
 		removeSprites(mk_kugutsu_plist("Karasu"));
 		removeSprites(mk_kugutsu_plist("Sanshouuo"));
 		removeSprites(mk_kugutsu_plist("Saso"));
+	}
+	else if (name == HeroEnum::Chiyo)
+	{
+		removeSprites(mk_kugutsu_plist("Parents"));
 	}
 	else if (name == HeroEnum::Kakuzu)
 	{
@@ -330,7 +337,8 @@ void LoadLayer::unloadCharIMG(CharacterBase *c)
 
 void LoadLayer::unloadAllCharsIMG(const vector<Hero *> &players)
 {
-	vector<string> unloadVector(players.size());
+	vector<string> unloadVector;
+	unloadVector.reserve(players.size());
 	for (auto player : players)
 	{
 		auto name = player->getName();

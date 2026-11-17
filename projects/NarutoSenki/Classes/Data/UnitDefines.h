@@ -248,6 +248,47 @@ namespace MonAIRegistry
 } // namespace MonAIRegistry
 
 /**
+ * AI monster dari XML (alternatif selain Lua CloneMon / CloneMonAI).
+ *
+ * Monster boleh menulis nama AI-nya langsung di Resources/Unit/Mon/<Nama>.xml, di data
+ * nAttack (item pertama):
+ *     <p type="attackType">Jibaku</p>
+ * Maka monster itu memakai AI/cabang "Jibaku" (spawn di CharacterBase::setMon DAN
+ * per-tick di Monster::setAI), sementara nama/sprite/resource tetap milik monster itu.
+ *
+ * Prioritas: alias Lua (CloneMon / CloneMonAI) > attackType XML > nama monster sendiri.
+ * attackType generik ("nAttack", "aAttack", atau kosong) TIDAK dianggap nama AI, jadi
+ * monster lama yang XML-nya masih "nAttack" berperilaku persis seperti sebelumnya.
+ */
+namespace MonXmlAI
+{
+	inline bool isGenericAttackType(const std::string &attackType)
+	{
+		return attackType.empty() || attackType == "nAttack" || attackType == "aAttack";
+	}
+
+	// AI spawn (CharacterBase::setMon). Mengembalikan referensi ke salah satu argumen.
+	inline const std::string &resolveSpawn(const std::string &name, const std::string &xmlAttackType)
+	{
+		if (MonRegistry::has(name))
+			return MonRegistry::resolve(name);
+		if (!isGenericAttackType(xmlAttackType))
+			return xmlAttackType;
+		return name;
+	}
+
+	// AI per-tick (Monster::setAI). Mengembalikan referensi ke salah satu argumen.
+	inline const std::string &resolveTick(const std::string &name, const std::string &xmlAttackType)
+	{
+		if (MonAIRegistry::has(name))
+			return MonAIRegistry::resolve(name);
+		if (!isGenericAttackType(xmlAttackType))
+			return xmlAttackType;
+		return name;
+	}
+} // namespace MonXmlAI
+
+/**
  * Peta alias generik "nama -> nama lain" (satu tingkat, tidak berantai).
  * Dipakai BulletRegistry dan CatchRegistry di bawah; jembatan Lua-nya ada di
  * Systems/AliasBridge.hpp.

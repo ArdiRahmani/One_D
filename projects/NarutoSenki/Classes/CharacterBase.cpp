@@ -3267,12 +3267,14 @@ void CharacterBase::setMon(const string &monName)
 	// CloneMon: nama AI/perilaku spawn yang dipakai. Default = monName, bisa dialihkan dari Lua
 	// (CloneMon.set("Chibaku", "JibakuEX")). `monName` tetap dipakai untuk setID/resource,
 	// sedangkan seluruh percabangan posisi/attack/doAI di bawah memakai `aiName`.
-	const string &aiName = MonRegistry::resolve(monName);
-
+	// Selain Lua, AI juga bisa dari XML: <p type="attackType">Jibaku</p> di Unit/Mon/<monName>.xml
+	// (lihat MonXmlAI di Data/UnitDefines.h). Lua tetap menang. Diputuskan SETELAH setID()
+	// karena attackType baru terbaca saat XML dimuat.
 	float monsterStayTime = _attackRangeY;
 
 	auto monster = Monster::create();
 	monster->setID(monName, Role::Mon, _group);
+	const string aiName = MonXmlAI::resolveSpawn(monName, monster->getNAttackType());
 
 	if (_master)
 	{
