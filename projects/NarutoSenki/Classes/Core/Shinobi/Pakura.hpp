@@ -91,7 +91,7 @@ class Pakura : public Hero
 				}
 				else if (enemyCombatPoint > friendCombatPoint && abs(enemyCombatPoint - friendCombatPoint) > 3000 && !_isHealing && !_isControlled)
 				{
-					if (abs(sp.x) < 160)
+					if (abs(sp.x) < 32)
 					{
 						stepBack2();
 						return;
@@ -117,7 +117,7 @@ class Pakura : public Hero
 					attack(SKILL1);
 					return;
 				}
-				else if (abs(sp.x) < 128)
+				else if (abs(sp.x) < 64)
 				{
 					if (getMaxHP() - getHP() >= 3000 &&
 						getCoin() >= 50 && !_isHealing && _isCanItem1)

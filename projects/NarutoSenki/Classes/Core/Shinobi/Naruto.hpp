@@ -579,6 +579,8 @@ class Naruto : public Hero
 	}
 
 	inline Hero *createClone_RikudoNaruto(int cloneTime)
+{
+	if (cloneTime == 9)
 	{
 		auto clone = createCloneHero<Kurama>(SummonEnum::Kurama);
 		clone->setDEF(5000);
@@ -588,6 +590,15 @@ class Naruto : public Hero
 		clone->hasArmorBroken = true;
 		return clone;
 	}
+
+	auto clone = createCloneHero<RikudoNarutoClone>(getName());
+	clone->setSkill1Action(clone->createAnimation(clone->skillSPC1Array, 10, false, true));
+	clone->setSAttackValue1(getSAttackValue1());
+	clone->setSAttackType1(_spcAttackType1);
+	clone->_sAttackCD1 = _spcAttackCD1;
+
+	return clone;
+}
 
 private:
 	string _originNAttackType;
