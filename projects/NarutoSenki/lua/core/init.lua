@@ -29,3 +29,6 @@ require 'Hook.Transform'
 
 -- Aset tambahan per karakter, mis. Guy = Guy8Gates.plist (dikirim ke C++ lewat Assets)
 require 'Hook.Assets'
+
+-- Binding gambar unit (_rp, _rpf, _CutIn, _avator, _small), mis. Guy8Gates_rpf pakai Guy_rpf.png (dikirim ke C++ lewat Icons)
+require 'Hook.Icons'

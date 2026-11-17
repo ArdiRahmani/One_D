@@ -191,7 +191,7 @@ void GameOver::listResult()
 				hero->changeGroup();
 		}
 
-		auto avator_small = Sprite::createWithSpriteFrameName(format("{}_small.png", hero->getName()).c_str());
+		auto avator_small = Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::Small, hero->getName()).c_str());
 		avator_small->setAnchorPoint(Vec2(0, 0));
 
 		uint32_t realKillNum = hero->getKillNum();

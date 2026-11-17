@@ -456,7 +456,7 @@ function SelectLayer:setSelected(btn)
         self:addChild(self._heroName, 5)
     elseif self.comCount >= 1 and not self._com1Select then
         self._comSelector1:setDisplayFrame(
-            display.newSpriteFrame(self.selectHero .. '_small.png'))
+            display.newSpriteFrame(Icons.frame('small', self.selectHero)))
 
         if btn._clickTime >= 2 then
             self._com1Select = self.selectHero
@@ -470,7 +470,7 @@ function SelectLayer:setSelected(btn)
         end
     elseif self.comCount >= 2 and not self._com2Select then
         self._comSelector2:setDisplayFrame(
-            display.newSpriteFrame(self.selectHero .. '_small.png'))
+            display.newSpriteFrame(Icons.frame('small', self.selectHero)))
 
         if btn._clickTime >= 2 then
             self._com2Select = self.selectHero
@@ -484,7 +484,7 @@ function SelectLayer:setSelected(btn)
         end
     elseif self.comCount >= 3 and not self._com3Select then
         self._comSelector3:setDisplayFrame(
-            display.newSpriteFrame(self.selectHero .. '_small.png'))
+            display.newSpriteFrame(Icons.frame('small', self.selectHero)))
 
         if btn._clickTime >= 2 then
             self._com3Select = self.selectHero
@@ -532,7 +532,7 @@ function SelectLayer:onPickEnemy(btn)
 
     local selector = self._enemySelectors[idx]
     selector:setDisplayFrame(
-        display.newSpriteFrame(self.selectHero .. '_small.png'))
+        display.newSpriteFrame(Icons.frame('small', self.selectHero)))
 
     if btn._clickTime >= 2 then
         self._enemySelects[idx] = self.selectHero

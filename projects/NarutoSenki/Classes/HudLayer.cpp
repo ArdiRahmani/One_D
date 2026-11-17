@@ -171,7 +171,7 @@ void HudLayer::JoyStickUpdate(Vec2 direction)
 
 void HudLayer::initGearButton(const string &charName)
 {
-	gearMenuSprite = MenuItemSprite::create(Sprite::createWithSpriteFrameName(format("{}_avator.png", charName).c_str()), nullptr, nullptr, this, menu_selector(HudLayer::gearButtonClick));
+	gearMenuSprite = MenuItemSprite::create(Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::Avator, charName).c_str()), nullptr, nullptr, this, menu_selector(HudLayer::gearButtonClick));
 	if (gearMenuSprite == nullptr)
 	{
 		CCLOGERROR("Not found %s avator sprite", charName.c_str());
@@ -1063,12 +1063,12 @@ Sprite *HudLayer::createReport(const string &slayer, const string &dead, float &
 {
 	Sprite *reportSprite = Sprite::create();
 
-	Sprite *slain_p = Sprite::createWithSpriteFrameName(format("{}_rp.png", slayer).c_str());
+	Sprite *slain_p = Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::Rp, slayer).c_str());
 	slain_p->setAnchorPoint(Vec2(0, 0.5f));
 	slain_p->setPosition(Vec2(0, 0));
 	reportSprite->addChild(slain_p);
 
-	Sprite *slain_pf = Sprite::createWithSpriteFrameName(format("{}_rpf.png", slayer).c_str());
+	Sprite *slain_pf = Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::Rpf, slayer).c_str());
 	slain_pf->setPosition(Vec2(slain_p->getContentSize().width, 0));
 	slain_pf->setAnchorPoint(Vec2(0, 0.5f));
 	reportSprite->addChild(slain_pf);
@@ -1087,14 +1087,14 @@ Sprite *HudLayer::createReport(const string &slayer, const string &dead, float &
 	slain->setAnchorPoint(Vec2(0, 0.5f));
 	slain->setPosition(Vec2(slain_pf->getPositionX() + slain_pf->getContentSize().width, 0));
 
-	Sprite *death_pf = Sprite::createWithSpriteFrameName(format("{}_rpf.png", dead).c_str());
+	Sprite *death_pf = Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::Rpf, dead).c_str());
 	death_pf->setAnchorPoint(Vec2(0, 0.5f));
 	death_pf->setPosition(Vec2(slain->getPositionX() + slain->getContentSize().width, 0));
 	reportSprite->addChild(death_pf);
 	Sprite *death_p;
 	if (dead != kRoleTower)
 	{
-		death_p = Sprite::createWithSpriteFrameName(format("{}_rp.png", dead).c_str());
+		death_p = Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::Rp, dead).c_str());
 		death_p->setAnchorPoint(Vec2(0, 0.5f));
 		death_p->setPosition(Vec2(death_pf->getPositionX() + death_pf->getContentSize().width, 0));
 		reportSprite->addChild(death_p);
@@ -1278,7 +1278,7 @@ void HudLayer::setOugis(const string &name, Group group)
 
 		ougisLayer->addChild(CutLineUP);
 
-		Sprite *CutIn = Sprite::createWithSpriteFrameName(format("{}_CutIn.png", name).c_str());
+		Sprite *CutIn = Sprite::createWithSpriteFrameName(iconFrameName(IconRegistry::CutIn, name).c_str());
 		if (isKonohaGroup)
 		{
 			CutIn->setAnchorPoint(Vec2(0, 0));

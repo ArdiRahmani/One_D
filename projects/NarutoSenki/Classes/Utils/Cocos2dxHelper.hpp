@@ -2,6 +2,7 @@
 #include "cocos2d.h"
 #include "../../../scripting/lua/cocos2dx_support/CCLuaEngine.h"
 #include "Utils/CCDeprecated.h"
+#include "Data/UnitDefines.h"
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC
 #include <format>
@@ -120,6 +121,28 @@ static inline void removeSprites(const string &plistName)
 static inline SpriteFrame *getSpriteFrame(const string &name)
 {
 	return SpriteFrameCache::sharedSpriteFrameCache()->spriteFrameByName(name.c_str());
+}
+
+/**
+ * Nama frame gambar unit dengan memperhitungkan binding Lua (IconRegistry / tabel `Icons`).
+ *   iconFrameName(IconRegistry::Rpf, "Guy8Gates")  ->  "Guy_rpf.png"  (kalau di-bind ke Guy)
+ *                                                  ->  "Guy8Gates_rpf.png"  (kalau tidak)
+ * Kalau frame hasil binding tidak ada di SpriteFrameCache, kembali ke nama unit sendiri
+ * supaya Sprite::createWithSpriteFrameName tidak crash.
+ */
+static inline string iconFrameName(IconRegistry::Kind kind, const string &unit)
+{
+	const char *suffix = IconRegistry::info(kind).suffix;
+	string own = unit + "_" + suffix + ".png";
+	if (!IconRegistry::has(kind, unit))
+		return own;
+
+	string bound = IconRegistry::resolve(kind, unit) + "_" + suffix + ".png";
+	if (getSpriteFrame(bound) != nullptr)
+		return bound;
+
+	CCLOG("[Icons] frame %s tidak ada, pakai %s", bound.c_str(), own.c_str());
+	return own;
 }
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_MAC

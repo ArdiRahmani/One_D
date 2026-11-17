@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <cctype>
 #include <cstring>
 #include <deque>
 #include <string>
@@ -541,3 +542,111 @@ namespace AssetRegistry
 		}
 	}
 } // namespace AssetRegistry
+
+/**
+ * Binding ikon/gambar per unit (Icons): "unit X memakai gambar milik hero Y".
+ *
+ * Contoh: IconRegistry::add(IconRegistry::Rpf, "Guy", "Guy8Gates") ->
+ *   frame laporan kill milik unit "Guy8Gates" bukan lagi "Guy8Gates_rpf.png"
+ *   melainkan "Guy_rpf.png". Tiap jenis gambar punya tabel sendiri, jadi _rp boleh
+ *   diganti tanpa mengubah _rpf dan sebaliknya.
+ *
+ * Arah binding sama dengan Assets/Transform: [hero_sumber] = unit_yang_memakai.
+ *   rpf = { Guy = 'Guy8Gates' }   -> Guy8Gates_rpf.png  =>  Guy_rpf.png
+ *   rp  = { Hashirama = 'SageHashirama' } -> SageHashirama_rp.png => Hashirama_rp.png
+ *
+ * Satu langkah saja (tidak berantai). Unit yang tidak terdaftar memakai namanya sendiri.
+ *
+ * Diisi dari Lua lewat tabel global `Icons` (lihat Systems/IconSystem.hpp dan
+ * lua/Hook/Icons.lua). Pencarian frame (termasuk fallback bila frame tujuan tidak ada)
+ * ada di iconFrameName() pada Utils/Cocos2dxHelper.hpp.
+ */
+namespace IconRegistry
+{
+	enum Kind
+	{
+		Rp,		// <n>_rp.png      ikon kecil laporan kill
+		Rpf,	// <n>_rpf.png     ikon besar laporan kill
+		CutIn,	// <n>_CutIn.png   potret saat ougi / cut-in
+		Avator, // <n>_avator.png  tombol avatar di HUD
+		Small,	// <n>_small.png   ikon kecil layar pilih / hasil akhir
+		KindCount
+	};
+
+	// Nama jenis di Lua (tidak peka huruf besar/kecil) dan akhiran frame sebenarnya.
+	struct KindInfo
+	{
+		const char *key;
+		const char *suffix;
+	};
+
+	inline const KindInfo &info(Kind k)
+	{
+		static const KindInfo table[KindCount] = {
+			{"rp", "rp"},
+			{"rpf", "rpf"},
+			{"cutin", "CutIn"},
+			{"avator", "avator"},
+			{"small", "small"},
+		};
+		return table[k];
+	}
+
+	inline bool findKind(const std::string &key, Kind &out)
+	{
+		std::string lower = key;
+		std::transform(lower.begin(), lower.end(), lower.begin(), [](unsigned char c) { return (char)std::tolower(c); });
+		for (int i = 0; i < KindCount; i++)
+		{
+			if (lower == info((Kind)i).key)
+			{
+				out = (Kind)i;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// unit -> hero sumber gambar
+	inline std::unordered_map<std::string, std::string> &store(Kind k)
+	{
+		static std::unordered_map<std::string, std::string> maps[KindCount];
+		return maps[k];
+	}
+
+	inline size_t count()
+	{
+		size_t n = 0;
+		for (int i = 0; i < KindCount; i++)
+			n += store((Kind)i).size();
+		return n;
+	}
+
+	// source == unit berarti binding dihapus. Return false kalau input kosong.
+	inline bool add(Kind k, const std::string &source, const std::string &unit)
+	{
+		if (source.empty() || unit.empty())
+			return false;
+		if (source == unit)
+			store(k).erase(unit);
+		else
+			store(k)[unit] = source;
+		return true;
+	}
+
+	inline bool remove(Kind k, const std::string &unit) { return store(k).erase(unit) > 0; }
+	inline void clear(Kind k) { store(k).clear(); }
+	inline void clearAll()
+	{
+		for (int i = 0; i < KindCount; i++)
+			store((Kind)i).clear();
+	}
+	inline bool has(Kind k, const std::string &unit) { return store(k).count(unit) > 0; }
+
+	// Nama hero sumber gambar untuk `unit` (= unit sendiri kalau tidak ada binding).
+	inline std::string resolve(Kind k, const std::string &unit)
+	{
+		auto it = store(k).find(unit);
+		return it != store(k).end() ? it->second : unit;
+	}
+} // namespace IconRegistry

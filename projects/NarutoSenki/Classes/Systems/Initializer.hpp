@@ -3,6 +3,7 @@
 #include "Systems/AssetSystem.hpp"
 #include "Systems/CommandSystem.hpp"
 #include "Systems/HeroSystem.hpp"
+#include "Systems/IconSystem.hpp"
 #include "Systems/MonsterAISystem.hpp"
 #include "Systems/MonsterSystem.hpp"
 #include "Systems/ProviderSystem.hpp"
@@ -29,5 +30,7 @@ namespace Internal
 		TransformSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/Assets.lua mengisi aset per karakter lewat tabel `Assets`
 		AssetSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/Icons.lua mengisi binding _rp/_rpf/_CutIn/_avator/_small lewat tabel `Icons`
+		IconSystem::registerLua();
 	}
 } // namespace Internal
