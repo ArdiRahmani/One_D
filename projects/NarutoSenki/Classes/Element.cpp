@@ -49,6 +49,8 @@ void Monster::setID(const string &name, Role role, Group group)
 	int tmpCombatPoint;
 
 	readData(tmpData, unitName, maxHP, tmpWidth, tmpHeight, tmpSpeed, tmpCombatPoint);
+	// <Idle><data><p type="attackType">Jibaku</p> = nama AI monster (bukan yang di nAttack).
+	_xmlAIType = unitName;
 
 	setMaxHPValue(maxHP, false);
 	setHPValue(maxHP, false);
@@ -163,8 +165,8 @@ void Monster::setAI(float dt)
 	// CloneMonAI: nama AI yang dipakai. Default = getName(), bisa dialihkan dari Lua
 	// (CloneMonAI.set("Shakuton", "Rocket")). getName() tetap nama asli untuk sprite/resource,
 	// sedangkan seluruh percabangan AI di bawah memakai `charName`.
-	// Prioritas: CloneMonAI (Lua) > attackType di XML Unit/Mon/<nama>.xml > getName().
-	const string &charName = MonXmlAI::resolveTick(getName(), _nAttackType);
+	// Prioritas: attackType di XML Unit/Mon/<nama>.xml > CloneMonAI (Lua) > getName().
+	const string &charName = MonXmlAI::resolveTick(getName(), _xmlAIType);
 	if (charName == SkillEnum::Kage)
 	{
 		for (auto hero : getGameLayer()->_CharacterArray)

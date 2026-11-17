@@ -20,7 +20,12 @@ public:
 
 	CREATE_FUNC(Monster);
 
+	// attackType dari action <Idle> di Unit/Mon/<nama>.xml (mis. "Jibaku", "Snake").
+	// Dipakai sebagai nama AI (lihat MonXmlAI). Beda dengan _nAttackType (action nAttack, "aAttack").
+	const string &getXmlAIType() const { return _xmlAIType; }
+
 protected:
+	string _xmlAIType;
 	void dealloc();
 	void setAI(float dt);
 	void setResume();
