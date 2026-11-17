@@ -159,8 +159,7 @@ class Obito : public Hero
 			_isTaunt = false;
 			setHurtAction(createAnimation(hurtArray, 10, false, true));
 		}
-		CharacterBase::resumeAction(dt);
-	}
+		}
 }
 	void setActionResume() override
 	{
