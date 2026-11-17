@@ -3268,7 +3268,7 @@ void CharacterBase::setMon(const string &monName)
 	// (CloneMon.set("Chibaku", "JibakuEX")). `monName` tetap dipakai untuk setID/resource,
 	// sedangkan seluruh percabangan posisi/attack/doAI di bawah memakai `aiName`.
 	// Selain Lua, AI juga bisa dari XML: <p type="attackType">Jibaku</p> di Unit/Mon/<monName>.xml
-	// (lihat MonXmlAI di Data/UnitDefines.h). XML menang atas alias Lua. Diputuskan SETELAH setID()
+	// (lihat MonXmlAI di Data/UnitDefines.h). Urutan: Lua > XML > default (alias Lua menang, XML hanya dipakai kalau tidak ada alias Lua). Diputuskan SETELAH setID()
 	// karena attackType baru terbaca saat XML dimuat.
 	float monsterStayTime = _attackRangeY;
 

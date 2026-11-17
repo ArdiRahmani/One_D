@@ -248,7 +248,7 @@ namespace MonAIRegistry
 } // namespace MonAIRegistry
 
 /**
- * AI monster dari XML (alternatif selain Lua CloneMon / CloneMonAI).
+ * AI monster dari XML (fallback kalau tidak ada alias Lua CloneMon / CloneMonAI).
  *
  * Monster boleh menulis nama AI-nya langsung di Resources/Unit/Mon/<Nama>.xml, di data
  * action <Idle> (item pertama, dibaca ke Monster::_xmlAIType):
@@ -256,8 +256,9 @@ namespace MonAIRegistry
  * Maka monster itu memakai AI/cabang "Jibaku" (spawn di CharacterBase::setMon DAN
  * per-tick di Monster::setAI), sementara nama/sprite/resource tetap milik monster itu.
  *
- * Prioritas: attackType XML > alias Lua (CloneMon / CloneMonAI) > nama monster sendiri.
- * (XML = data milik monster itu sendiri, jadi menang atas daftar global di Lua.)
+ * Prioritas: alias Lua (CloneMon / CloneMonAI) > attackType XML > nama monster sendiri (default).
+ * Kalau monster punya alias di Lua, XML dilewati. Kalau tidak ada alias Lua, dipakai attackType XML.
+ * Kalau XML juga tidak ada, jatuh ke default (nama monster sendiri).
  * attackType generik ("nAttack", "aAttack", atau kosong) TIDAK dianggap nama AI, jadi
  * monster lama yang XML-nya masih "nAttack" berperilaku persis seperti sebelumnya.
  */
@@ -271,20 +272,26 @@ namespace MonXmlAI
 	// AI spawn (CharacterBase::setMon). Mengembalikan referensi ke salah satu argumen.
 	inline const std::string &resolveSpawn(const std::string &name, const std::string &xmlAttackType)
 	{
-		if (!isGenericAttackType(xmlAttackType))
-			return xmlAttackType;
+		// 1) Lua (CloneMon)
 		if (MonRegistry::has(name))
 			return MonRegistry::resolve(name);
+		// 2) XML (attackType)
+		if (!isGenericAttackType(xmlAttackType))
+			return xmlAttackType;
+		// 3) Default
 		return name;
 	}
 
 	// AI per-tick (Monster::setAI). Mengembalikan referensi ke salah satu argumen.
 	inline const std::string &resolveTick(const std::string &name, const std::string &xmlAttackType)
 	{
-		if (!isGenericAttackType(xmlAttackType))
-			return xmlAttackType;
+		// 1) Lua (CloneMonAI)
 		if (MonAIRegistry::has(name))
 			return MonAIRegistry::resolve(name);
+		// 2) XML (attackType)
+		if (!isGenericAttackType(xmlAttackType))
+			return xmlAttackType;
+		// 3) Default
 		return name;
 	}
 } // namespace MonXmlAI
