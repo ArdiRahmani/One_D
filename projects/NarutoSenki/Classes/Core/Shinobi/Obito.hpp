@@ -150,7 +150,7 @@ class Obito : public Hero
 
 		}
 }
-	void resumeAction() override
+	void resumeAction(float dt) override
 	{
 	if (getName() == HeroEnum::Obito)
 		{
@@ -159,8 +159,9 @@ class Obito : public Hero
 			_isTaunt = false;
 			setHurtAction(createAnimation(hurtArray, 10, false, true));
 		}
-		}
-}
+	}
+CharacterBase::resumeAction(dt);
+	}
 	void setActionResume() override
 	{
 	if (getName() == HeroEnum::Obito)
