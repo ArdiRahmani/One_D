@@ -3982,6 +3982,24 @@
       <key>textureRotated</key>
       <false/>
     </dict>
+    <key>ObitoRikudo_full.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{239,203}</string>
+      <key>spriteSourceSize</key>
+      <string>{239,203}</string>
+      <key>textureRect</key>
+      <string>{{475,427},{239,203}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
+    
     <key>Obito_half.png</key>
     <dict>
       <key>aliases</key>

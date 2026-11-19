@@ -3,7 +3,7 @@
 
 	<action name="Idle">
 		<data>
-			<p type="attackType">Tiger</p>
+			<p type="attackType">TamaBomb</p>
 			<p type="attackValue">0</p>
 			<p type="attackRangeX">29</p>
 			<p type="attackRangeY">15</p>

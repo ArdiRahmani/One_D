@@ -3,7 +3,7 @@
 
 	<action name="Idle">
 		<data>
-			<p type="attackType">Itachi</p>
+			<p type="attackType">FakeTobirama</p>
 			<p type="attackValue">0</p>
 			<p type="attackRangeX">51</p>
 			<p type="attackRangeY">11</p>

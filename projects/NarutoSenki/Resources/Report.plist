@@ -632,6 +632,7 @@
       <string>{{36,110},{34,34}}</string>
       <key>textureRotated</key>
       <false/>
+       </dict>
     <key>Guy8Gates_rpf.png</key>
     <dict>
       <key>aliases</key>
@@ -649,8 +650,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    </dict>
-    <key>Guy_rp.png</key>
+    <key>Guy2_rp.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -2588,7 +2588,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>SageHashirama21_rpf.png</key>
+    <key>SageHashiramaGG_rpf.png</key>
     <dict>
       <key>aliases</key>
       <array/>

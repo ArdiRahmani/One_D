@@ -23,7 +23,8 @@ local skillPageCharacters = {
     Naruto = 'RikudoNaruto',
     Sasuke = 'ImmortalSasuke', 
     Jiraiya = 'SageJiraiya', 
-    Minato = 'MinatoET'
+    Minato = 'MinatoET', 
+    Obito = 'ObitoRikudo'
 }
 
 SkillLayer = class('SkillLayer', function() return display.newLayer() end)

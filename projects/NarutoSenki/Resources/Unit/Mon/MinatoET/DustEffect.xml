@@ -3,7 +3,7 @@
    
     <action name="Idle">
 	 <date>
-	    <p type="attackType">Jibaku</p>
+	    <p type="attackType">Rocket</p>
         <p type="attackValue">0</p>
         <p type="attackRangeX">49</p>
         <p type="attackRangeY">47</p>
@@ -16,7 +16,7 @@
    
     <action name="Walk">
       <frame>
-
+<f>MinatoET_Blank</f>
       </frame>
     </action>
    

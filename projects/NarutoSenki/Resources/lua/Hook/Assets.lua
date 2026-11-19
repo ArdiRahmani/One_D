@@ -42,6 +42,13 @@ local list = {
         skill = 'SageHashirama',
         ogg = 'SageHashirama',
     },
+    Obito = {
+        ninja = 'ObitoRikudo',
+        ogg = 'ObitoRikudo',
+    },
+    ObitoRikudo = {
+        skill = 'Obito',
+    },
     Nagato = {
         ninja = 'AnimalPath',
         ninja = 'AsuraPath',

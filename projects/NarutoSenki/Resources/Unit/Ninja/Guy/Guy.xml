@@ -3,7 +3,7 @@
    
     <action name="Idle">
 	 <data>
-	    <p type="attackType">Guy</p>
+	    <p type="attackType">Ino</p>
         <p type="attackValue">5000</p>
         <p type="attackRangeX">55</p>
         <p type="attackRangeY">80</p>

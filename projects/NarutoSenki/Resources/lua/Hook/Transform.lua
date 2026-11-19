@@ -27,6 +27,8 @@ local TransformHook = {}
 local list = {
     Hashirama = 'SageHashirama',
     Guy = 'Guy8Gates',
+    Zetsu = 'Zetsu2', 
+    Obito = 'ObitoRikudo', 
 }
 
 if not Transform then

@@ -15,8 +15,6 @@
    
     <action name="Walk">
       <frame>
-        <e type="setCommand">findTarget</e> 
-        <e type="setCommand">setTransport</e>
 <f>Jinpachi_NAttack_06</f>
       </frame>
     </action>

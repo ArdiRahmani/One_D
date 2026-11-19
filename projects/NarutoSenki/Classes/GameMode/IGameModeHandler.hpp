@@ -421,9 +421,11 @@ protected:
 		return random(2) == 0 ? Group::Konoha : Group::Akatsuki;
 	}
 
-	// Varian hero menurut page skill yang dipilih di SkillLayer.
-	// SkillLayer.lua menyimpan "heroPage_<Hero>" = nama varian (mis. heroPage_Guy = "Guy8Gates")
-	// saat page 2 dipilih, dan string kosong saat page 1. Kosong / tidak ada => nama asli.
+	// Varian hero menurut INDEX page skill yang dipilih di SkillLayer (page 1, 2, 3, 4, ... berapa pun).
+	// SkillLayer.lua menyimpan index di "heroPageIdx_<Hero>" dan menerjemahkannya ke nama varian
+	// di "heroPage_<Hero>" (mis. heroPage_Guy = "Guy8Gates" untuk page 2; string kosong untuk page 1).
+	// Fungsi ini dipakai untuk player, COM rekan, hero acak, dan musuh, jadi semuanya ikut
+	// index page yang dipilih. Kosong / tidak ada => nama asli (page 1).
 	static inline string resolveHeroVariant(const string &name)
 	{
 		if (name.empty())
