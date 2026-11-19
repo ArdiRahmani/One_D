@@ -42,7 +42,7 @@
 local LuaAIHook = {}
 
 local list = {
-    Yagura = 'Yagura',   -- lua/AI/Yagura.lua (= Tsunade.lua + klon YClone)
+    Yagura = 'Tsunade',   -- lua/AI/Yagura.lua (= Tsunade.lua + klon YClone)
 }
 
 if not LuaAI then

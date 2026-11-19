@@ -13,18 +13,21 @@ local useFull2ImageList = {
     'Hinata', 'Sakura', 'Ino', 'Tsunade', 'Tenten', 'Konan', 'Karin'
 }
 
--- Karakter yang mempunyai dua halaman skill.
--- Key = nama karakter asli di SelectLayer, value = nama aset untuk page 2.
--- Tambahkan karakter lain dengan format yang sama.
+-- Karakter yang punya beberapa halaman (page) skill.
+-- Key   = nama karakter asli di SelectLayer (= page 1).
+-- Value = daftar varian untuk page 2, page 3, page 4, ... (urutan = nomor page).
+--   Guy = {'Guy8Gates'}            => page 1 Guy, page 2 Guy8Gates
+--   X   = {'XPage2', 'XPage3'}     => page 1 X, page 2 XPage2, page 3 XPage3
+-- Boleh juga string tunggal (dianggap page 2 saja) agar format lama tetap jalan.
 local skillPageCharacters = {
-    Guy = 'Guy8Gates',
-    Hashirama = 'SageHashirama',
-    Pain = 'Nagato',
-    Naruto = 'RikudoNaruto',
-    Sasuke = 'ImmortalSasuke', 
-    Jiraiya = 'SageJiraiya', 
-    Minato = 'MinatoET', 
-    Obito = 'ObitoRikudo'
+    Guy = {'Guy8Gates'},
+    Hashirama = {'SageHashirama'},
+    Pain = {'Nagato'},
+    Naruto = {'SageNaruto', 'RikudoNaruto'},
+    Sasuke = {'ImmortalSasuke'},
+    Jiraiya = {'SageJiraiya'},
+    Minato = {'MinatoET'},
+    Obito = {'ObitoRikudo'}
 }
 
 SkillLayer = class('SkillLayer', function() return display.newLayer() end)
@@ -32,21 +35,61 @@ SkillLayer = class('SkillLayer', function() return display.newLayer() end)
 -- Dipakai SelectLayer untuk mereset pilihan page saat layar pilih dibuka.
 SkillLayer.skillPageCharacters = skillPageCharacters
 
--- Simpan pilihan page ke UserDefault supaya dibaca C++ (IGameModeHandler::resolveHeroVariant).
---   page 1 => ''            (hero asli, mis. Guy)
---   page 2 => nama varian   (mis. Guy8Gates)
--- Hasilnya berlaku untuk player, COM rekan, hero acak, dan musuh.
--- Page tersimpan untuk hero ini: 2 kalau varian dipilih, 1 kalau tidak, nil kalau hero tanpa page.
+-- Daftar varian (page 2..N) untuk hero. nil kalau hero tidak punya page.
+local function getVariants(baseName)
+    local v = skillPageCharacters[baseName]
+    if type(v) == 'string' then return {v} end
+    if type(v) == 'table' and #v > 0 then return v end
+    return nil
+end
+
+-- Jumlah page hero (termasuk page 1). 1 kalau hero tidak punya page tambahan.
+function SkillLayer.getPageCount(baseName)
+    local variants = getVariants(baseName)
+    return variants and (#variants + 1) or 1
+end
+
+-- Nama aset hero untuk nomor page tertentu (page 1 = nama asli).
+function SkillLayer.getPageHeroName(baseName, page)
+    local variants = getVariants(baseName)
+    if page and page >= 2 and variants and variants[page - 1] then
+        return variants[page - 1]
+    end
+    return baseName
+end
+
+-- Pilihan page disimpan sebagai INDEX di UserDefault:
+--   heroPageIdx_<Hero> = 1, 2, 3, 4, ...  (sumber utama, dipakai Lua)
+-- Nama varian hasil index juga ditulis ke:
+--   heroPage_<Hero>    = nama varian ('' untuk page 1)
+-- supaya C++ (IGameModeHandler::resolveHeroVariant) tinggal membaca nama,
+-- apa pun nomor page-nya. Berlaku untuk player, COM rekan, hero acak, dan musuh.
+-- Page tersimpan untuk hero ini (1..N), nil kalau hero tanpa page.
 function SkillLayer.getSavedPage(baseName)
-    if not skillPageCharacters[baseName] then return nil end
-    local v = save.getString('heroPage_' .. baseName)
-    return (v and v ~= '') and 2 or 1
+    local count = SkillLayer.getPageCount(baseName)
+    if count <= 1 then return nil end
+    local idx = save.getInteger('heroPageIdx_' .. baseName, 0) or 0
+    if idx == 0 then
+        -- Save lama (hanya nama varian): cocokkan nama ke index-nya.
+        local name = save.getString('heroPage_' .. baseName)
+        idx = 1
+        if name and name ~= '' then
+            for i = 2, count do
+                if SkillLayer.getPageHeroName(baseName, i) == name then idx = i break end
+            end
+        end
+    end
+    if idx < 1 or idx > count then idx = 1 end
+    return idx
 end
 
 function SkillLayer.savePageChoice(baseName, page)
-    local variant = skillPageCharacters[baseName]
-    if not variant then return end
-    save.string('heroPage_' .. baseName, page == 2 and variant or '')
+    local count = SkillLayer.getPageCount(baseName)
+    if count <= 1 then return end
+    if not page or page < 1 or page > count then page = 1 end
+    save.integer('heroPageIdx_' .. baseName, page)
+    save.string('heroPage_' .. baseName,
+                page == 1 and '' or SkillLayer.getPageHeroName(baseName, page))
 end
 
 function SkillLayer:ctor(selectLayer)
@@ -343,24 +386,31 @@ end
 -- Mengembalikan nama aset karakter untuk halaman yang sedang dipilih.
 function SkillLayer:getSkillPageHero(page)
     local baseName = self._skillBaseHero or self.selectHero
-    if page == 2 and skillPageCharacters[baseName] then
-        return skillPageCharacters[baseName]
-    end
-    return baseName
+    return SkillLayer.getPageHeroName(baseName, page)
 end
 
 -- Ikon dan posisi mengikuti page button milik SelectLayer.
 function SkillLayer:initSkillPageButtons()
-    if not self._skillBaseHero or not skillPageCharacters[self._skillBaseHero] then
-        return
+    local pageCount = self._skillBaseHero and
+                          SkillLayer.getPageCount(self._skillBaseHero) or 1
+    if pageCount <= 1 then return end
+
+    -- Frame ikon page{i}_off/on; kalau belum ada (mis. page4) pakai page terakhir yang ada.
+    local cache = CCSpriteFrameCache:sharedSpriteFrameCache()
+    local function iconIndex(i)
+        while i > 1 and not cache:spriteFrameByName('page' .. i .. '_off.png') do
+            i = i - 1
+        end
+        return i
     end
 
     local pageButtons = {}
-    for i = 1, 2 do
+    for i = 1, pageCount do
         local pageIndex = i
+        local icon = iconIndex(i)
         local button = ui.newImageMenuItem({
-            image = '#page' .. tostring(i) .. '_off.png',
-            imageSelected = '#page' .. tostring(i) .. '_on.png',
+            image = '#page' .. tostring(icon) .. '_off.png',
+            imageSelected = '#page' .. tostring(icon) .. '_on.png',
             listener = function()
                 self:onSkillPageButtonClick(pageIndex)
             end
@@ -382,7 +432,8 @@ function SkillLayer:initSkillPageButtons()
 end
 
 function SkillLayer:onSkillPageButtonClick(page)
-    if page ~= 1 and page ~= 2 then return end
+    local pageCount = SkillLayer.getPageCount(self._skillBaseHero or self.selectHero)
+    if page < 1 or page > pageCount then return end
     if self._skillPage == page then return end
 
     audio.playSound(ns.menu.SELECT_SOUND)
@@ -406,7 +457,7 @@ function SkillLayer:onSkillPageButtonClick(page)
 
     -- Perbarui status visual tombol page.
     if self._skillPageButtons then
-        for i = 1, 2 do
+        for i = 1, #self._skillPageButtons do
             local button = self._skillPageButtons[i]
             if i == page then
                 button:selected()

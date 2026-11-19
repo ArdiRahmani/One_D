@@ -46,7 +46,7 @@ function SelectLayer:init()
 
     self.enableHardCore = false
 
-    self.pageNum = 3
+    self.pageNum = 4
 
     self._comLabel1 = nil
     self._comLabel2 = nil
@@ -64,7 +64,7 @@ function SelectLayer:init()
     self._playerSelect = nil
     self.selectHero = nil
 
-    -- Pilihan page skill (heroPage_<Hero>) sengaja TIDAK direset di sini,
+    -- Pilihan page skill (heroPageIdx_<Hero> = index page, heroPage_<Hero> = nama varian) sengaja TIDAK direset di sini,
     -- jadi tetap tersimpan setelah keluar/selesai pertandingan.
 
     tools.addSprites('Record.plist', 'Record2.plist', 'Select.plist',
