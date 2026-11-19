@@ -32,7 +32,7 @@ ns.CharactersLayout = {
     -- {
          _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
          _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
-         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    'Obito',
     -- },
 }
 
