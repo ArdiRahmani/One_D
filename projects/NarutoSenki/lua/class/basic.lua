@@ -26,13 +26,13 @@ ns.CharactersLayout = {
     -- {
         _None, 		   'Tobi', 		    'Zetsu',		_None,      --[[ Right ]] 'Pain',        'Konan',         _None,
         _None, 		    'Deidara', 		'Kakuzu', 		'Hidan',    --[[ Right ]] 'Kimimaro',    _None,         _None,
-        'Itachi', 		'Kisame',		_None, 		    _None,      --[[ Right ]] _None, 		 _None,         _None,
+        'Itachi', 		'Kisame',		_None, 		    _None,      --[[ Right ]] _None, 		 _None,         'Yagura',
         -- },
     -- Page Four
     -- {
-        -- _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
-        -- _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
-        -- _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
     -- },
 }
 

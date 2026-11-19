@@ -28,7 +28,6 @@ local list = {
     Guy8Gates = 'Pakura', 
     MinatoET = 'Ino', 
     Temari = 'Pakura',
-    YClone = 'Slug',     -- klon Yagura memakai AI Slug.hpp
 }
 
 if not CloneAI then

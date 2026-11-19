@@ -15,7 +15,7 @@ if (getName() == HeroEnum::Zetsu)
 }
 	void perform() override
 	{
-	if (getName() == HeroEnum::Zetsu2)
+	if (getName() != HeroEnum::Zetsu)
     {
         perform_Zetsu2();
         return;
@@ -153,7 +153,7 @@ if (getName() == HeroEnum::Zetsu)
 		findHeroHalf();
 
 		tryUseGear6();
-		tryBuyGear(GearType::Gear00, GearType::Gear08, GearType::Gear02);
+		tryBuyGear(GearType::Gear00, GearType::Gear04, GearType::Gear08);
 
 		if (needBackToTowerToRestoreHP() ||
 			needBackToDefendTower())

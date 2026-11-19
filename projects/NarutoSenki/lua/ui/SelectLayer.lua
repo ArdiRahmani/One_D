@@ -46,7 +46,7 @@ function SelectLayer:init()
 
     self.enableHardCore = false
 
-    self.pageNum = 3
+    self.pageNum = 4
 
     self._comLabel1 = nil
     self._comLabel2 = nil
