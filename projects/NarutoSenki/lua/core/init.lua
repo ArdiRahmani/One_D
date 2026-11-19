@@ -12,6 +12,9 @@ Heroes = require 'Hook.Heroes'
 -- Alias AI karakter, mis. Madara = Asuma (dikirim ke C++ lewat CloneAI)
 require 'Hook.CloneAI'
 
+-- AI karakter yang ditulis di Lua, mis. Yagura = Tsunade (lua/AI/Tsunade.lua) (dikirim ke C++ lewat LuaAI)
+require 'Hook.LuaAI'
+
 -- Alias AI monster/summon, mis. Chibaku = JibakuEX (dikirim ke C++ lewat CloneMon)
 require 'Hook.Monster'
 

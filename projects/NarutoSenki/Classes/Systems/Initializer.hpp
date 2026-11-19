@@ -4,6 +4,7 @@
 #include "Systems/CommandSystem.hpp"
 #include "Systems/HeroSystem.hpp"
 #include "Systems/IconSystem.hpp"
+#include "Systems/LuaAISystem.hpp"
 #include "Systems/MonsterAISystem.hpp"
 #include "Systems/MonsterSystem.hpp"
 #include "Systems/ProviderSystem.hpp"
@@ -18,6 +19,8 @@ namespace Internal
 		HeroSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/CloneAI.lua mengisi alias AI lewat tabel `CloneAI`
 		ProviderSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/LuaAI.lua mengikat unit ke script lua/AI/<Script>.lua lewat tabel `LuaAI`
+		LuaAISystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/Monster.lua mengisi alias AI monster lewat tabel `CloneMon`
 		MonsterSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/MonsterAI.lua mengisi alias Monster::setAI lewat tabel `CloneMonAI`

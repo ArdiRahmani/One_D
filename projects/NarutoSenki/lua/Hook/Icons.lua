@@ -32,16 +32,16 @@ local IconsHook = {}
 
 local list = {
     rp = {
-        Chiyo = 'SageHashirama',
+        Chiyo = 'Guy',
     },
     rpf = {
-        Ino = 'Guy8Gates',
+        Chiyo = 'SageHashirama',
     },
     CutIn = {
         -- Guy = 'Guy8Gates',
     },
     Avator = {
-        -- Guy = 'Guy8Gates',
+        HashiramaET = 'SageHashirama',
     },
     small = {
         -- Hashirama = 'SageHashirama',

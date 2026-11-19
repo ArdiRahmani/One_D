@@ -126,6 +126,65 @@ namespace AIRegistry
 } // namespace AIRegistry
 
 /**
+ * AI karakter yang ditulis di Lua (LuaAI): "unit X dijalankan oleh script lua/AI/<Y>.lua".
+ *
+ * Contoh: LuaAIRegistry::set("Yagura", "Tsunade") -> Provider::create("Yagura", ...)
+ * membuat LuaHero yang menjalankan lua/AI/Tsunade.lua. Unit "Tsunade" tidak ikut berubah,
+ * tetap memakai class C++ Tsunade (Tsunade.hpp), kecuali juga di-bind lewat LuaAI.
+ *
+ * Beda dengan AIRegistry (CloneAI): CloneAI mengalihkan ke class C++ yang sudah ada,
+ * LuaAI mengalihkan ke script Lua. Kalau sebuah unit ada di keduanya, LuaAI menang
+ * (kalau script gagal dimuat, Provider jatuh balik ke CloneAI / class C++ biasa).
+ *
+ * Diisi dari Lua lewat tabel global `LuaAI` (lihat Systems/LuaAISystem.hpp dan
+ * lua/Hook/LuaAI.lua). name == script TIDAK dihapus (beda dengan AIRegistry), karena
+ * "Tsunade" -> lua/AI/Tsunade.lua adalah binding yang sah.
+ */
+namespace LuaAIRegistry
+{
+	inline std::unordered_map<std::string, std::string> &store()
+	{
+		static std::unordered_map<std::string, std::string> map;
+		return map;
+	}
+
+	inline size_t count()
+	{
+		return store().size();
+	}
+
+	inline bool set(const std::string &name, const std::string &script)
+	{
+		if (name.empty() || script.empty())
+			return false;
+		store()[name] = script;
+		return true;
+	}
+
+	inline bool remove(const std::string &name)
+	{
+		return store().erase(name) > 0;
+	}
+
+	inline void clear()
+	{
+		store().clear();
+	}
+
+	inline bool has(const std::string &name)
+	{
+		return store().find(name) != store().end();
+	}
+
+	// Nama script milik `name`; string kosong kalau tidak ada.
+	inline std::string get(const std::string &name)
+	{
+		auto it = store().find(name);
+		return it != store().end() ? it->second : std::string();
+	}
+} // namespace LuaAIRegistry
+
+/**
  * Alias AI monster/summon (CloneMon): "monster X memakai perilaku monster Y".
  *
  * Contoh: MonRegistry::set("Chibaku", "JibakuEX") -> CharacterBase::setMon("Chibaku")

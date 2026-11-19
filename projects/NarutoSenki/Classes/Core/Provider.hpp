@@ -45,6 +45,9 @@
 #include "Shinobi/Tsunade.hpp"
 #include "Shinobi/Zetsu.hpp"
 
+// Lua AI (LuaAI): hero yang AI-nya ditulis di lua/AI/<Script>.lua
+#include "LuaHero.hpp"
+
 // Bunshin
 #include "Shinobi/Bunshin/NarutoClone.hpp"
 #include "Shinobi/Bunshin/SageNarutoClone.hpp"
@@ -92,12 +95,26 @@ class Provider
 public:
 	static Hero *create(const string &name, Role role, Group group)
 	{
-		Hero *ptr;
+		Hero *ptr = nullptr;
+		// Dipakai LuaHero::createSummon() supaya script Lua bisa membuat summon lewat nama
+		LuaHero::heroFactory = &Provider::create;
+
+		// LuaAI (lua/Hook/LuaAI.lua): unit yang di-bind ke script Lua memakai LuaHero.
+		// Prioritas di atas CloneAI / class native; kalau script gagal dimuat -> jatuh ke bawah.
+		if (LuaAIRegistry::has(name))
+		{
+			ptr = LuaHero::createFromScript(LuaAIRegistry::get(name));
+			if (!ptr)
+				CCLOG("[LuaAI] script [ %s ] untuk [ %s ] gagal dimuat, pakai AI C++", LuaAIRegistry::get(name).c_str(), name.c_str());
+		}
+
 		// CloneAI: nama AI/class yang dipakai. Default = name, bisa dialihkan dari Lua
 		// (CloneAI.set("Madara", "Asuma")). `name` tetap dipakai untuk setID/resource.
 		const string &aiName = AIRegistry::resolve(name);
 		bool aiFallback = false;
 
+		if (!ptr)
+		{
 		__begin__
 		is("Akamaru") 						ptr = new Akamaru();
 		is("Asuma") 						ptr = new Asuma();
@@ -162,6 +179,7 @@ public:
 		is("WhiteZetsu") 						ptr = new WhiteZetsu();
 		is("Juubi")				ptr = new Guardian();
 		else								{ aiFallback = true; ptr = new DefaultAI(); }
+		}
 
 		if (aiFallback && aiName != name)
 		{
