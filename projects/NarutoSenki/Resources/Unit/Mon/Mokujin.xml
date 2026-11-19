@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Tiger</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">29</p>
+        <p type="attackRangeY">15</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+     <f>Mangetsu_Idlle_01</f>
+     <f>Mangetsu_Idlle_02</f>
+     <f>Mangetsu_Idlle_03</f> 
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>Mangetsu_Walk_01</f>
+        <f>Mangetsu_Walk_02</f>
+        <f>Mangetsu_Walk_03</f>
+        <f>Mangetsu_Walk_04</f>
+        <f>Mangetsu_Walk_05</f>
+        <f>Mangetsu_Walk_06</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">150</p>
+        <p type="attackRangeX">48</p>
+        <p type="attackRangeY">32</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+        <e type="setSkillEffect">smk</e>
+          <f>Hashirama_NAttack_14</f> <f>Mangetsu_NAttack_01</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e> 
+<f>Mangetsu_NAttack_02</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+<f>Mangetsu_NAttack_03</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e> 
+<f>Mangetsu_NAttack_04</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e> 
+<f>Mangetsu_NAttack_05</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e> 
+<f>Mangetsu_NAttack_04</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+<f>Mangetsu_NAttack_03</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+<f>Mangetsu_NAttack_02</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+<f>Mangetsu_NAttack_01</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">20</e>
+        <e type="setSkillEffect">smk</e>
+        <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>
