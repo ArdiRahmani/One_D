@@ -64,13 +64,6 @@ local list = {
         skill = 'Naruto',
         kuchiyose = 'Kurama',    
     },
-    SageNaruto = {
-    ninja = 'RikudoNaruto',
-        skill = 'RikudoNaruto',
-        ogg = 'RikudoNaruto',    
-        skill = 'Naruto',
-        kuchiyose = 'Kurama',    
-    },
     SageJiraiya = {
         ninja = 'Jiraiya',
         skill = 'Jiraiya',
