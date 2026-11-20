@@ -21,13 +21,13 @@ local useFull2ImageList = {
 -- Boleh juga string tunggal (dianggap page 2 saja) agar format lama tetap jalan.
 local skillPageCharacters = {
     Guy = {'Guy8Gates'},
+    Tobi = {'TobiMasked'},
     Hashirama = {'SageHashirama'},
     Pain = {'Nagato'},
     Naruto = {'SageNaruto', 'RikudoNaruto'},
     Sasuke = {'ImmortalSasuke'},
     Jiraiya = {'SageJiraiya'},
     Minato = {'MinatoET'},
-    Tobi = {'TobiMasked'}, 
     Obito = {'ObitoRikudo'}
 }
 

@@ -22,7 +22,7 @@ local roster = {
     'Kankuro', 'Karin', 'Kiba', 'Kimimaro', 'Kisame', 'Konan', 'Lee',
     'Minato', 'Naruto', 'Neji', 'Ino', 'Obito', 'Orochimaru', 'Pain', 'Sai', 'Sakura',
     'Sasuke', 'Shikamaru', 'Shino', 'Suigetsu', 'Temari','Tenten', 'Tobi', 'Tobirama',
-    'Tsunade', 'Yagura', 'Zetsu',
+    'Tsunade', 'Utakata', 'Yagura', 'Zetsu',
 }
 
 local function hasNative()

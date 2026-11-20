@@ -8,6 +8,24 @@
 #include "Systems/CommandSystem.hpp"
 #include "Utils/Debug/UnitDebug.hpp"
 
+// Nama AI/perilaku sebuah attacker untuk keperluan "ct_hit" (tangkap).
+// Monster hasil clone (nama sendiri, mis. "ShenweiX") yang AI-nya "Shenwei" lewat
+// Lua CloneMonAI / CloneMon atau <p type="attackType">Shenwei</p> di XML-nya harus diperlakukan
+// sama seperti Shenwei asli. Pakai getName() saja tidak cukup karena getName() = nama clone.
+// Bukan Monster / tidak ada alias -> kembali ke getName().
+static string getCatchAIName(CharacterBase *c)
+{
+	const string &name = c->getName();
+	if (!c->isMon())
+		return name;
+
+	if (MonAIRegistry::has(name))
+		return MonAIRegistry::resolve(name);
+	if (MonRegistry::has(name))
+		return MonRegistry::resolve(name);
+	return MonXmlAI::resolveTick(name, static_cast<Monster *>(c)->getXmlAIType());
+}
+
 CharacterBase::CharacterBase()
 {
 	_state = State::WALK;
@@ -799,15 +817,16 @@ void CharacterBase::acceptAttack(Ref *object)
 								 (attacker->_state == State::O2ATTACK ||
 								  attacker->_state == State::OATTACK)))
 							{
+								const string catchAI = getCatchAIName(attacker);
 								if (attacker->_isCatchOne == false ||
-									attacker->getName() == SkillEnum::Shenwei)
+									catchAI == SkillEnum::Shenwei)
 								{
 									if (attacker->_master)
 									{
-										if (attacker->getName() == SkillEnum::Kuroari ||
-											attacker->getName() == SkillEnum::Shenwei ||
-											attacker->getName() == SkillEnum::Sabaku ||
-											attacker->getName() == SkillEnum::Shenwei2)
+										if (catchAI == SkillEnum::Kuroari ||
+											catchAI == SkillEnum::Shenwei ||
+											catchAI == SkillEnum::Sabaku ||
+											catchAI == SkillEnum::Shenwei2)
 										{
 											if (hardHurt(3000, false, true, false, false))
 											{
@@ -815,7 +834,7 @@ void CharacterBase::acceptAttack(Ref *object)
 												scheduleOnce(schedule_selector(CharacterBase::reCatched), 2.9f);
 											}
 										}
-										else if (attacker->getName() == SkillEnum::SandBall)
+										else if (catchAI == SkillEnum::SandBall)
 										{
 											if (hardHurt(1000, false, true, false, false))
 											{

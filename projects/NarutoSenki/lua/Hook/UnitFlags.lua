@@ -24,7 +24,7 @@
 local UnitFlagsHook = {}
 
 local list = {
-    -- Madara = { 'holdBuff', 'lockWalk' },
+--    Utakata = { 'holdBuff', 'lockWalk' },
 }
 
 if not UnitFlags then

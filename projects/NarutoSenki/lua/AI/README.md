@@ -41,7 +41,6 @@ function AI.changeAction(self) end   -- opsional (setara override changeAction)
 function AI.resumeAction(self, dt) end -- opsional (setara override resumeAction)
 function AI.createClone(self, t)     -- opsional, return self:createSummon('Nama') atau nil
 end
-function AI.setActionResume(self) end   -- opsional (setara override setActionResume, mis. Hashirama.lua)
 
 return AI
 ```
@@ -103,20 +102,17 @@ array: slot yang sama + `spc1..spc5`. Tanpa `array` = kembali ke animasi bawaan 
 
 `name role group state hp maxHp hpPercent def level exp ckr ckr2 coin x y height walkSpeed
 nAttackValue nAttackType isFlog isNotFlog isTower isNotTower isCom isPlayer isPlayerOrCom isClone
-isKugutsu isSummon isMon isBullet isGuardian isArmored isInvincible isControlled isHealing canGear06`
+isKugutsu isSummon isMon isBullet isGuardian isArmored isInvincible isControlled isHealing`
 
 * `role`: `'Com' 'Player' 'Hero' 'Flog' 'Tower' 'Bullet' 'Clone' 'Kugutsu' 'Mon' 'Summon'`
 * `state`: `'IDLE' 'WALK' 'NATTACK' 'SATTACK' 'OATTACK' 'O2ATTACK' 'HURT' 'KNOCKDOWN' 'FLOAT' 'JUMP' 'AIRHURT' 'DEAD'`
 
 ### Properti khusus `self`
 
-Baca: `canSkill1 canSkill2 canSkill3 canOugis1 canOugis2 canGear00 canGear03 isBaseDanger
+Baca: `canSkill1 canSkill2 canSkill3 canOugis1 canOugis2 canGear00 canGear03 canGear06 isBaseDanger
 enemyCombatPoint friendCombatPoint isOugis2Game isFreeState gearCount spcAttackType1..3`
 Baca + tulis: `isOnlySkillLocked healBuffValue nAttackRangeX nAttackRangeY state`
-Bisa ditulis di semua unit: `isArmored nAttackValue nAttackType walkSpeed originSpeed tempAttackValue1`
-Baca + tulis (self): `skillChangeBuffValue`
-
-> Di Lua `0` itu *truthy*: `!_skillChangeBuffValue` di C++ ditulis `self.skillChangeBuffValue == 0`.
+Bisa ditulis di semua unit: `isArmored nAttackValue nAttackType walkSpeed`
 
 ### Variabel milik script (setara anggota `private` di C++)
 

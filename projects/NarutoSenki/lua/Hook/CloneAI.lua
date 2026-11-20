@@ -28,6 +28,7 @@ local list = {
     Guy8Gates = 'Pakura', 
     MinatoET = 'Ino', 
     Temari = 'Pakura',
+--    Utakata = 'Hiruzen',
 }
 
 if not CloneAI then
