@@ -13,6 +13,20 @@ Monster::~Monster()
 	CC_SAFE_RELEASE(walkArray);
 	CC_SAFE_RELEASE(deadArray);
 	CC_SAFE_RELEASE(nattackArray);
+	for (auto &arr : _contArrays)
+		CC_SAFE_RELEASE(arr);
+}
+
+CCArray *Monster::getContinueArray(const string &actionName)
+{
+	static const char *kNames[10] = {"skill1", "skill2", "skill3", "skill4", "skill5",
+									 "spc1", "spc2", "spc3", "spc4", "spc5"};
+	for (int i = 0; i < 10; ++i)
+	{
+		if (actionName == kNames[i])
+			return _contArrays[i];
+	}
+	return nullptr;
 }
 
 bool Monster::init()
@@ -79,6 +93,25 @@ void Monster::setID(const string &name, Role role, Group group)
 	setNAttackValue(tmpValue);
 	nattackArray = (CCArray *)(tmpAction->objectAtIndex(1));
 	nattackArray->retain();
+
+	// Aksi opsional untuk setContinue (indeks sama dengan Hero: skill1..5 = 8..12, spc1=17, spc2=18, spc3=19, spc4=16, spc5=15).
+	// Dimuat hanya kalau ada di XML, jadi monster lama tidak terpengaruh.
+	auto loadExtra = [&](uint32_t index, CCArray *&dest)
+	{
+		if (animationArray->count() <= index)
+			return;
+		auto extra = (CCArray *)(animationArray->objectAtIndex(index));
+		if (extra == nullptr || extra->count() < 2)
+			return;
+		auto frames = (CCArray *)(extra->objectAtIndex(1));
+		if (frames == nullptr || frames->count() == 0)
+			return;
+		dest = frames;
+		dest->retain();
+	};
+	static const uint32_t kIndex[10] = {8, 9, 10, 11, 12, 17, 18, 19, 16, 15};
+	for (int i = 0; i < 10; ++i)
+		loadExtra(kIndex[i], _contArrays[i]);
 
 	initAction();
 }

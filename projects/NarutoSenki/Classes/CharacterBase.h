@@ -408,17 +408,17 @@ public:
 	CCArray*			floatArray;
 	CCArray*			deadArray;
 	CCArray*			nattackArray;
-	CCArray*			skill1Array;
-	CCArray*			skill2Array;
-	CCArray*			skill3Array;
-	CCArray*			skill4Array;
-	CCArray*			skill5Array;
+	CCArray*			skill1Array = nullptr;
+	CCArray*			skill2Array = nullptr;
+	CCArray*			skill3Array = nullptr;
+	CCArray*			skill4Array = nullptr;
+	CCArray*			skill5Array = nullptr;
 
-	CCArray*			skillSPC1Array;
-	CCArray*			skillSPC2Array;
-	CCArray*			skillSPC3Array;
-	CCArray*			skillSPC4Array;
-	CCArray*			skillSPC5Array;
+	CCArray*			skillSPC1Array = nullptr;
+	CCArray*			skillSPC2Array = nullptr;
+	CCArray*			skillSPC3Array = nullptr;
+	CCArray*			skillSPC4Array = nullptr;
+	CCArray*			skillSPC5Array = nullptr;
 
 
 	virtual void		dealloc();
@@ -497,6 +497,26 @@ public:
 	// same setup rules setClone() already uses. cloneTime<=0 means "no forced timeout" (see body).
 	Hero*				finalizeClone(Hero *clone, int cloneTime);
 	void				setMon(const string &monName);
+	// <e type="setContinue">Spc1|Spc2|Skill3</e>: hentikan aksi yang sedang jalan lalu
+	// lanjutkan ke aksi lain (Spc1 / Spc2 / Skill3) dari XML unit yang sama.
+	void				setContinue(const string &actionName);
+	// Array frame untuk setContinue ("spc1" / "spc2" / "skill3", sudah huruf kecil).
+	// Default: array milik Hero/CharacterBase (nullptr kalau aksinya tidak ada di XML).
+	// Monster meng-override karena hanya memuat array ini bila ada di XML-nya.
+	virtual CCArray*	getContinueArray(const string &actionName)
+	{
+		if (actionName == "spc1") return skillSPC1Array;
+		if (actionName == "spc2") return skillSPC2Array;
+		if (actionName == "spc3") return skillSPC3Array;
+		if (actionName == "spc4") return skillSPC4Array;
+		if (actionName == "spc5") return skillSPC5Array;
+		if (actionName == "skill1") return skill1Array;
+		if (actionName == "skill2") return skill2Array;
+		if (actionName == "skill3") return skill3Array;
+		if (actionName == "skill4") return skill4Array;
+		if (actionName == "skill5") return skill5Array;
+		return nullptr;
+	}
 	void				setMonPer(float dt);
 	void				setBullet(const string &bulletName);
 	void				setBulletGroup(float dt);

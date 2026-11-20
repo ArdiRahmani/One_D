@@ -1,3 +1,4 @@
+#include <cctype>
 #include "CharacterBase.h"
 #include "Core/Provider.hpp"
 #include "HudLayer.h"
@@ -1069,6 +1070,11 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 				else if (key == "setMon")
 				{
 					auto call = CallFunc::create(std::bind(&CharacterBase::setMon, this, keyValue));
+					list.pushBack(call);
+				}
+				else if (key == "setContinue")
+				{
+					auto call = CallFunc::create(std::bind(&CharacterBase::setContinue, this, keyValue));
 					list.pushBack(call);
 				}
 				else if (key == "setFont")
@@ -3263,6 +3269,32 @@ void CharacterBase::removeAllClones()
 			std::erase(unitArray, c);
 		}
 	}
+}
+
+void CharacterBase::setContinue(const string &actionName)
+{
+	// Nama tidak peka huruf besar/kecil: "Spc1", "spc2", "Skill3" (juga "SPC1", "SKILL3").
+	string name;
+	for (char c : actionName)
+		name.push_back((char)tolower((unsigned char)c));
+
+	// Yang didukung: spc1..spc5 dan skill1..skill5
+	const bool isSpc = name.size() == 4 && name.compare(0, 3, "spc") == 0 && name[3] >= '1' && name[3] <= '5';
+	const bool isSkill = name.size() == 6 && name.compare(0, 5, "skill") == 0 && name[5] >= '1' && name[5] <= '5';
+	if (!isSpc && !isSkill)
+		return;
+
+	auto arr = getContinueArray(name);
+	if (arr == nullptr || arr->count() == 0)
+		return;
+
+	auto action = createAnimation(arr, 10, false, true);
+	if (action == nullptr)
+		return;
+
+	// Dipanggil dari dalam CallFunc milik aksi yang sedang berjalan; aksi lama diganti.
+	stopAllActions();
+	runAction(action);
 }
 
 void CharacterBase::setMon(const string &monName)

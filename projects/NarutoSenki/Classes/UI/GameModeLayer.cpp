@@ -189,13 +189,13 @@ void GameModeLayer::selectMode(GameMode mode)
 		{
 			customSelect = false;
 		}
-		else if (mode != GameMode::RandomDeathmatch && mode != GameMode::Clone)
+		else if (mode != GameMode::RandomDeathmatch)
 		{
 			customSelect = Cheats >= kMaxCheats;
 		}
 
 		// Dari tombol Yes di kotak HardCore (StartMenu): aktifkan pilih tim
-		if (enableCustomSelect && mode != GameMode::RandomDeathmatch && mode != GameMode::Clone)
+		if (enableCustomSelect && mode != GameMode::RandomDeathmatch)
 		{
 			customSelect = true;
 		}

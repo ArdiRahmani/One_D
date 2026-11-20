@@ -24,7 +24,13 @@ public:
 	// Dipakai sebagai nama AI (lihat MonXmlAI). Beda dengan _nAttackType (action nAttack, "aAttack").
 	const string &getXmlAIType() const { return _xmlAIType; }
 
+	// Array aksi tambahan untuk <e type="setContinue"> (Spc1 / Spc2 / Skill3).
+	// Hanya terisi kalau Unit/Mon/<nama>.xml punya aksi tersebut (indeks 10 / 17 / 18).
+	CCArray *getContinueArray(const string &actionName) override;
+
 protected:
+	// Indeks: 0-4 = skill1..skill5 (XML 8..12), 5-9 = spc1..spc5 (XML 17,18,19,16,15)
+	CCArray *_contArrays[10] = {};
 	string _xmlAIType;
 	void dealloc();
 	void setAI(float dt);
