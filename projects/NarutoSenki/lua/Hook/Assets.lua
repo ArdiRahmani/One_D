@@ -50,10 +50,11 @@ local list = {
         skill = 'Obito',
     },
     Nagato = {
+    ninja = { 'AnimalPath', 'AsuraPath', 'NarakaPath' },
+    skill = 'Pain',
+    },
+    Yagura = {
         ninja = 'AnimalPath',
-        ninja = 'AsuraPath',
-        skill = 'Pain',
-        ninja = 'NarakaPath',
     },
     Guy = {
         ninja = 'Guy8Gates',

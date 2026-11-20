@@ -27,6 +27,7 @@ local skillPageCharacters = {
     Sasuke = {'ImmortalSasuke'},
     Jiraiya = {'SageJiraiya'},
     Minato = {'MinatoET'},
+    Tobi = {'TobiMasked'}, 
     Obito = {'ObitoRikudo'}
 }
 

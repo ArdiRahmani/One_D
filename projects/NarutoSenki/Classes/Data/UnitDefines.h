@@ -498,6 +498,57 @@ namespace TransformRegistry
 } // namespace TransformRegistry
 
 /**
+ * Flag perilaku per karakter (UnitFlags): pengganti daftar nama hard-coded di CharacterBase,
+ * supaya hero baru (mis. Madara yang memakai AI Hashirama.lua) bisa ikut perilaku yang sama.
+ *
+ *   HoldBuff : CharacterBase::setBuff TIDAK menjadwalkan resumeAction otomatis setelah buffStayTime
+ *              (mode berakhir lewat event setActionResume di XML aksi). Setara dengan daftar
+ *              `getName() != Hashirama/Hiruzen/Suigetsu/Jugo/Kisame/...` di CharacterBase::setBuff.
+ *   LockWalk : CharacterBase::walk TIDAK menggerakkan AI (bukan player) yang sedang NATTACK saat
+ *              _isOnlySkillLocked. Setara dengan `getName() == Suigetsu/Jugo/Hashirama/Hiruzen/Kisame`
+ *              di CharacterBase::walk.
+ *
+ * Ini TAMBAHAN: nama yang sudah ditulis di C++ tetap berlaku, flag hanya menambah.
+ * Diisi dari Lua lewat tabel global `UnitFlags` (Systems/UnitFlagSystem.hpp, lua/Hook/UnitFlags.lua).
+ */
+namespace UnitFlagRegistry
+{
+	enum Flag : unsigned
+	{
+		HoldBuff = 1u << 0,
+		LockWalk = 1u << 1
+	};
+
+	inline std::unordered_map<std::string, unsigned> &store()
+	{
+		static std::unordered_map<std::string, unsigned> map;
+		return map;
+	}
+
+	inline size_t count() { return store().size(); }
+
+	inline bool add(const std::string &name, unsigned flags)
+	{
+		if (name.empty() || flags == 0)
+			return false;
+		store()[name] |= flags;
+		return true;
+	}
+
+	inline bool remove(const std::string &name) { return store().erase(name) > 0; }
+
+	inline void clear() { store().clear(); }
+
+	inline unsigned get(const std::string &name)
+	{
+		auto it = store().find(name);
+		return it != store().end() ? it->second : 0u;
+	}
+
+	inline bool has(const std::string &name, Flag f) { return (get(name) & f) != 0; }
+} // namespace UnitFlagRegistry
+
+/**
  * Aset tambahan per karakter (Assets): plist sprite + file suara yang ikut di-load /
  * di-unload bersama karakter tersebut.
  *

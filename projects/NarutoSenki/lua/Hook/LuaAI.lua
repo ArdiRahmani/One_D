@@ -42,7 +42,9 @@
 local LuaAIHook = {}
 
 local list = {
-    Yagura = 'Tsunade',   -- lua/AI/Yagura.lua (= Tsunade.lua + klon YClone)
+    Yagura = 'Yagura',   
+    -- Madara = 'Hashirama',   -- lua/AI/Hashirama.lua (port Hashirama.hpp, termasuk SageHashirama)
+    TobiMasked = 'TobiMasked',   -- lua/AI/Yagura.lua (= Tsunade.lua + klon YClone)
 }
 
 if not LuaAI then

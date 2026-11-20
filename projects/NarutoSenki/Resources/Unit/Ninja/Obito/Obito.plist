@@ -2565,7 +2565,7 @@
                 <key>sourceSize</key>
                 <string>{482,633}</string>
             </dict>
-            <key>tBuff_Effect_01</key>
+            <key>t2Buff_Effect_01</key>
             <dict>
                 <key>frame</key>
                 <string>{{2756,926},{12,18}}</string>
@@ -2578,7 +2578,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_02</key>
+            <key>t2Buff_Effect_02</key>
             <dict>
                 <key>frame</key>
                 <string>{{2379,3564},{28,30}}</string>
@@ -2591,7 +2591,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_03</key>
+            <key>t2Buff_Effect_03</key>
             <dict>
                 <key>frame</key>
                 <string>{{3989,124},{40,42}}</string>
@@ -2604,7 +2604,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_04</key>
+            <key>t2Buff_Effect_04</key>
             <dict>
                 <key>frame</key>
                 <string>{{488,2423},{44,60}}</string>
@@ -2617,7 +2617,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_05</key>
+            <key>t2Buff_Effect_05</key>
             <dict>
                 <key>frame</key>
                 <string>{{3989,2},{42,58}}</string>
@@ -2630,7 +2630,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_06</key>
+            <key>t2Buff_Effect_06</key>
             <dict>
                 <key>frame</key>
                 <string>{{3989,64},{42,56}}</string>
@@ -2643,7 +2643,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_07</key>
+            <key>t2Buff_Effect_07</key>
             <dict>
                 <key>frame</key>
                 <string>{{3618,3555},{42,54}}</string>
@@ -2656,7 +2656,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_08</key>
+            <key>t2Buff_Effect_08</key>
             <dict>
                 <key>frame</key>
                 <string>{{973,2501},{42,52}}</string>
@@ -2669,7 +2669,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_09</key>
+            <key>t2Buff_Effect_09</key>
             <dict>
                 <key>frame</key>
                 <string>{{536,2423},{42,52}}</string>
@@ -2682,7 +2682,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_10</key>
+            <key>t2Buff_Effect_10</key>
             <dict>
                 <key>frame</key>
                 <string>{{2952,3766},{32,52}}</string>
@@ -2695,7 +2695,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_11</key>
+            <key>t2Buff_Effect_11</key>
             <dict>
                 <key>frame</key>
                 <string>{{952,3822},{32,42}}</string>
@@ -2708,7 +2708,7 @@
                 <key>sourceSize</key>
                 <string>{50,70}</string>
             </dict>
-            <key>tBuff_Effect_12</key>
+            <key>t2Buff_Effect_12</key>
             <dict>
                 <key>frame</key>
                 <string>{{3718,428},{32,18}}</string>

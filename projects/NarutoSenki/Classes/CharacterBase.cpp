@@ -2440,7 +2440,8 @@ void CharacterBase::setBuff(int buffValue)
 				getName() != KugutsuEnum::Parents &&
 				getName() != HeroEnum::Lee &&
 				getName() != HeroEnum::RockLee &&
-				getName() != HeroEnum::Nagato)
+				getName() != HeroEnum::Nagato &&
+				!UnitFlagRegistry::has(getName(), UnitFlagRegistry::HoldBuff))
 			{
 				scheduleOnce(schedule_selector(CharacterBase::resumeAction), buffStayTime);
 			}
@@ -2448,7 +2449,8 @@ void CharacterBase::setBuff(int buffValue)
 
 		changeAction();
 	}
-	else if (_attackType == "tBuff")
+	else if (_attackType == "tBuff" ||
+			 _attackType == "t2Buff")
 	{
 		_skillChangeBuffValue = buffValue;
 		scheduleOnce(schedule_selector(CharacterBase::resumeAction), buffStayTime);
@@ -2526,6 +2528,7 @@ void CharacterBase::setBuffEffect(const string &type)
 		addChild(_skillBuffEffect);
 	}
 	else if (type == "tBuff" ||
+			 type == "t2Buff" ||
 			 type == "dcBuff" ||
 			 type == "jdBuff" ||
 			 type == "bmBuff")
@@ -4272,7 +4275,8 @@ void CharacterBase::walk(Vec2 direction)
 			 getName() == HeroEnum::Jugo ||
 			 getName() == HeroEnum::Hashirama ||
 			 getName() == HeroEnum::Hiruzen ||
-			 getName() == HeroEnum::Kisame))
+			 getName() == HeroEnum::Kisame ||
+			 UnitFlagRegistry::has(getName(), UnitFlagRegistry::LockWalk)))
 		{
 			if (isNotPlayer())
 			{

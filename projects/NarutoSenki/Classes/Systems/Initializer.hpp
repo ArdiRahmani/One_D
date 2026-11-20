@@ -9,6 +9,7 @@
 #include "Systems/MonsterSystem.hpp"
 #include "Systems/ProviderSystem.hpp"
 #include "Systems/TransformSystem.hpp"
+#include "Systems/UnitFlagSystem.hpp"
 
 namespace Internal
 {
@@ -31,6 +32,8 @@ namespace Internal
 		AliasBridge<CatchRegistry::map>::registerLua("CloneCatch");
 		// Harus sebelum main.lua: lua/Hook/Transform.lua mengisi daftar transformasi lewat tabel `Transform`
 		TransformSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/UnitFlags.lua mengisi flag perilaku (holdBuff/lockWalk) lewat tabel `UnitFlags`
+		UnitFlagSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/Assets.lua mengisi aset per karakter lewat tabel `Assets`
 		AssetSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/Icons.lua mengisi binding _rp/_rpf/_CutIn/_avator/_small lewat tabel `Icons`

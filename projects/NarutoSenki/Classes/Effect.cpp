@@ -70,6 +70,7 @@ bool Effect::init(const string &name, CharacterBase *attacker)
 		{"sBuff", [&]() { runAnim("sBuff_Effect_", 10, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},
 		{"hsBuff", [&]() { runAnim("hsBuff_Effect_", 12, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},
 		{"tBuff", [&]() { runAnim("tBuff_Effect_", 12, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},
+		{"t2Buff", [&]() { runAnim("t2Buff_Effect_", 12, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},
 		{"dcBuff", [&]() { runAnim("dcBuff_Effect_", 10, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},
 		{"jdBuff", [&]() { runAnim("jdBuff_Effect_", 8, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},
 		{"bmBuff", [&]() { runAnim("bmBuff_Effect_", 8, 10, true); setAnchorPoint(Vec2(0.5f, 0)); }},

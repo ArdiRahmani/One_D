@@ -256,7 +256,7 @@
 
     <action name="skill03">
         <data>
-			<p type="attackType">tBuff</p>
+			<p type="attackType">t2Buff</p>
             <p type="attackValue">400</p>
             <p type="attackRangeX">0</p>
             <p type="attackRangeY">20</p>

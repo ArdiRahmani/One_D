@@ -36,6 +36,7 @@ local list = {
     },
     rpf = {
         Chiyo = 'SageHashirama',
+        Tobi = 'TobiMasked',
     },
     CutIn = {
         -- Guy = 'Guy8Gates',

@@ -14,6 +14,7 @@
  *       perform      = function(self) ... end,          -- WAJIB, tiap tick AI
  *       changeAction = function(self) ... end,          -- opsional
  *       resumeAction = function(self, dt) ... end,      -- opsional
+ *       setActionResume = function(self) ... end,       -- opsional (setara override setActionResume, mis. Hashirama)
  *       createClone  = function(self, cloneTime) ... end, -- opsional, return self:createSummon('Slug')
  *   }
  *
@@ -63,11 +64,11 @@
  *    name role group state hp maxHp hpPercent def level exp ckr ckr2 coin x y height walkSpeed
  *    nAttackValue nAttackType isFlog isNotFlog isTower isNotTower isCom isPlayer isPlayerOrCom
  *    isClone isKugutsu isSummon isMon isBullet isGuardian isArmored isInvincible isControlled
- *    isHealing
+ *    isHealing canGear06 originSpeed(r/w) tempAttackValue1(r/w)
  *    role  : 'Com' 'Player' 'Hero' 'Flog' 'Tower' 'Bullet' 'Clone' 'Kugutsu' 'Mon' 'Summon'
  *    state : 'IDLE' 'WALK' 'NATTACK' 'SATTACK' 'OATTACK' 'O2ATTACK' 'HURT' 'KNOCKDOWN' ...
  * ---- Properti khusus self (baca) ---------------------------------------------------------
- *    canSkill1 canSkill2 canSkill3 canOugis1 canOugis2 canGear00 canGear03 canGear06
+ *    canSkill1 canSkill2 canSkill3 canOugis1 canOugis2 canGear00 canGear03
  *    isBaseDanger enemyCombatPoint friendCombatPoint isOugis2Game isFreeState gearCount
  *    isOnlySkillLocked healBuffValue skillChangeBuffValue nAttackRangeX nAttackRangeY
  *    spcAttackType1 spcAttackType2 spcAttackType3
@@ -106,6 +107,7 @@ public:
 	void perform() override;
 	void changeAction() override;
 	void resumeAction(float dt) override;
+	void setActionResume() override;
 	Hero *createClone(int cloneTime) override;
 
 private:
@@ -397,12 +399,15 @@ struct LuaHeroBinding
 			LH_BOOL("isInvincible", c->_isInvincible),
 			LH_BOOL("isControlled", c->_isControlled),
 			LH_BOOL("isHealing", c->_isHealing),
+			LH_BOOL("canGear06", c->_isCanGear06),
 
 			// ---- semua unit (baca + tulis) ----
 			{"isArmored", {LH_GET(lua_pushboolean(L, c->_isArmored ? 1 : 0)), LH_SET(c->_isArmored = lua_toboolean(L, v) != 0), false}},
 			{"nAttackValue", {LH_GET(lua_pushnumber(L, (lua_Number)c->getNAttackValue())), LH_SET(c->setNAttackValue((uint32_t)luaL_checknumber(L, v))), false}},
 			{"nAttackType", {LH_GET(lua_pushstring(L, c->getNAttackType().c_str())), LH_SET(c->setNAttackType(string(luaL_checkstring(L, v)))), false}},
 			{"walkSpeed", {LH_GET(lua_pushnumber(L, (lua_Number)c->getWalkSpeed())), LH_SET(c->setWalkSpeed((int)luaL_checkinteger(L, v))), false}},
+			{"originSpeed", {LH_GET(lua_pushnumber(L, (lua_Number)c->_originSpeed)), LH_SET(c->_originSpeed = (int)luaL_checkinteger(L, v)), false}},
+			{"tempAttackValue1", {LH_GET(lua_pushnumber(L, (lua_Number)c->getTempAttackValue1())), LH_SET(c->setTempAttackValue1((uint32_t)luaL_checknumber(L, v))), false}},
 
 			// ---- khusus self (baca) ----
 			LH_SELF_BOOL("canSkill1", h->_isCanSkill1),
@@ -412,7 +417,6 @@ struct LuaHeroBinding
 			LH_SELF_BOOL("canOugis2", h->_isCanOugis2),
 			LH_SELF_BOOL("canGear00", h->_isCanGear00),
 			LH_SELF_BOOL("canGear03", h->_isCanGear03),
-			LH_SELF_BOOL("canGear06", h->_isCanGear06),
 			LH_SELF_BOOL("isBaseDanger", h->isBaseDanger),
 			LH_SELF_NUM("enemyCombatPoint", h->enemyCombatPoint),
 			LH_SELF_NUM("friendCombatPoint", h->friendCombatPoint),
@@ -1176,6 +1180,20 @@ inline void LuaHero::resumeAction(float dt)
 	lua_settop(L, top);
 	if (!ok)
 		CharacterBase::resumeAction(dt); // idempotent: jaga state tetap konsisten kalau hook error
+}
+
+inline void LuaHero::setActionResume()
+{
+	// base CharacterBase::setActionResume() kosong, jadi tanpa hook = tidak melakukan apa-apa
+	if (_scriptRef == LUA_NOREF || !LuaBridge::isReady())
+		return;
+
+	lua_getL;
+	if (!hasHook(L, "setActionResume"))
+		return;
+	const int top = lua_gettop(L);
+	callHook(L, "setActionResume", 0, 0, [](lua_State *) {});
+	lua_settop(L, top);
 }
 
 inline Hero *LuaHero::createClone(int cloneTime)

@@ -14,7 +14,7 @@ for k, v in pairs(Base) do Yagura[k] = v end
 
 function Yagura.createClone(self, cloneTime)
     -- setara  createCloneHero<Slug>("YClone")  -> Role::Clone
-    local clone = self:createClone('YClone')
+    local clone = self:createClone('AnimalPath')
     if not clone then return nil end
 
     clone.isArmored = true                 -- clone->_isArmored = true;

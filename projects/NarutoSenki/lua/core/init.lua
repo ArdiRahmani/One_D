@@ -11,7 +11,7 @@ Heroes = require 'Hook.Heroes'
 
 -- Alias AI karakter, mis. Madara = Asuma (dikirim ke C++ lewat CloneAI)
 require 'Hook.CloneAI'
-
+require 'Hook.LuaAI'
 -- Alias AI monster/summon, mis. Chibaku = JibakuEX (dikirim ke C++ lewat CloneMon)
 require 'Hook.Monster'
 
@@ -26,6 +26,9 @@ require 'Hook.Catch'
 
 -- Transformasi karakter, mis. Guy = Guy8Gates (dikirim ke C++ lewat Transform)
 require 'Hook.Transform'
+
+-- Flag perilaku per karakter (holdBuff, lockWalk), mis. Madara = Hashirama (dikirim ke C++ lewat UnitFlags)
+require 'Hook.UnitFlags'
 
 -- Aset tambahan per karakter, mis. Guy = Guy8Gates.plist (dikirim ke C++ lewat Assets)
 require 'Hook.Assets'
