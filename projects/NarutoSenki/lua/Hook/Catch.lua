@@ -27,7 +27,7 @@
 local CatchHook = {}
 
 local list = {
-    Guy = 'Itachi',
+    TobiMasked = 'Itachi',
 }
 
 if not CloneCatch then

@@ -516,7 +516,12 @@ namespace UnitFlagRegistry
 	enum Flag : unsigned
 	{
 		HoldBuff = 1u << 0,
-		LockWalk = 1u << 1
+		LockWalk = 1u << 1,
+		// Perilaku CharacterBase::healBuff (GroupBuff / GroupHeal / hBuff), per tipe:
+		HealGroup  = 1u << 2, // seperti Karin  : heal HP semua rekan hero dalam jangkauan
+		HealChakra = 1u << 3, // seperti Chiyo  : tambah chakra semua rekan hero (kecuali dirinya)
+		HealSelf   = 1u << 4, // seperti Sakura/Tsunade : heal diri sendiri
+		HealFlog   = 1u << 5  // seperti Slug   : heal pasukan (flog) satu tim dalam jangkauan
 	};
 
 	inline std::unordered_map<std::string, unsigned> &store()

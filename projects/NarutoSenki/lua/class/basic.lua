@@ -34,6 +34,12 @@ ns.CharactersLayout = {
          _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
          _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
     -- },
+  --   Page Four
+    -- {
+        'Yagura',			'Utakata',			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+         _None,			_None,			_None,			_None,      --[[ Right ]] _None,		_None,		    _None,
+    -- },
 }
 
 Heroes.checkLayout(ns.CharactersLayout)

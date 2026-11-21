@@ -12,6 +12,13 @@
 --             _isOnlySkillLocked. Setara `getName() == Hashirama/Hiruzen/Suigetsu/Jugo/Kisame`
 --             di CharacterBase::walk.
 --
+--   healGroup   CharacterBase::healBuff (GroupBuff/GroupHeal/hBuff) bekerja seperti KARIN:
+--               heal HP semua rekan hero dalam jangkauan.
+--   healChakra  ... seperti CHIYO: tambah chakra semua rekan hero dalam jangkauan (kecuali dirinya).
+--   healSelf    ... seperti SAKURA / TSUNADE: heal diri sendiri.
+--   healFlog    ... seperti SLUG (Katsuyu): heal pasukan (flog) satu tim dalam jangkauan.
+--   Contoh:  Fukai = 'healChakra'   -- Fukai (clone/pemakai) pakai GroupBuff gaya Chiyo
+--
 -- Ini TAMBAHAN di atas nama yang sudah ada di C++ (Hashirama, Hiruzen, dst tidak perlu didaftarkan).
 -- Gunanya untuk hero baru, mis. Madara yang memakai AI Hashirama.lua:
 --     Madara = { 'holdBuff', 'lockWalk' },
@@ -24,7 +31,12 @@
 local UnitFlagsHook = {}
 
 local list = {
---    Utakata = { 'holdBuff', 'lockWalk' },
+    -- Madara = { 'holdBuff', 'lockWalk' },
+    -- GroupBuff = (Chiyo, Fukai)  ->
+    -- Fukai = 'healChakra',
+    -- GroupHeal = (Karin, X)      ->  X = 'healGroup'
+    -- Heal self = (Tsunade, X)    ->  X = 'healSelf'
+    -- Heal flog = (Slug, X)       ->  X = 'healFlog'
 }
 
 if not UnitFlags then

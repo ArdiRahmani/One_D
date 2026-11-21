@@ -23,6 +23,7 @@ extern "C"
  * Nama flag (huruf besar/kecil bebas):
  *   'holdBuff'  setBuff tidak menjadwalkan resumeAction otomatis (lihat UnitFlagRegistry::HoldBuff)
  *   'lockWalk'  walk() AI diblok saat NATTACK + _isOnlySkillLocked   (UnitFlagRegistry::LockWalk)
+ *   'healGroup' / 'healChakra' / 'healSelf' / 'healFlog'  perilaku healBuff (GroupBuff/GroupHeal/hBuff)
  *
  * Dipanggil sekali dari Internal::initAllSystems(), sebelum main.lua dijalankan.
  */
@@ -38,6 +39,10 @@ namespace UnitFlagSystem
 		};
 		if (eq(s, "holdBuff")) { out = UnitFlagRegistry::HoldBuff; return true; }
 		if (eq(s, "lockWalk")) { out = UnitFlagRegistry::LockWalk; return true; }
+		if (eq(s, "healGroup")) { out = UnitFlagRegistry::HealGroup; return true; }
+		if (eq(s, "healChakra")) { out = UnitFlagRegistry::HealChakra; return true; }
+		if (eq(s, "healSelf")) { out = UnitFlagRegistry::HealSelf; return true; }
+		if (eq(s, "healFlog")) { out = UnitFlagRegistry::HealFlog; return true; }
 		return false;
 	}
 
@@ -89,7 +94,7 @@ namespace UnitFlagSystem
 			unsigned f = 0;
 			const char *bad = nullptr;
 			if (!readFlags(L, i, f, &bad))
-				return luaL_error(L, "UnitFlags: flag tidak dikenal '%s' (pakai 'holdBuff' / 'lockWalk')", bad);
+				return luaL_error(L, "UnitFlags: flag tidak dikenal '%s' (pakai 'holdBuff' / 'lockWalk' / 'healGroup' / 'healChakra' / 'healSelf' / 'healFlog')", bad);
 			flags |= f;
 		}
 		lua_pushboolean(L, UnitFlagRegistry::add(name, flags) ? 1 : 0);
@@ -162,6 +167,10 @@ namespace UnitFlagSystem
 		int i = 1;
 		if (have & UnitFlagRegistry::HoldBuff) { lua_pushstring(L, "holdBuff"); lua_rawseti(L, -2, i++); }
 		if (have & UnitFlagRegistry::LockWalk) { lua_pushstring(L, "lockWalk"); lua_rawseti(L, -2, i++); }
+		if (have & UnitFlagRegistry::HealGroup) { lua_pushstring(L, "healGroup"); lua_rawseti(L, -2, i++); }
+		if (have & UnitFlagRegistry::HealChakra) { lua_pushstring(L, "healChakra"); lua_rawseti(L, -2, i++); }
+		if (have & UnitFlagRegistry::HealSelf) { lua_pushstring(L, "healSelf"); lua_rawseti(L, -2, i++); }
+		if (have & UnitFlagRegistry::HealFlog) { lua_pushstring(L, "healFlog"); lua_rawseti(L, -2, i++); }
 		return 1;
 	}
 

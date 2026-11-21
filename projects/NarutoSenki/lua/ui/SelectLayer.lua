@@ -1,6 +1,74 @@
 --
 -- SelectLayer
 --
+
+local HeroData = require('ui.HeroData')
+
+-- Nama hero memakai font njNaruto.ttf (pengganti sprite <hero>_font.png)
+local NAME_FONT = 'Fonts/njNaruto.ttf'
+local NAME_SIZE = 28
+local NAME_SCALE = 0.60
+
+-- Title (mis. "(AKATSUKI)") di bawah nama
+local TITLE_FONT = 'Fonts/ReggaeOne.ttf'
+local TITLE_SIZE = 25
+local TITLE_SCALE = 0.40
+local SHOW_TITLE = true
+
+local OFFSETS8 = {{1,0},{-1,0},{0,1},{0,-1},{1,1},{-1,1},{1,-1},{-1,-1}}
+local OFFSETS4 = {{1,0},{-1,0},{0,1},{0,-1}}
+
+-- Nama tampilan: Klan + nama (HeroData.heroDisplayName / cleanHeroName)
+local function displayName(charName)
+    local base = HeroData.heroDisplayName[charName]
+    if not base then
+        base = HeroData.cleanHeroName(charName)
+        base = base:gsub('(%l)(%u)', '%1 %2') -- "FourthRaikage" -> "Fourth Raikage"
+    end
+    local clan = HeroData.heroClan[HeroData.cleanHeroName(charName)]
+    if clan then return clan .. ' ' .. base end
+    return base
+end
+
+local function addOutlinedLabel(node, text, font, size, scale, offsets, x, y, strokeOpacity)
+    for _, o in ipairs(offsets) do
+        local stroke = CCLabelTTF:create(text, font, size)
+        stroke:setColor(ccc3(0, 0, 0))
+        stroke:setScale(scale)
+        stroke:setAnchorPoint(0.5, 0.5)
+        stroke:setPosition(x + o[1], y + o[2])
+        if strokeOpacity then stroke:setOpacity(strokeOpacity) end
+        node:addChild(stroke)
+    end
+    local label = CCLabelTTF:create(text, font, size)
+    label:setColor(ccc3(255, 255, 255))
+    label:setScale(scale)
+    label:setAnchorPoint(0.5, 0.5)
+    label:setPosition(x, y)
+    node:addChild(label)
+end
+
+-- Satu node berisi nama (+ title); hapus node = hapus semuanya
+local function newHeroNameLabel(charName, x, y)
+    local node = CCNode:create()
+    node:setPosition(x, y)
+
+    addOutlinedLabel(node, displayName(charName), NAME_FONT, NAME_SIZE,
+                     NAME_SCALE, OFFSETS8, 0, 8)
+
+    if SHOW_TITLE then
+        local rawTitle = HeroData.heroTitle[charName] or
+                             HeroData.heroTitle[HeroData.cleanHeroName(charName)]
+        if rawTitle then
+            addOutlinedLabel(node, '(' .. string.upper(rawTitle) .. ')',
+                             TITLE_FONT, TITLE_SIZE, TITLE_SCALE, OFFSETS4,
+                             0, -4, 200)
+        end
+    end
+
+    return node
+end
+
 function SelectLayer:init()
     log('Initial SelectLayer...')
 
@@ -46,7 +114,10 @@ function SelectLayer:init()
 
     self.enableHardCore = false
 
-    self.pageNum = 4
+    -- 21 karakter per halaman (3 baris x 7 kolom); jumlah halaman dihitung otomatis
+    self.PER_PAGE = 21
+    self.currentPage = 1
+    self.pageNum = math.max(1, math.ceil(#ns.CharactersLayout / self.PER_PAGE))
 
     self._comLabel1 = nil
     self._comLabel2 = nil
@@ -150,27 +221,17 @@ function SelectLayer:init()
 
     for i = 1, self.pageNum do
         -- initial page list
-        local index = i
         local pageLayer = TouchGroup:create() -- display.newLayer()
-        local page_btn = ui.newImageMenuItem({
-            image = '#page' .. tostring(i) .. '_off.png',
-            imageSelected = '#page' .. tostring(i) .. '_on.png',
-            listener = function()
-                return self:onPageButtonClick(index)
-            end
-        })
 
         self:addChild(pageLayer, 5)
-        if i == 1 then
+        if i == self.currentPage then
             pageLayer:show()
-            page_btn:selected()
         else
             pageLayer:hide()
             pageLayer:setPositionY(2000)
         end
 
         table.insert(self.pageLayers, pageLayer)
-        table.insert(self.pageButtons, page_btn)
     end
 
     local charactersList = ns.CharactersLayout
@@ -184,7 +245,7 @@ function SelectLayer:init()
         local idx = i - 1
         local Column = idx % 7
         local Row = toint(idx / 7)
-        local Page = toint(idx / 21)
+        local Page = toint(idx / self.PER_PAGE)
         -- log(
         --     ' -> load character %s\t[ Column: %d Row: %d Page: %d ] [ pos: %f, %f ]',
         --     charName, Column, Row, Page,
@@ -211,9 +272,43 @@ function SelectLayer:init()
         selectButtons[#selectButtons + 1] = select_btn
     end
 
-    local page_menu = ui.newMenu(self.pageButtons)
-    page_menu:alignItemsHorizontallyWithPadding(20)
-    page_menu:setPosition(width / 2 + 48, 42)
+    -- Tombol PREV / NEXT (loop: dari halaman 1 ke belakang -> halaman terakhir)
+    local menuList = {}
+    local btnY = 42
+
+    local prev_btn = ui.newImageMenuItem({
+        image = 'Img/Prev.png',
+        imageSelected = 'Img/Prev_1.png',
+        listener = handler(self, SelectLayer.onPagePrev)
+    })
+    prev_btn:setAnchorPoint(0.5, 0.5)
+    prev_btn:setScale(0.60)
+    prev_btn:setPosition(width / 2 - 20, btnY)
+    table.insert(menuList, prev_btn)
+    self._prevBtn = prev_btn
+
+    local next_btn = ui.newImageMenuItem({
+        image = 'Img/Next.png',
+        imageSelected = 'Img/Next_1.png',
+        listener = handler(self, SelectLayer.onPageNext)
+    })
+    next_btn:setAnchorPoint(0.5, 0.5)
+    next_btn:setScale(0.60)
+    next_btn:setPosition(width / 2 + 80, btnY)
+    table.insert(menuList, next_btn)
+    self._nextBtn = next_btn
+
+    -- animasi gerak kecil seperti contoh
+    local mvPrev = CCMoveBy:create(1, CCPoint(-8, 0))
+    prev_btn:runAction(CCRepeatForever:create(
+                           transition.sequence({mvPrev, mvPrev:reverse()})))
+    local mvNext = CCMoveBy:create(1, CCPoint(8, 0))
+    next_btn:runAction(CCRepeatForever:create(
+                           transition.sequence({mvNext, mvNext:reverse()})))
+
+    local page_menu = ui.newMenu(menuList)
+    page_menu:setAnchorPoint(0, 0)
+    page_menu:setPosition(0, 0)
     self:addChild(page_menu, 10)
 
     self.selectButtons = selectButtons
@@ -227,8 +322,7 @@ function SelectLayer:init()
         heroHalfImage:setAnchorPoint(0, 0)
         self:addChild(heroHalfImage, 1)
 
-        local heroName = display.newSprite('#' .. hero .. '_font.png', 100, 20)
-        heroName:setAnchorPoint(0.5, 0)
+        local heroName = newHeroNameLabel(hero, 100, 20)
         self:addChild(heroName, 5)
 
         self._heroName = heroName
@@ -392,18 +486,30 @@ function SelectLayer:onSkillMenuButtonClick()
     director.pushScene(scene)
 end
 
-function SelectLayer:onPageButtonClick(index)
+function SelectLayer:onPagePrev()
+    self:changePage(self.currentPage - 1)
+end
+
+function SelectLayer:onPageNext()
+    self:changePage(self.currentPage + 1)
+end
+
+function SelectLayer:changePage(targetPage)
     audio.playSound(ns.menu.SELECT_SOUND)
 
-    for i, pageBtn in pairs(self.pageButtons) do
-        if i == index then
-            pageBtn:selected()
-        else
-            pageBtn:unselected()
-        end
+    -- wrap-around
+    local newPage = targetPage
+    if newPage < 1 then
+        newPage = self.pageNum
+    elseif newPage > self.pageNum then
+        newPage = 1
     end
-    for i, pageLayer in pairs(self.pageLayers) do
-        if i == index then
+    if newPage == self.currentPage then return end
+
+    self.currentPage = newPage
+
+    for i, pageLayer in ipairs(self.pageLayers) do
+        if i == newPage then
             pageLayer:show()
             pageLayer:setPositionY(0)
         else
@@ -411,6 +517,11 @@ function SelectLayer:onPageButtonClick(index)
             pageLayer:setPositionY(10000)
         end
     end
+end
+
+-- kompatibilitas dengan pemanggil lama
+function SelectLayer:onPageButtonClick(index)
+    self:changePage(index)
 end
 
 function SelectLayer:setSelected(btn)
@@ -451,8 +562,7 @@ function SelectLayer:setSelected(btn)
         self:addChild(self._heroHalfImage, 1)
 
         self._heroName:removeFromParent()
-        self._heroName = display.newSprite(charName .. '_font.png', 100, 20)
-        self._heroName:setAnchorPoint(CCPoint(0.5, 0))
+        self._heroName = newHeroNameLabel(btn._charName, 100, 20)
         self:addChild(self._heroName, 5)
     elseif self.comCount >= 1 and not self._com1Select then
         self._comSelector1:setDisplayFrame(

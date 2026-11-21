@@ -8,24 +8,6 @@
 #include "Systems/CommandSystem.hpp"
 #include "Utils/Debug/UnitDebug.hpp"
 
-// Nama AI/perilaku sebuah attacker untuk keperluan "ct_hit" (tangkap).
-// Monster hasil clone (nama sendiri, mis. "ShenweiX") yang AI-nya "Shenwei" lewat
-// Lua CloneMonAI / CloneMon atau <p type="attackType">Shenwei</p> di XML-nya harus diperlakukan
-// sama seperti Shenwei asli. Pakai getName() saja tidak cukup karena getName() = nama clone.
-// Bukan Monster / tidak ada alias -> kembali ke getName().
-static string getCatchAIName(CharacterBase *c)
-{
-	const string &name = c->getName();
-	if (!c->isMon())
-		return name;
-
-	if (MonAIRegistry::has(name))
-		return MonAIRegistry::resolve(name);
-	if (MonRegistry::has(name))
-		return MonRegistry::resolve(name);
-	return MonXmlAI::resolveTick(name, static_cast<Monster *>(c)->getXmlAIType());
-}
-
 CharacterBase::CharacterBase()
 {
 	_state = State::WALK;
@@ -43,12 +25,6 @@ CharacterBase::CharacterBase()
 	_skill3Action = nullptr;
 	_skill4Action = nullptr;
 	_skill5Action = nullptr;
-
-	skillSPC1Array = nullptr;
-	skillSPC2Array = nullptr;
-	skillSPC3Array = nullptr;
-	skillSPC4Array = nullptr;
-	skillSPC5Array = nullptr;
 
 	gearCKRValue = 0;
 	gearRecoverValue = 0;
@@ -817,16 +793,15 @@ void CharacterBase::acceptAttack(Ref *object)
 								 (attacker->_state == State::O2ATTACK ||
 								  attacker->_state == State::OATTACK)))
 							{
-								const string catchAI = getCatchAIName(attacker);
 								if (attacker->_isCatchOne == false ||
-									catchAI == SkillEnum::Shenwei)
+									attacker->getName() == SkillEnum::Shenwei)
 								{
 									if (attacker->_master)
 									{
-										if (catchAI == SkillEnum::Kuroari ||
-											catchAI == SkillEnum::Shenwei ||
-											catchAI == SkillEnum::Sabaku ||
-											catchAI == SkillEnum::Shenwei2)
+										if (attacker->getName() == SkillEnum::Kuroari ||
+											attacker->getName() == SkillEnum::Shenwei ||
+											attacker->getName() == SkillEnum::Sabaku ||
+											attacker->getName() == SkillEnum::Shenwei2)
 										{
 											if (hardHurt(3000, false, true, false, false))
 											{
@@ -834,7 +809,7 @@ void CharacterBase::acceptAttack(Ref *object)
 												scheduleOnce(schedule_selector(CharacterBase::reCatched), 2.9f);
 											}
 										}
-										else if (catchAI == SkillEnum::SandBall)
+										else if (attacker->getName() == SkillEnum::SandBall)
 										{
 											if (hardHurt(1000, false, true, false, false))
 											{
@@ -1012,13 +987,9 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 	FiniteTimeAction *tempAction;
 	FiniteTimeAction *seq;
 	Ref *tObject;
-	bool isContinued = false; // set by <e type="setContinue">, everything after it is ignored
 
 	CCARRAY_FOREACH(ationArray, tObject)
 	{
-		if (isContinued)
-			break;
-
 		auto dic = (CCDictionary *)tObject;
 		CCDictElement *ele = nullptr;
 
@@ -1186,16 +1157,6 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 					auto call = CallFunc::create(std::bind(&CharacterBase::setCharFlip, this));
 					list.pushBack(call);
 				}
-				else if (key == "setContinue")
-				{
-					// Jump to another action (Spc1..Spc5). The sequence ends right here:
-					// no more events/frames and no automatic idle(), the target action does its own.
-					auto call = CallFunc::create(std::bind(&CharacterBase::setContinue, this, keyValue));
-					list.pushBack(call);
-					isContinued = true;
-					spriteFrames.clear();
-					break;
-				}
 
 				spriteFrames.clear();
 			}
@@ -1206,12 +1167,6 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 		tempAnimation = Animation::createWithSpriteFrames(spriteFrames, 1.0f / fps);
 		tempAction = Animate::create(tempAnimation);
 		list.pushBack(tempAction);
-	}
-
-	if (isContinued)
-	{
-		// never loop / never idle: control is handed to the target action
-		return Sequence::create(list);
 	}
 
 	if (isLoop)
@@ -1283,53 +1238,6 @@ void CharacterBase::disableShadow(Sprite *charN)
 {
 	charN->stopAllActions();
 	charN->removeFromParent();
-}
-
-CCArray *CharacterBase::getSpcArray(const string &name) const
-{
-	// accepts "Spc1".."Spc5" and "Spc01".."Spc05" (case-insensitive)
-	string s;
-	for (char c : name)
-	{
-		if (c != ' ' && c != '\t')
-			s += (char)tolower((unsigned char)c);
-	}
-	if (s.size() < 4 || s.compare(0, 3, "spc") != 0)
-		return nullptr;
-
-	switch (atoi(s.c_str() + 3))
-	{
-	case 1:
-		return skillSPC1Array;
-	case 2:
-		return skillSPC2Array;
-	case 3:
-		return skillSPC3Array;
-	case 4:
-		return skillSPC4Array;
-	case 5:
-		return skillSPC5Array;
-	default:
-		return nullptr;
-	}
-}
-
-void CharacterBase::setContinue(const string &target)
-{
-	FiniteTimeAction *action = nullptr;
-	auto arr = getSpcArray(target);
-	if (arr)
-		action = createAnimation(arr, 10, false, true);
-
-	if (!action)
-	{
-		// target missing in this unit's XML: don't leave the unit stuck in the old state
-		CCLOG("setContinue: action '%s' not found for %s", target.c_str(), getName().c_str());
-		idle();
-		return;
-	}
-
-	runAction(action);
 }
 
 void CharacterBase::setOugis()
@@ -2805,7 +2713,9 @@ void CharacterBase::healBuff(float dt)
 		return;
 	}
 
-	if (getName() == HeroEnum::Karin)
+	const unsigned healFlags = UnitFlagRegistry::get(getName());
+
+	if (getName() == HeroEnum::Karin || (healFlags & UnitFlagRegistry::HealGroup))
 	{
 		for (auto hero : getGameLayer()->_CharacterArray)
 		{
@@ -2835,12 +2745,13 @@ void CharacterBase::healBuff(float dt)
 			}
 		}
 	}
-	else if (getName() == HeroEnum::Chiyo)
+	else if (getName() == HeroEnum::Chiyo || (healFlags & UnitFlagRegistry::HealChakra))
 	{
 		for (auto hero : getGameLayer()->_CharacterArray)
 		{
 			if (getGroup() == hero->getGroup() &&
 				hero->isPlayerOrCom() &&
+				hero != this &&
 				hero->getName() != HeroEnum::Chiyo)
 			{
 				Vec2 sp = hero->getPosition() - getPosition();
@@ -2862,7 +2773,7 @@ void CharacterBase::healBuff(float dt)
 			}
 		}
 	}
-	else if (getName() == SummonEnum::Slug)
+	else if (getName() == SummonEnum::Slug || (healFlags & UnitFlagRegistry::HealFlog))
 	{
 		auto list = isAkatsukiGroup()
 						? getGameLayer()->_AkatsukiFlogArray
@@ -2882,7 +2793,8 @@ void CharacterBase::healBuff(float dt)
 		}
 	}
 	else if (getName() == HeroEnum::Sakura ||
-			 getName() == HeroEnum::Tsunade)
+			 getName() == HeroEnum::Tsunade ||
+			 (healFlags & UnitFlagRegistry::HealSelf))
 	{
 		increaseHpAndUpdateUI(_healBuffValue);
 	}
