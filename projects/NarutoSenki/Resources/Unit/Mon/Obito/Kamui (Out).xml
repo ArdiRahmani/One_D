@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Kamui</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">57</p>
+        <p type="attackRangeY">48</p>
+        <p type="cd">700</p>
+      </data>
+      <frame>
+      <e type="setCommand">setDead</e>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+      <e type="setCommand">setDead</e>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+      <e type="setSound">Audio/Obito/Teleport.ogg</e>
+       
+      <f>Kamui_Out_01</f>
+      
+      <f>Kamui_Out_02</f>
+      
+      <f>Kamui_Out_03</f>
+      
+      <f>Kamui_Out_04</f>
+      
+      <f>Kamui_Out_05</f>
+      
+      <f>Kamui_Out_06</f>
+      
+      <f>Kamui_Out_07</f>
+      
+      <f>Kamui_Out_08</f>
+      
+      <f>Kamui_Out_09</f>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">400</p>
+        <p type="attackRangeX">0</p>
+        <p type="attackRangeY">16</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+      <e type="setSound">Audio/Obito/Teleport.ogg</e>
+       
+      <f>Kamui_Out_01</f>
+      
+      <f>Kamui_Out_02</f>
+      
+      <f>Kamui_Out_03</f>
+      
+      <f>Kamui_Out_04</f>
+      
+      <f>Kamui_Out_05</f>
+      
+      <f>Kamui_Out_06</f>
+      
+      <f>Kamui_Out_07</f>
+      
+      <f>Kamui_Out_08</f>
+      
+      <f>Kamui_Out_09</f>
+      
+      <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>

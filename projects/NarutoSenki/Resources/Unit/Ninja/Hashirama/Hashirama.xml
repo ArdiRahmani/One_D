@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Hashirama</p>
+        <p type="attackValue">5000</p>
+        <p type="attackRangeX">70</p>
+        <p type="attackRangeY">80</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>Hashirama_Idle_01</f>
+        <f>Hashirama_Idle_02</f>
+        <f>Hashirama_Idle_03</f>
+        <f>Hashirama_Idle_04</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>Hashirama_Walk_01</f>
+        <f>Hashirama_Walk_02</f>
+        <f>Hashirama_Walk_03</f>
+        <f>Hashirama_Walk_04</f>
+        <f>Hashirama_Walk_05</f>
+        <f>Hashirama_Walk_06</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+        <e type="setMove">32</e>
+        <f>Hashirama_Hurt_01</f>
+        <f>Hashirama_Hurt_02</f>
+        <f>Hashirama_Hurt_03</f>
+        <e type="setSound">Audio/Hashirama/hashirama_hurt.ogg</e>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+         <f>Hashirama_AirHurt_01</f>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+          <f>Hashirama_KnockDown_01</f>
+          <f>Hashirama_KnockDown_02</f>
+          <e type="setDelay">10</e>
+          <f>Hashirama_KnockDown_03</f>
+          <e type="setDelay">60</e>
+          <f>Hashirama_KnockDown_04</f>
+          <f>Hashirama_KnockDown_05</f>
+          <f>Hashirama_KnockDown_06</f>
+          
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+          <f>Hashirama_Float_01</f>
+          <e type="setDelay">10</e>
+          <f>Hashirama_Float_02</f>
+          <e type="setDelay">10</e>
+          <f>Hashirama_Float_03</f>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+          <f>Hashirama_KnockDown_01</f>
+          <f>Hashirama_KnockDown_02</f>
+          <f>Hashirama_KnockDown_03</f>
+          <e type="setSound">Audio/SageHashirama/H_Dead.ogg</e>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">60</p>
+        <p type="attackRangeX">16</p>
+        <p type="attackRangeY">48</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+          <f>Hashirama_NAttack_14</f>
+          <e type="setSound">Audio/Effect/combo1.ogg</e>
+          <e type="setAttackBox">n_hit</e>
+          <f>Hashirama_NAttack_01</f>
+          <f>Hashirama_NAttack_02</f>
+          <e type="setMove">8</e>
+          <f>Hashirama_NAttack_03</f>
+          <e type="setSound">Audio/Effect/combo2.ogg</e>
+          <e type="setAttackBox">n_hit</e>
+          <f>Hashirama_NAttack_04</f>
+          <f>Hashirama_NAttack_05</f>
+          <f>Hashirama_NAttack_06</f>
+          <f>Hashirama_NAttack_07</f>
+          <e type="setMove">16</e>
+          <f>Hashirama_NAttack_08</f>
+          <e type="setSound">Audio/Effect/combo3.ogg</e>
+          <e type="setAttackBox">l_hit</e>
+          <f>Hashirama_NAttack_09</f>
+          <e type="setSound">Audio/SageHashirama/H_NAttack.ogg</e>
+          <f>Hashirama_NAttack_10</f>
+          <f>Hashirama_NAttack_11</f>
+      </frame>
+    </action>
+
+   <action name="skill01">
+     <data>
+	   <p type="attackType">aAttack</p>
+       <p type="attackValue">230</p>
+       <p type="attackRangeX">64</p>
+       <p type="attackRangeY">48</p>
+       <p type="cd">10</p>
+     </data>
+     <frame>
+        <f>Hashirama_Skill01_01</f>
+         <e type="setSound">Audio/Hashirama/H_skill01_01.ogg</e>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_02</f>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_03</f>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_04</f>
+            <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_05</f>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_06</f>
+            <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_07</f>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setDelay">5</e>
+        <f>Hashirama_Skill01_08</f>
+            <e type="setAttackBox">f_hit</e>
+        <e type="setDelay">10</e>
+
+     </frame>
+   </action>
+
+    <action name="skill02">
+        <data>
+		    <p type="attackType">cAttack</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">16</p>
+            <p type="cd">15</p>
+        </data>
+        <frame>
+          <f>Hashirama_Skill04_01</f>
+            <e type="setSound">Audio/Hashirama/sagehashirama_skill2.ogg</e>
+            <e type="setDelay">10</e>
+          <f>Hashirama_Skill04_02</f>
+        <e type="setSound">Audio/Effect/ougis.ogg</e>
+          <f>Hashirama_Skill04_03</f>
+          <e type="setDelay">10</e>
+            <e type="setMon">Mokujin</e>
+            <e type="setDelay">20</e>
+        </frame>
+    </action>
+
+    <action name="skill03">
+        <data>
+            <p type="attackType">cBuff</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">20</p>
+            <p type="combatPoint">2</p>
+        </data>
+        <frame>
+            <f>Hashirama_Skill01_03</f>
+            <e type="setSound">Audio/Effect/ougis.ogg</e>
+            <e type="setSound">Audio/Hashirama/mokuryu.ogg</e>
+            <f>Hashirama_Skill03_01</f>
+            <e type="setDelay">0</e>
+            <f>Hashirama_Skill03_02</f>
+            <f>Hashirama_Skill03_03</f>
+            <f>Hashirama_Skill03_04</f>
+            <e type="setDelay">20</e>
+            <e type="setSkillEffect">Kujiyose</e>
+            <f>Hashirama_Skill02_01</f>
+            <f>Hashirama_Skill02_02</f>
+            <e type="setBuff">17</e>
+        </frame>
+    </action>
+
+   <action name="skill04">
+     <data>
+       <p type="attackType">oAttack</p>
+       <p type="attackValue">400</p>
+       <p type="attackRangeX">100</p>
+       <p type="attackRangeY">68</p>
+       <p type="cd">1</p>
+     </data>
+     <frame>
+         <e type="setSound">Audio/Effect/ougis.ogg</e>
+          <f>Hashirama_Skill04_01</f>
+          <e type="setSound">Audio/SageHashirama/H_Mokuton.ogg</e>
+          <f>Hashirama_Skill04_02</f>
+          <f>Hashirama_Skill04_03</f>
+          <f>Hashirama_Skill04_04</f>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+          <e type="setAttackBox">c_hit</e>
+          <e type="setDelay">0</e>
+          <f>Hashirama_Skill04_05</f>
+          <e type="setAttackBox">c_hit</e>
+          <f>Hashirama_Skill04_06</f>
+          <e type="setAttackBox">c_hit</e>
+          <f>Hashirama_Skill04_07</f>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+          <e type="setAttackBox">c_hit</e>
+          <f>Hashirama_Skill04_08</f>
+          <e type="setAttackBox">c_hit</e>
+          <f>Hashirama_Skill04_09</f>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+          <e type="setAttackBox">c_hit</e>
+          <f>Hashirama_Skill04_10</f>
+          <e type="setAttackBox">c_hit</e>
+          <f>Hashirama_Skill04_11</f>
+          <e type="setAttackBox">f_hit</e>
+          <e type="setSound">Audio/Effect/damage_l.ogg</e>
+          <f>Hashirama_Skill04_12</f>
+          <f>Hashirama_Skill04_13</f>
+          <f>Hashirama_Skill04_14</f>
+          <f>Hashirama_Skill04_15</f>
+          <e type="setDelay">10</e>     
+     </frame>
+   </action>
+    <action name="skill05">
+        <data>
+            <p type="attackType">Summon</p>
+            <p type="attackValue">350</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">48</p>
+            <p type="cd">1</p>
+        </data>
+        <frame>
+            <f>Hashirama_Skill04_01</f>
+            <e type="setDelay">10</e>
+            <f>Hashirama_Skill04_02</f>
+            <e type="setSound">Audio/Effect/ougis.ogg</e>
+            <f>Hashirama_Skill04_03</f>
+            <e type="setCommand">setInvincible</e>
+            <e type="setOugis">40</e>
+            <f>Hashirama_Skill04_03</f>
+            <e type="setMon">Jinpachi</e>
+            <e type="setDelay">50</e>
+            <f>Hashirama_Skill05_02</f>
+            <f>Hashirama_Skill05_17</f>
+            <e type="setDelay">10</e>x
+            <f>Hashirama_Skill05_18</f>
+            <e type="setSound">Audio/Hashirama/Hashirama_skill5_1.ogg</e>
+            <e type="setDelay">10</e>
+            <f>Hashirama_Skill05_19</f>
+            <e type="setDelay">10</e>
+            <f>Hashirama_Skill05_20</f>
+            <e type="setDelay">20</e>
+            <f>Hashirama_Skill05_21</f>
+            <e type="setDelay">20</e>
+            <f>Hashirama_Skill05_22</f>
+            <e type="setDelay">10</e>
+            <e type="setSound">Audio/Hashirama/Hashirama_skill5_2.ogg</e>
+            <f>Hashirama_Skill05_23</f>
+            <e type="setDelay">10</e>
+            <f>Hashirama_Skill05_24</f>
+            <e type="setDelay">30</e>
+            <e type="setSkillEffect">smk</e>
+            <e type="setTransform">40</e>
+            <e type="setCommand">reInvincible</e>
+        </frame>
+    </action>
+
+    <action name="skill06">
+        <frame></frame>
+    </action>
+    <action name="skill07">
+        <frame></frame>
+    </action>
+    <action name="skill08">
+        <frame></frame>
+    </action>
+    <action name="skill09">
+        <frame></frame>
+    </action>
+    <action name="skill10">
+        <data>
+            <p type="attackType">idle</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+            <f>Hashirama_Skill02_03</f>
+            <f>Hashirama_Skill02_04</f>
+        </frame>
+    </action>
+    <action name="skill11">
+        <data>
+            <p type="attackType">walk</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+             <e type="setSpeed">96</e>
+            <f>Hashirama_Skill02_03</f>
+            <f>Hashirama_Skill02_04</f>
+        </frame>
+    </action>
+    <action name="skill12">
+        <data>
+            <p type="attackType">aAttack</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">32</p>
+            <p type="attackRangeY">48</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+          <e type="setSound">Audio/Hashirama/sagehashirama_skill4_1.ogg</e>
+            <f>Hashirama_Skill02_03</f>
+             <e type="setChargeB">76</e>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+            <f>Hashirama_Skill02_04</f>
+             <e type="setChargeB">76</e>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+            <f>Hashirama_Skill02_03</f>
+             <e type="setChargeB">76</e>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+            <f>Hashirama_Skill02_04</f>
+             <e type="setChargeB">76</e>
+            <e type="setAttackBox">c_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+            <f>Hashirama_Skill02_04</f>
+             <e type="setChargeB">76</e>
+            <e type="setAttackBox">l_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+            <f>Hashirama_Skill02_05</f>
+             <e type="setChargeB">76</e>
+            <e type="setAttackBox">f_hit</e>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+             <e type="setActionResume">20</e>
+            <f>Hashirama_Skill02_06</f>
+            <e type="setDelay">10</e>
+        </frame>
+    </action>
+
+</unit>
