@@ -1259,6 +1259,36 @@ void CharacterBase::disableShadow(Sprite *charN)
 	charN->removeFromParent();
 }
 
+CCArray *CharacterBase::getSpcArray(const string &name) const
+{
+	// accepts "Spc1".."Spc5" and "Spc01".."Spc05" (case-insensitive)
+	string s;
+	for (char c : name)
+	{
+		if (c != ' ' && c != '\t')
+			s += (char)tolower((unsigned char)c);
+	}
+	if (s.size() < 4 || s.compare(0, 3, "spc") != 0)
+		return nullptr;
+
+	switch (atoi(s.c_str() + 3))
+	{
+	case 1:
+		return skillSPC1Array;
+	case 2:
+		return skillSPC2Array;
+	case 3:
+		return skillSPC3Array;
+	case 4:
+		return skillSPC4Array;
+	case 5:
+		return skillSPC5Array;
+	default:
+		return nullptr;
+	}
+}
+
+
 void CharacterBase::setContinue(const string &target)
 {
 	FiniteTimeAction *action = nullptr;
