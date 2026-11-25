@@ -26,12 +26,6 @@ CharacterBase::CharacterBase()
 	_skill4Action = nullptr;
 	_skill5Action = nullptr;
 
-	skillSPC1Array = nullptr;
-	skillSPC2Array = nullptr;
-	skillSPC3Array = nullptr;
-	skillSPC4Array = nullptr;
-	skillSPC5Array = nullptr;
-
 	gearCKRValue = 0;
 	gearRecoverValue = 0;
 	isAttackGainCKR = false;
@@ -993,13 +987,9 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 	FiniteTimeAction *tempAction;
 	FiniteTimeAction *seq;
 	Ref *tObject;
-	bool isContinued = false; // set by <e type="setContinue">, everything after it is ignored
 
 	CCARRAY_FOREACH(ationArray, tObject)
 	{
-		if (isContinued)
-			break;
-
 		auto dic = (CCDictionary *)tObject;
 		CCDictElement *ele = nullptr;
 
@@ -1167,16 +1157,6 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 					auto call = CallFunc::create(std::bind(&CharacterBase::setCharFlip, this));
 					list.pushBack(call);
 				}
-				else if (key == "setContinue")
-				{
-					// Jump to another action (Spc1..Spc5). The sequence ends right here:
-					// no more events/frames and no automatic idle(), the target action does its own.
-					auto call = CallFunc::create(std::bind(&CharacterBase::setContinue, this, keyValue));
-					list.pushBack(call);
-					isContinued = true;
-					spriteFrames.clear();
-					break;
-				}
 
 				spriteFrames.clear();
 			}
@@ -1187,12 +1167,6 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 		tempAnimation = Animation::createWithSpriteFrames(spriteFrames, 1.0f / fps);
 		tempAction = Animate::create(tempAnimation);
 		list.pushBack(tempAction);
-	}
-
-	if (isContinued)
-	{
-		// never loop / never idle: control is handed to the target action
-		return Sequence::create(list);
 	}
 
 	if (isLoop)
@@ -1264,53 +1238,6 @@ void CharacterBase::disableShadow(Sprite *charN)
 {
 	charN->stopAllActions();
 	charN->removeFromParent();
-}
-
-CCArray *CharacterBase::getSpcArray(const string &name) const
-{
-	// accepts "Spc1".."Spc5" and "Spc01".."Spc05" (case-insensitive)
-	string s;
-	for (char c : name)
-	{
-		if (c != ' ' && c != '\t')
-			s += (char)tolower((unsigned char)c);
-	}
-	if (s.size() < 4 || s.compare(0, 3, "spc") != 0)
-		return nullptr;
-
-	switch (atoi(s.c_str() + 3))
-	{
-	case 1:
-		return skillSPC1Array;
-	case 2:
-		return skillSPC2Array;
-	case 3:
-		return skillSPC3Array;
-	case 4:
-		return skillSPC4Array;
-	case 5:
-		return skillSPC5Array;
-	default:
-		return nullptr;
-	}
-}
-
-void CharacterBase::setContinue(const string &target)
-{
-	FiniteTimeAction *action = nullptr;
-	auto arr = getSpcArray(target);
-	if (arr)
-		action = createAnimation(arr, 10, false, true);
-
-	if (!action)
-	{
-		// target missing in this unit's XML: don't leave the unit stuck in the old state
-		CCLOG("setContinue: action '%s' not found for %s", target.c_str(), getName().c_str());
-		idle();
-		return;
-	}
-
-	runAction(action);
 }
 
 void CharacterBase::setOugis()
