@@ -8,7 +8,11 @@
 --
 -- Jenis (tidak peka huruf besar/kecil)  ->  frame bawaan:
 --   rp       {}_rp.png       ikon kecil laporan kill (pembunuh maupun korban)
---   rpf      {}_rpf.png      ikon besar laporan kill
+--   rpf      {}_rpf.png      NAMA hero di laporan kill. Sekarang digambar sebagai TEKS
+--                            (Roboto-Medium putih 42 + glow, lihat createNameGlowLabel di HudLayer.cpp),
+--                            bukan gambar lagi. Teksnya diambil dari nama frame hasil bind / file / frame
+--                            tanpa ".png" dan "_rpf" (bind TobiMasked = 'Tobi' -> tampil "Tobi").
+--                            Skala (defaultScale / scale) tetap berlaku untuk teks.
 --   CutIn    {}_CutIn.png    potret cut-in saat ougi
 --   Avator   {}_avator.png   tombol avatar di HUD            (tanpa skala)
 --   small    {}_small.png    ikon kecil layar pilih / hasil  (tanpa skala)
