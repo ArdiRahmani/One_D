@@ -223,6 +223,9 @@ function SkillLayer:initInterface()
     self:addChild(bgSprite, -5)
 
     local winNum = tools.readWinNumFromSQL(self._skillBaseHero or self.selectHero)
+    -- Jumlah kalah dibaca bersama jumlah menang (column2 di CharRecord)
+    local loseNum = tools.readLoseNumFromSQL(self._skillBaseHero or self.selectHero)
+    self._loseNum = loseNum
 
     local rank_src
     local isBlink = false

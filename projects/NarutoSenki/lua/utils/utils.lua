@@ -60,6 +60,10 @@ function tools.readWinNumFromSQL(heroName)
     return KTools:readWinNumFromSQL(heroName)
 end
 
+function tools.readLoseNumFromSQL(heroName)
+    return KTools:readLoseNumFromSQL(heroName)
+end
+
 function tools.readRecordTimeFromSQL(heroName)
     return KTools:readRecordTimeFromSQL(heroName)
 end

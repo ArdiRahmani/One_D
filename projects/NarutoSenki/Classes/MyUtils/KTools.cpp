@@ -483,6 +483,12 @@ int KTools::readWinNumFromSQL(const char *heroName)
 	return to_int(winNum.c_str());
 }
 
+int KTools::readLoseNumFromSQL(const char *heroName)
+{
+	string loseNum = readSQLite("CharRecord", "name", heroName, "column2");
+	return to_int(loseNum.c_str());
+}
+
 int KTools::readCoinFromSQL()
 {
 	auto coins = readFromSQLite();

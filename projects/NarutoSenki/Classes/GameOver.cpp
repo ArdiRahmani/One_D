@@ -156,13 +156,11 @@ void GameOver::listResult()
 	uint32_t killDead =
 		currPlayer->getKillNum() - currPlayer->_deadNum;
 
+	// Hasil SELALU ditampilkan. Kalau data tidak valid, hanya penyimpanan koin/rekor yang dilewati.
+	bool recordValid = true;
+
 	if (_totalSecond != getGameLayer()->getTotalTime())
-	{
-		SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-		getGameLayer()->_isExiting = true;
-		Director::sharedDirector()->popScene();
-		return;
-	}
+		recordValid = false;
 
 	if (getGameLayer()->_isHardCoreGame)
 	{
@@ -179,13 +177,9 @@ void GameOver::listResult()
 			resultScore = ((killDead - ((_totalSecond / 60.0f - 10) * 4)) / 40) * 100;
 	}
 
+	// Menang terlalu cepat (< 65 detik): tetap tampil, tapi tidak disimpan
 	if (_totalSecond < 1 * 60 + 5 && _isWin)
-	{
-		SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-		getGameLayer()->_isExiting = true;
-		Director::sharedDirector()->popScene();
-		return;
-	}
+		recordValid = false;
 
 	int konohaIndex = 0;
 	int akatsukiIndex = 0;
@@ -328,12 +322,7 @@ void GameOver::listResult()
 	{
 		// Verify that the game total kills is valid
 		if ((akatsukiKill + konohaKill) != getGameLayer()->getTotalKills())
-		{
-			SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			getGameLayer()->_isExiting = true;
-			Director::sharedDirector()->popScene();
-			return;
-		}
+			recordValid = false;
 
 		uint32_t realKillNum = currPlayer->getKillNum();
 
@@ -376,7 +365,8 @@ void GameOver::listResult()
 			extraCoin = "+0";
 		}
 
-		KTools::saveToSQLite("GameRecord", "coin", std::to_string(tempCoin).c_str(), false);
+		if (recordValid)
+			KTools::saveToSQLite("GameRecord", "coin", std::to_string(tempCoin).c_str(), false);
 
 		auto extraLabel = CCLabelBMFont::create(extraCoin, Fonts::Yellow);
 		extraLabel->setScale(0.5f);
@@ -453,7 +443,7 @@ void GameOver::listResult()
 
 			// detailRecord = format("{:02d}:{:02d},{},{},{}", _minute, getGameLayer()->_second, currPlayer->getKillNum(), currPlayer->_deadNum, currPlayer->_flogNum);
 		}
-		if (Cheats < kMaxCheats)
+		if (Cheats < kMaxCheats && recordValid)
 		{
 			// Nama catatan (mis. SageNaruto -> Naruto) diatur dari Lua: GameOver.record
 			resultChar = GameOverRegistry::recordName(currPlayer->getName());
