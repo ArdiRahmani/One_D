@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <date>
+	    <p type="attackType">MinatoET</p>
+        <p type="attackValue">5000</p>
+        <p type="attackRangeX">40</p>
+        <p type="attackRangeY">74</p>
+        <p type="cd">224</p>
+      </date>
+      <frame>
+        <f>MinatoET_Idle_01</f>
+        <f>MinatoET_Idle_02</f>
+        <f>MinatoET_Idle_03</f>
+        <f>MinatoET_Idle_04</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>MinatoET_Walk_01</f>
+        <f>MinatoET_Walk_02</f>
+        <f>MinatoET_Walk_03</f>
+        <f>MinatoET_Walk_04</f>
+        <f>MinatoET_Walk_05</f>
+        <f>MinatoET_Walk_06</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+        <e type="setCharge">32</e>
+        <f>MinatoET_Hurt_02</f>
+        <f>MinatoET_Hurt_01</f>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+         <f>MinatoET_AirHurt_01</f>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+          <f>MinatoET_KnockDown_01</f>
+          <f>MinatoET_KnockDown_02</f>
+          <e type="setDelay">10</e>
+          <f>MinatoET_KnockDown_03</f>
+          <e type="setDelay">60</e>
+          <f>MinatoET_KnockDown_04</f>
+          <f>MinatoET_KnockDown_05</f>
+          <f>MinatoET_KnockDown_06</f>
+          <f>MinatoET_KnockDown_07</f>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+          <f>MinatoET_Float_01</f>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+          <f>MinatoET_KnockDown_02</f>
+          <f>MinatoET_KnockDown_03</f>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <date>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">100</p>
+        <p type="attackRangeX">0</p>
+        <p type="attackRangeY">16</p>
+        <p type="cd">0</p>
+      </date>
+      <frame>
+        <f>MinatoET_NAttack_01</f>
+        <e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/MinatoET/NAttack_01.ogg</e>
+        <f>MinatoET_NAttack_02</f>
+        <f>MinatoET_NAttack_03</f>
+        <f>MinatoET_NAttack_04</f>
+        <e type="setAttackBox">n_hit</e>
+          <e type="setSound">Audio/MinatoET/NAttack_02.ogg</e>
+        <f>MinatoET_NAttack_05</f>
+        <f>MinatoET_NAttack_06</f>
+        <e type="setMove">8</e>
+        <f>MinatoET_NAttack_07</f>
+        <f>MinatoET_NAttack_08</f>
+        <f>MinatoET_NAttack_09</f>
+        <e type="setMove">8</e>
+          <e type="setSound">Audio/MinatoET/NAttack_03.ogg</e>
+        <f>MinatoET_NAttack_10</f>
+        <e type="setAttackBox">l_hit</e>
+        <f>MinatoET_NAttack_11</f>
+        <f>MinatoET_NAttack_12</f>
+      </frame>
+    </action>
+
+   <action name="skill01">
+     <date>
+	   <p type="attackType">aAttack</p>
+       <p type="attackValue">200</p>
+       <p type="attackRangeX">40</p>
+       <p type="attackRangeY">36</p>
+       <p type="cd">10</p>
+     </date>
+     <frame>
+            <f>MinatoET_Skill01_01</f>
+            <f>MinatoET_Skill01_02</f>
+            <f>MinatoET_Skill01_03</f>
+            <f>MinatoET_Skill01_04</f>
+          <e type="setSound">Audio/MinatoET/MK.ogg</e>
+        <e type="setBullet">MinatoET/MinatoKunai</e>
+            <f>MinatoET_Skill01_05</f>
+            <f>MinatoET_Skill01_06</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+            <f>MinatoET_Skill01_07</f>
+          <e type="setSound">Audio/MinatoET/Hiraishin.ogg</e>
+            <f>MinatoET_Skill01_08</f>
+            <f>MinatoET_Skill01_09</f>
+        <e type="setMove">200</e>
+<e type="setFlipped">10</e>
+            <f>MinatoET_Blank</f>
+            <f>MinatoET_Skill01_10</f>
+            <f>MinatoET_Skill01_11</f>
+            <f>MinatoET_Skill01_12</f>
+            <f>MinatoET_Skill01_13</f>
+            <f>MinatoET_Skill01_14</f>
+            <f>MinatoET_Skill01_15</f>
+        <e type="setMove">48</e>
+          <e type="setSound">Audio/MinatoET/01_01SFX.ogg</e>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill01_16</f>
+        <e type="setMove">64</e>
+        <e type="setAttackBox">f_hit</e>
+            <f>MinatoET_Skill01_17</f>
+        <e type="setMove">32</e>
+            <f>MinatoET_Skill01_18</f>
+        <e type="setMove">16</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill01_19</f>
+            <f>MinatoET_Skill01_20</f>
+            <f>MinatoET_Skill01_21</f>
+     </frame>
+   </action>
+
+    <action name="skill02">
+        <date>
+		    <p type="attackType">cAttack</p>
+            <p type="attackValue">250</p>
+            <p type="attackRangeX">48</p>
+            <p type="attackRangeY">38</p>
+            <p type="cd">15</p>
+        </date>
+        <frame>
+            <f>Charge_01</f>
+            <f>Charge_02</f>
+            <f>Charge_03</f>
+          <e type="setSound">Audio/MinatoET/02_01SFX.ogg</e>
+            <f>Charge_04</f>
+            <f>Charge_05</f>
+            <f>Charge_06</f>
+            <f>Charge_07</f>
+            <f>Charge_08</f>
+            <f>Charge_09</f>
+            <f>Charge_10</f>
+            <f>MinatoET_Skill02_01</f>
+        <e type="setMove">2</e>
+            <f>MinatoET_Skill02_02</f>
+        <e type="setMove">4</e>
+          <e type="setSound">Audio/MinatoET/02_01.ogg</e>
+            <f>MinatoET_Skill02_03</f>
+        <e type="setMove">4</e>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill02_04</f>
+        <e type="setMove">4</e>
+            <f>MinatoET_Skill02_05</f>
+        <e type="setMove">24</e>
+            <f>MinatoET_Skill02_06</f>
+        <e type="setMove">64</e>
+            <f>MinatoET_Skill02_07</f>
+        <e type="setMove">24</e>
+            <f>MinatoET_Skill02_08</f>
+        <e type="setMove">32</e>
+            <f>MinatoET_Skill02_09</f>
+            <f>MinatoET_Skill02_10</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill02_11</f>
+            <f>MinatoET_Skill02_12</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill02_13</f>
+            <f>MinatoET_Skill02_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill02_15</f>
+            <f>MinatoET_Skill02_16</f>
+            <f>MinatoET_Skill02_17</f>
+          <e type="setSound">Audio/MinatoET/02_02SFX.ogg</e>
+        <e type="setAttackBox">f_hit</e>
+            <f>MinatoET_Skill02_18</f>
+            <f>MinatoET_Skill02_19</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill02_20</f>
+            <f>MinatoET_Skill02_21</f>
+            <f>MinatoET_Skill02_22</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill02_23</f>
+            <f>MinatoET_Skill02_24</f>
+        </frame>
+    </action>
+
+    <action name="skill03">
+        <date>
+			<p type="attackType">cAttack</p>
+            <p type="attackValue">300</p>
+            <p type="attackRangeX">40</p>
+            <p type="attackRangeY">40</p>
+            <p type="cd">20</p>
+        </date>
+        <frame>
+            <f>Charge_01</f>
+            <f>Charge_02</f>
+            <f>Charge_03</f>
+          <e type="setSound">Audio/MinatoET/02_01SFX.ogg</e>
+            <f>Charge_04</f>
+            <f>Charge_05</f>
+            <f>Charge_06</f>
+            <f>Charge_07</f>
+            <f>Charge_08</f>
+            <f>Charge_09</f>
+            <f>Charge_10</f>
+            <f>Charge_11</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+            <f>Charge_12</f>
+          <e type="setSound">Audio/MinatoET/Hiraishin.ogg</e>
+            <f>Charge_13</f>
+            <f>Charge_14</f>
+<e type="setCommand">findTarget</e>
+<e type="setCommand">setTransport</e>
+            <f>MinatoET_Skill03_01</f>
+            <f>MinatoET_Skill03_02</f>
+            <f>MinatoET_Skill03_03</f>
+            <f>MinatoET_Skill03_04</f>
+          <e type="setSound">Audio/MinatoET/02_01.ogg</e>
+            <f>MinatoET_Skill03_05</f>
+          <e type="setDelay">-3</e>
+            <f>MinatoET_Skill03_06</f>
+          <e type="setDelay">-3</e>
+            <f>MinatoET_Skill03_07</f>
+          <e type="setDelay">-3</e>
+            <f>MinatoET_Skill03_08</f>
+          <e type="setDelay">-3</e>
+            <f>MinatoET_Skill03_09</f>
+          <e type="setDelay">-3</e>
+            <f>MinatoET_Skill03_10</f>
+            <f>MinatoET_Skill03_11</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill03_12</f>
+            <f>MinatoET_Skill03_13</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill03_14</f>
+            <f>MinatoET_Skill03_15</f>
+            <f>MinatoET_Skill03_16</f>
+            <f>MinatoET_Skill03_17</f>
+        <e type="setAttackBox">f_hit</e>
+          <e type="setSound">Audio/MinatoET/02_02SFX.ogg</e>
+            <f>MinatoET_Skill03_18</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill03_19</f>
+            <f>MinatoET_Skill03_20</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill03_21</f>
+            <f>MinatoET_Skill03_22</f>
+            <f>MinatoET_Skill03_23</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill03_24</f>
+            <f>MinatoET_Skill03_25</f>
+        </frame>
+    </action>
+
+   <action name="skill04">
+     <date>
+       <p type="attackType">aAttack</p>
+       <p type="attackValue">410</p>
+       <p type="attackRangeX">48</p>
+       <p type="attackRangeY">36</p>
+       <p type="cd">1</p>
+     </date>
+     <frame>
+        <f>MinatoET_NAttack_01</f>
+          <e type="setSound">Audio/MinatoET/NAttack_01.ogg</e>
+        <e type="setAttackBox">c_hit</e>
+        <f>MinatoET_NAttack_02</f>
+        <f>MinatoET_NAttack_03</f>
+        <f>MinatoET_NAttack_04</f>
+          <e type="setSound">Audio/MinatoET/NAttack_02.ogg</e>
+        <e type="setAttackBox">c_hit</e>
+        <f>MinatoET_NAttack_05</f>
+        <f>MinatoET_NAttack_06</f>
+            <f>MinatoET_Skill04_01</f>
+            <f>MinatoET_Skill04_02</f>
+        <e type="setDelay">-1</e>
+            <f>MinatoET_Skill04_03</f>
+        <e type="setDelay">-2</e>
+            <f>MinatoET_Skill04_04</f>
+        <e type="setDelay">-2</e>
+            <f>MinatoET_Skill04_05</f>
+        <e type="setDelay">-2</e>
+            <f>MinatoET_Skill04_06</f>
+        <e type="setDelay">-1</e>
+        <e type="setMove">16</e>
+            <f>MinatoET_Skill04_07</f>
+        <e type="setMon">MinatoET/Sk4Effect</e>
+        <e type="setMove">32</e>
+            <f>MinatoET_Skill04_08</f>
+        <e type="setDelay">-2</e>
+        <e type="setMove">12</e>
+            <f>MinatoET_Skill04_09</f>
+        <e type="setMove">4</e>
+            <f>MinatoET_Skill04_10</f>
+            <f>MinatoET_Skill04_11</f>
+            <f>MinatoET_Skill04_12</f>
+          <e type="setSound">Audio/MinatoET/MK.ogg</e>
+        <e type="setBullet">MinatoET/MinatoKunai</e>
+            <f>MinatoET_Skill04_14</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+            <f>MinatoET_Skill04_15</f>
+            <f>MinatoET_Skill04_16</f>
+            <f>MinatoET_Skill04_17</f>
+        <e type="setMove">200</e>
+<e type="setFlipped">10</e>
+            <f>MinatoET_Blank</f>
+            <f>MinatoET_Skill04_18</f>
+            <f>MinatoET_Skill04_19</f>
+            <f>MinatoET_Skill04_20</f>
+            <f>MinatoET_Skill04_21</f>
+            <f>MinatoET_Skill04_22</f>
+        <e type="setAttackBox">c_hit</e>
+          <e type="setSound">Audio/MinatoET/NAttack_01.ogg</e>
+            <f>MinatoET_Skill04_23</f>
+            <f>MinatoET_Skill04_24</f>
+            <f>MinatoET_Skill04_25</f>
+            <f>MinatoET_Skill04_26</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+            <f>MinatoET_Skill04_27</f>
+            <f>MinatoET_Skill04_28</f>
+            <f>MinatoET_Skill04_29</f>
+<e type="setCommand">findTarget</e>
+<e type="setCommand">setTransport</e>
+<e type="setCommand">setInvincible</e> 
+            <f>MinatoET_Skill04_30</f>
+            <f>MinatoET_Skill04_31</f>
+            <f>MinatoET_Skill04_32</f>
+            <f>MinatoET_Skill04_33</f>
+            <f>MinatoET_Skill04_34</f>
+        <e type="setMove">2</e>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill04_35</f>
+        <e type="setMove">4</e>
+            <f>MinatoET_Skill04_36</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill04_37</f>
+        <e type="setAttackBox">f_hit</e>
+          <e type="setSound">Audio/MinatoET/04_01SFX.ogg</e>
+            <f>MinatoET_Skill04_38</f>
+            <f>MinatoET_Skill04_39</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill04_40</f>
+            <f>MinatoET_Skill04_41</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+            <f>MinatoET_Skill04_42</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill04_43</f>
+            <f>MinatoET_Skill04_44</f>
+<e type="setCommand">reInvincible</e> 
+<e type="setCommand">setTransport</e>
+            <f>MinatoET_Skill04_45</f>
+            <f>MinatoET_Skill04_46</f>
+            <f>MinatoET_Skill04_47</f>
+            <f>MinatoET_Skill04_48</f>
+            <f>MinatoET_Skill04_49</f>
+            <f>MinatoET_Skill04_50</f>
+     </frame>
+   </action>
+
+    <action name="skill05">
+         <date>
+       <p type="attackType">cAttack</p>
+       <p type="attackValue">799</p>
+       <p type="attackRangeX">86</p>
+       <p type="attackRangeY">42</p>
+       <p type="cd">1</p>
+     </date>
+     <frame>
+            <f>MinatoET_Skill05_01</f>
+            <f>MinatoET_Skill05_02</f>
+        <e type="setMon">MinatoET/DustEffect</e>
+        <e type="setMove">16</e>
+            <f>MinatoET_Skill05_03</f>
+        <e type="setMove">16</e>
+            <f>MinatoET_Skill05_04</f>
+        <e type="setMove">12</e>
+            <f>MinatoET_Skill05_05</f>
+        <e type="setMove">8</e>
+            <f>MinatoET_Skill05_06</f>
+        <e type="setMove">4</e>
+            <f>MinatoET_Skill05_07</f>
+        <e type="setMove">4</e>
+            <f>MinatoET_Skill05_08</f>
+        <e type="setAttackBox">f_hit</e>
+        <e type="setMove">8</e>
+          <e type="setSound">Audio/MinatoET/Hit.ogg</e>
+            <f>MinatoET_Skill05_09</f>
+            <f>MinatoET_Skill05_10</f>
+            <f>MinatoET_Skill05_11</f>
+            <f>MinatoET_Skill05_12</f>
+          <e type="setSound">Audio/MinatoET/05_01.ogg</e>
+            <f>MinatoET_Skill05_13</f>
+              <e type="setOugis">10</e>
+<e type="setCommand">setInvincible</e> 
+            <f>MinatoET_Skill05_14</f>
+            <f>MinatoET_Skill05_15</f>
+          <e type="setSound">Audio/MinatoET/05_02SFX.ogg</e>
+            <f>MinatoET_Skill05_16</f>
+          <e type="setDelay">10</e>
+            <f>MinatoET_Skill05_17</f>
+          <e type="setSound">Audio/MinatoET/05_02SFX.ogg</e>
+            <f>MinatoET_Skill05_18</f>
+          <e type="setDelay">20</e>
+            <f>MinatoET_Skill05_19</f>
+            <f>MinatoET_Skill05_20</f>
+          <e type="setSound">Audio/MinatoET/NAttack_01.ogg</e>
+            <f>MinatoET_Skill05_21</f>
+            <f>MinatoET_Skill05_22</f>
+        <e type="setAttackBox">f_hit</e>
+            <f>MinatoET_Skill05_23</f>
+            <f>MinatoET_Skill05_24</f>
+            <f>MinatoET_Skill05_25</f>
+          <e type="setSound">Audio/MinatoET/Poof.ogg</e>
+            <f>MinatoET_Skill05_26</f>
+            <f>MinatoET_Skill05_27</f>
+            <f>MinatoET_Skill05_28</f>
+            <f>MinatoET_Skill05_29</f>
+            <f>MinatoET_Skill05_30</f>
+            <f>MinatoET_Skill05_31</f>
+            <f>MinatoET_Skill05_32</f>
+            <f>MinatoET_Skill05_33</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_34</f>
+            <f>MinatoET_Skill05_35</f>
+          <e type="setSound">Audio/MinatoET/05_02.ogg</e>
+            <f>MinatoET_Skill05_36</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_37</f>
+            <f>MinatoET_Skill05_38</f>
+            <f>MinatoET_Skill05_39</f>
+            <f>MinatoET_Skill05_40</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_41</f>
+            <f>MinatoET_Skill05_42</f>
+            <f>MinatoET_Skill05_43</f>
+          <e type="setSound">Audio/MinatoET/Hiraishin.ogg</e>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_44</f>
+            <f>MinatoET_Skill05_45</f>
+            <f>MinatoET_Skill05_46</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_47</f>
+            <f>MinatoET_Skill05_48</f>
+            <f>MinatoET_Skill05_49</f>
+          <e type="setSound">Audio/MinatoET/05_03.ogg</e>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_50</f>
+            <f>MinatoET_Skill05_51</f>
+            <f>MinatoET_Skill05_52</f>
+          <e type="setSound">Audio/MinatoET/HiraishinSFX.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_53</f>
+            <f>MinatoET_Skill05_54</f>
+            <f>MinatoET_Skill05_55</f>
+          <e type="setSound">Audio/MinatoET/01_01SFX.ogg</e>
+        <e type="setAttackBox">ab_hit</e>
+            <f>MinatoET_Skill05_56</f>
+            <f>MinatoET_Skill05_57</f>
+            <f>MinatoET_Skill05_58</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_59</f>
+            <f>MinatoET_Skill05_60</f>
+            <f>MinatoET_Skill05_61</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_62</f>
+            <f>MinatoET_Skill05_63</f>
+            <f>MinatoET_Skill05_64</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_65</f>
+            <f>MinatoET_Skill05_66</f>
+            <f>MinatoET_Skill05_67</f>
+            <f>MinatoET_Skill05_68</f>
+            <f>MinatoET_Skill05_69</f>
+            <f>MinatoET_Skill05_70</f>
+            <f>MinatoET_Skill05_71</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill05_72</f>
+            <f>MinatoET_Skill05_73</f>
+          <e type="setSound">Audio/MinatoET/05_03SFX.ogg</e>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill05_74</f>
+            <f>MinatoET_Skill05_75</f>
+            <f>MinatoET_Skill05_76</f>
+            <f>MinatoET_Skill05_77</f>
+        <e type="setAttackBox">f_hit</e>
+            <f>MinatoET_Skill05_78</f>
+            <f>MinatoET_Skill05_79</f>
+        <e type="setAttackBox">c_hit</e>
+            <f>MinatoET_Skill05_80</f>
+            <f>MinatoET_Skill05_81</f>
+            <f>MinatoET_Skill05_82</f>
+        <e type="setAttackBox">ac_hit</e>
+            <f>MinatoET_Skill05_83</f>
+            <f>MinatoET_Skill05_84</f>
+            <f>MinatoET_Skill05_85</f>
+<e type="setCommand">reInvincible</e> 
+     </frame>
+    </action>
+    <action name="skill06">
+        <frame></frame>
+    </action>
+    <action name="skill07">
+        <frame></frame>
+    </action>
+    <action name="skill08">
+        <frame></frame>
+    </action>
+    <action name="skill09">
+        <frame></frame>
+    </action>
+    <action name="skill10">
+        <frame>
+
+        </frame>
+    </action>
+   
+   
+</unit>

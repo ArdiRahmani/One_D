@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Raintiger</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>Pakura_Blank_00</f>
+        <e type="setChargeB">50</e>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+          <f>Pakura_Blank_00</f>
+          <f>Pakura_Blank_00</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">600</p>
+        <p type="attackRangeX">128</p>
+        <p type="attackRangeY">64</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+        <f>Pakura_Skill03_14</f>
+        <e type="setSound">Audio/Pakura/Fireterasu.wav</e>
+        <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">2</e>
+        <f>Pakura_Skill03_15</f>
+        <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">2</e>
+        <f>Pakura_Skill03_16</f>
+        <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">2</e>
+        <f>Pakura_Skill03_17</f>
+        <e type="setAttackBox">c_hit</e>
+        <e type="setDelay">2</e>
+        <f>Pakura_Skill03_18</f>
+        <e type="setAttackBox">b_hit</e>
+        <e type="setDelay">2</e>
+        <f>Pakura_Skill03_19</f>
+         <e type="setAttackBox">b_hit</e>
+        <f>Pakura_Skill03_20</f>
+        <f>Pakura_Skill03_21</f>
+        <f>Pakura_Skill03_22</f>
+        <f>Pakura_Skill03_23</f>
+        <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>

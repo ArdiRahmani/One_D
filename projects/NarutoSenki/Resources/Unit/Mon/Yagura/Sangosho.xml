@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action value="Idle">
+	 <date>
+	    <p type="attackType">Suiji</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">224</p>
+      </date>
+      <frame>
+        <f>Skill01_01</f>
+      </frame>
+    </action>
+   
+    <action value="Walk">
+      <frame>
+          <f>Skill01_01</f>
+      </frame>
+    </action>
+   
+    <action value="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action value="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action value="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Dead">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="nAttack">
+      <date>
+	    <p type="attackType">sAttack</p>
+        <p type="attackValue">187.5</p>
+        <p type="attackRangeX">-20</p>
+        <p type="attackRangeY">32</p>
+        <p type="cd">0</p>
+      </date>
+      <frame>
+          <f>Skill01_01</f>
+          <f>Skill01_02</f>
+          <f>Skill01_03</f>
+          <f>Skill01_04</f>
+          <f>Skill01_05</f>
+          <e type="setDelay">-1</e>
+          <f>Skill01_06</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">ac_hit</e>
+          <f>Skill01_07</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">a_hit</e>
+          <e type="setSound">Audio/Yagura/Yagura_SFX1_3.ogg</e>
+          <f>Skill01_08</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">a_hit</e>
+          <f>Skill01_09</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">a_hit</e>
+          <f>Skill01_10</f>
+          <e type="setDelay">-1</e>
+          <f>Skill01_11</f>
+          <e type="setDelay">-1</e>
+          <f>Skill01_12</f>
+          <e type="setDelay">-1</e>
+          <f>Skill01_13</f>
+          <e type="setDelay">-1</e>
+          <f>Skill01_14</f>
+          <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>
