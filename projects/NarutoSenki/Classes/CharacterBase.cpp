@@ -26,6 +26,12 @@ CharacterBase::CharacterBase()
 	_skill4Action = nullptr;
 	_skill5Action = nullptr;
 
+	skillSPC1Array = nullptr;
+	skillSPC2Array = nullptr;
+	skillSPC3Array = nullptr;
+	skillSPC4Array = nullptr;
+	skillSPC5Array = nullptr;
+
 	gearCKRValue = 0;
 	gearRecoverValue = 0;
 	isAttackGainCKR = false;
@@ -987,11 +993,13 @@ FiniteTimeAction *CharacterBase::createAnimation(CCArray *ationArray, uint8_t fp
 	FiniteTimeAction *tempAction;
 	FiniteTimeAction *seq;
 	Ref *tObject;
-	
-bool isContinued = false; // set by <e type="setContinue">, everything after it is ignored
+	bool isContinued = false; // set by <e type="setContinue">, everything after it is ignored
 
 	CCARRAY_FOREACH(ationArray, tObject)
 	{
+		if (isContinued)
+			break;
+
 		auto dic = (CCDictionary *)tObject;
 		CCDictElement *ele = nullptr;
 
@@ -1205,7 +1213,6 @@ bool isContinued = false; // set by <e type="setContinue">, everything after it 
 	return seq;
 }
 
-
 void CharacterBase::setCharFlip()
 {
 	if (_isFlipped)
@@ -1287,7 +1294,6 @@ CCArray *CharacterBase::getSpcArray(const string &name) const
 		return nullptr;
 	}
 }
-
 
 void CharacterBase::setContinue(const string &target)
 {
