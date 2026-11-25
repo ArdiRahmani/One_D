@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Tiger</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">29</p>
+        <p type="attackRangeY">15</p>
+        <p type="cd">224</p>
+      </data>
+      <frame> <f>Jinpachi_NAttack_11</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+<f>Jinpachi_NAttack_06</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">1100</p>
+        <p type="attackRangeX">250</p>
+        <p type="attackRangeY">160</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+<f>Jinpachi_NAttack_06</f>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+<f>Jinpachi_NAttack_07</f>
+ <e type="setAttackBox">c_hit</e>
+<f>Jinpachi_NAttack_08</f>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+ <e type="setAttackBox">c_hit</e>
+<f>Jinpachi_NAttack_09</f>
+ <e type="setAttackBox">c_hit</e>
+<f>Jinpachi_NAttack_10</f>
+              <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setDelay">10</e>
+        <e type="setSound">Audio/Effect/kuroari.ogg</e>
+        <e type="setAttackBox">ct_hit</e>
+        <e type="setDelay">320</e> <f>Jinpachi_NAttack_11</f>
+      </frame>
+    </action>
+
+</unit>
