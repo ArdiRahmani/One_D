@@ -163,6 +163,12 @@ void LoadLayer::perloadCharIMG(const string &name)
 	auto path = format("Unit/Ninja/{}/{}_Skill.plist", name, name);
 	if (FileUtils::sharedFileUtils()->isFileExist(path.c_str()))
 		addSprites(path);
+		
+	
+	path = format("Unit/Ninja/{}/{}_Skill2.plist", name, name);
+	if (FileUtils::sharedFileUtils()->isFileExist(path.c_str()))
+		addSprites(path);
+		
 	// else
 	// CCLOG("Not found file %s", path);
 

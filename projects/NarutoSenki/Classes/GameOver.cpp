@@ -50,7 +50,7 @@ bool GameOver::init(RenderTexture *snapshoot)
 	addChild(result_title, 3);
 
 	// gameover_bg.png diambil dari Img/gameover_bg.png, fallback ke atlas
-	result_bg = Sprite::create("Img/gameover_bg.png");
+	result_bg = Sprite::create("Img/GameOver.png");
 	if (!result_bg)
 		result_bg = Sprite::createWithSpriteFrameName("gameover_bg.png");
 	result_bg->setScale(0.5f);
@@ -107,20 +107,20 @@ void GameOver::listResult()
 	half->setAnchorPoint(Vec2(0, 0));
 	half->setPosition(Vec2(
 		winSize.width / 2 - half->getContentSize().width * halfScale / 2,
-		bgBottom + 28 // naik supaya ada ruang untuk gambar Defeat di bawahnya
+		bgBottom + 38 // naik supaya ada ruang untuk gambar Defeat di bawahnya
 	));
 	addChild(half, 5);
 
 	// KONOHA LIST BG - KIRI
 	auto list_bg_konoha = Sprite::createWithSpriteFrameName("list_bg.png");
 	list_bg_konoha->setAnchorPoint(Vec2(0, 0));
-	list_bg_konoha->setPosition(Vec2(konohaX, bgBottom + 26));
+	list_bg_konoha->setPosition(Vec2(konohaX, bgBottom + 36));
 	addChild(list_bg_konoha, 5);
 
 	// AKATSUKI LIST BG - KANAN
 	auto list_bg_akatsuki = Sprite::createWithSpriteFrameName("list_bg.png");
 	list_bg_akatsuki->setAnchorPoint(Vec2(0, 0));
-	list_bg_akatsuki->setPosition(Vec2(akatsukiX, bgBottom + 26));
+	list_bg_akatsuki->setPosition(Vec2(akatsukiX, bgBottom + 36));
 	addChild(list_bg_akatsuki, 5);
 
 	int _hour = getGameLayer()->_minute / 60;

@@ -1080,7 +1080,7 @@ static Sprite *createNameGlowLabel(const string &unit)
 		name.erase(name.size() - kSuffix.size());
 
 	const char *kFont = "Fonts/Roboto-Medium.ttf";
-	const float kFontSize = 42.0f;
+	const float kFontSize = 21.0f;
 	const float kBlur = 5.0f;
 	const float kIntensity = 0.8f;
 	const ccColor3B kGlowColor = {34, 138, 32};
