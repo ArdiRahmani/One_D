@@ -701,9 +701,11 @@ void StartMenu::showExitDialog()
 	confirm_bg->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
 
 	auto title = CCLabelTTF::create("Exit Game", "Fonts/Roboto-Medium.ttf", 16);
+	title->setColor(ccBLACK);
 	title->setPosition(Vec2(winSize.width / 2, winSize.height / 2 + 38));
 
 	auto text = CCLabelTTF::create("Do you really want to exit?", "Fonts/Roboto-Medium.ttf", 12);
+	text->setColor(ccBLACK);
 	text->setPosition(Vec2(winSize.width / 2, winSize.height / 2 + 8));
 
 	MenuItem *yes_btn = MenuItemSprite::create(Sprite::createWithSpriteFrameName("yes_btn1.png"), Sprite::createWithSpriteFrameName("yes_btn2.png"), this, menu_selector(StartMenu::onExitYes));
