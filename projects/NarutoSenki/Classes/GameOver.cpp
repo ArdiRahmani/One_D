@@ -131,7 +131,7 @@ void GameOver::listResult()
 	timeBG->setAnchorPoint(Vec2(0, 0));
 	timeBG->setPosition(Vec2(
 		konohaX + (listW - timeBG->getContentSize().width) / 2,
-		bgBottom + 4
+		bgBottom + 5
 	));
 	addChild(timeBG, 6);
 
@@ -144,7 +144,7 @@ void GameOver::listResult()
 	gameClock->setAnchorPoint(Vec2(0.5f, 0));
 	gameClock->setPosition(Vec2(
 		timeBG->getPositionX() + timeBG->getContentSize().width / 2,
-		timeBG->getPositionY() + 3
+		timeBG->getPositionY() + 4
 	));
 	gameClock->setScale(0.48f);
 	addChild(gameClock, 7);
@@ -245,7 +245,7 @@ void GameOver::listResult()
 			konohaKill += realKillNum;
 
 			posX = konohaX;
-			posY = bgBottom + 152 - (konohaIndex * 25);
+			posY = bgBottom + 162 - (konohaIndex * 25);
 
 			konohaIndex++;
 		}
@@ -255,7 +255,7 @@ void GameOver::listResult()
 			akatsukiKill += realKillNum;
 
 			posX = akatsukiX;
-			posY = bgBottom + 152 - (akatsukiIndex * 25);
+			posY = bgBottom + 162 - (akatsukiIndex * 25);
 
 			akatsukiIndex++;
 		}
@@ -341,7 +341,7 @@ void GameOver::listResult()
 		coinBG->setAnchorPoint(Vec2(0, 0));
 		coinBG->setPosition(Vec2(
 			akatsukiX + (listW - coinBG->getContentSize().width) / 2,
-			bgBottom + 4
+			bgBottom + 5
 		));
 		addChild(coinBG, 6);
 
