@@ -69,6 +69,24 @@ function StartMenu:init()
     -- self:addChild(startmenu_title, 3)
 end
 
+-- Dipanggil dari C++ (StartMenu::onTrainingCallBack)
+--   logo GameScene diklik 7 kali (logo2.png) -> GameModeLayer.lua
+--   selain itu                               -> GameModeLayer::create() (C++)
+function enterGameModeLayer()
+    local modeScene = CCScene:create()
+    local modeLayer
+
+    if _G.useLuaGameMode then
+        modeLayer = GameModeLayer:createLua()
+        hook.registerInitHandlerOnly(modeLayer) -- GameModeLayer:init() di Lua
+    else
+        modeLayer = GameModeLayer:create() -- UI dibangun C++ (GameModeLayer::init)
+    end
+
+    modeScene:addChild(modeLayer)
+    director.replaceSceneWithFade(modeScene, 1.25)
+end
+
 function enterSelectLayer(gameMode, enableCustomSelect)
     tools.addSprites('Select.plist')
     tools.addSprites('UI.plist')

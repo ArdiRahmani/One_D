@@ -3,10 +3,6 @@
 --
 local gameScene = GameScene
 
--- true : push_start langsung membuka GameModeLayer.lua (tanpa StartMenu)
--- false: alur lama, push_start -> StartMenu (tombol Training -> GameModeLayer.lua)
-local PUSH_START_TO_GAMEMODE = true
-
 function GameScene:init()
     log('Initial GameScene...')
 
@@ -116,18 +112,8 @@ function GameScene:onPush()
     -- Cleanup audio engine in StartMenu
     audio.playSound(ns.menu.CONFIRM)
 
-    if PUSH_START_TO_GAMEMODE then
-        -- GameModeLayer.lua (Cheats dipakai untuk menentukan custom select)
-        GameModeLayer:setCheats(self.cheats)
-
-        -- StartMenu::onEnter biasanya memutar musik menu
-        if save.getBool('isBGM') then
-            audio.playMusic(ns.music.MENU_MUSIC, true)
-        end
-
-        enterGameModeLayer()
-        return
-    end
+    -- Logo sudah jadi logo2.png (diklik 7 kali) -> StartMenu.lua pakai GameModeLayer.lua
+    _G.useLuaGameMode = self.cheats >= 7
 
     local menuScene = CCScene:create()
     local menuLayer = StartMenu:create()

@@ -3,7 +3,7 @@
 --
 -- Port dari Classes/UI/GameModeLayer.cpp. Tampilan (UI) dibangun di sini,
 -- sisi C++ hanya menyediakan binding:
---   GameModeLayer:create()
+--   GameModeLayer:createLua()   -- layer kosong, UI dari GameModeLayer:init() ini
 --   GameModeLayer:getModeCount()
 --   GameModeLayer:getModeImage(mode)
 --   GameModeLayer:startMode(mode)     -- konfirmasi mode -> SelectLayer
@@ -12,14 +12,14 @@
 
 -- Id mode (urut sesuai enum GameMode di C++)
 local MODE = {
-    OneVsOne = 0,    
-    Classic = 1,
-    FourVsFour = 2,
-    TwoVsTwo = 3,
-    HardCore_4Vs4 = 4,
+    OneVsOne = 0,
+    TwoVsTwo = 7,
+    Classic = 2,
+    FourVsFour = 3,
+    HardCore_4Vs4 = 1,
     Clone = 5,
     Deathmatch = 6,
-    RandomDeathmatch = 7
+    RandomDeathmatch = 4
 }
 
 -- Jumlah mode yang tampil per halaman
@@ -270,14 +270,4 @@ function GameModeLayer:onModeClick(id)
 
     for _, m in ipairs(self.modes) do m.hasSelected = false end
     data.hasSelected = true
-end
-
--- Dipanggil dari C++ (StartMenu::onTrainingCallBack) dan GameScene.lua
-function enterGameModeLayer()
-    local modeScene = CCScene:create()
-    local modeLayer = GameModeLayer:create()
-
-    hook.registerInitHandlerOnly(modeLayer)
-    modeScene:addChild(modeLayer)
-    director.replaceSceneWithFade(modeScene, 1.25)
 end

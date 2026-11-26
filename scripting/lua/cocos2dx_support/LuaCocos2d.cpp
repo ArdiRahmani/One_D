@@ -67034,6 +67034,34 @@ static int tolua_Cocos2d_GameModeLayer_create00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: createLua of class  GameModeLayer */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_createLua00
+static int tolua_Cocos2d_GameModeLayer_createLua00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"GameModeLayer",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   GameModeLayer* tolua_ret = (GameModeLayer*)  GameModeLayer::createForLua();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"GameModeLayer");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'createLua'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: getModeCount of class  GameModeLayer */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_getModeCount00
 static int tolua_Cocos2d_GameModeLayer_getModeCount00(lua_State* tolua_S)
@@ -67079,7 +67107,7 @@ static int tolua_Cocos2d_GameModeLayer_getModeImage00(lua_State* tolua_S)
  {
   int mode = ((int)  tolua_tonumber(tolua_S,2,0));
   {
-   const char* tolua_ret = (const char*)  GameModeLayer::getModeImage(mode);
+   const char* tolua_ret = (const char*)  GameModeLayer::getModeImagePath(mode);
    tolua_pushstring(tolua_S,(const char*)tolua_ret);
   }
  }
@@ -72217,6 +72245,7 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
   tolua_cclass(tolua_S,"GameModeLayer","GameModeLayer","CCLayer",NULL);
   tolua_beginmodule(tolua_S,"GameModeLayer");
    tolua_function(tolua_S,"create",tolua_Cocos2d_GameModeLayer_create00);
+   tolua_function(tolua_S,"createLua",tolua_Cocos2d_GameModeLayer_createLua00);
    tolua_function(tolua_S,"getModeCount",tolua_Cocos2d_GameModeLayer_getModeCount00);
    tolua_function(tolua_S,"getModeImage",tolua_Cocos2d_GameModeLayer_getModeImage00);
    tolua_function(tolua_S,"startMode",tolua_Cocos2d_GameModeLayer_startMode00);

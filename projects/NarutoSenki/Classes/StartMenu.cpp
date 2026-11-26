@@ -535,8 +535,16 @@ void StartMenu::onHardLayerCallBack()
 
 void StartMenu::onTrainingCallBack()
 {
-	// Enter game mode scene (GameModeLayer sekarang dibuat di Lua: lua/ui/GameModeLayer.lua)
-	lua_call_func(UiFlowKeys::kEnterGameModeLayer);
+	// Lua (StartMenu.lua: enterGameModeLayer) memilih GameModeLayer.lua atau GameModeLayer::create()
+	if (LuaBridge::isReady() && lua_call_func(UiFlowKeys::kEnterGameModeLayer))
+		return;
+
+	// Fallback kalau fungsi Lua tidak ada: versi C++
+	auto modeScene = Scene::create();
+	auto gameModeLayer = GameModeLayer::create();
+	modeScene->addChild(gameModeLayer);
+
+	Director::sharedDirector()->replaceScene(TransitionFade::create(1.25f, modeScene));
 }
 
 void StartMenu::onCreditsCallBack()
