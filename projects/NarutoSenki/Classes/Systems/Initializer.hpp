@@ -2,6 +2,7 @@
 #include "Systems/AliasBridge.hpp"
 #include "Systems/AssetSystem.hpp"
 #include "Systems/CommandSystem.hpp"
+#include "Systems/GameModeSystem.hpp"
 #include "Systems/GameOverSystem.hpp"
 #include "Systems/HeroSystem.hpp"
 #include "Systems/IconSystem.hpp"
@@ -44,5 +45,7 @@ namespace Internal
 		IconSystem::registerLua();
 		// Harus sebelum main.lua: lua/Hook/GameOver.lua mengisi half.png / flipX / nama catatan layar hasil lewat tabel `GameOver`
 		GameOverSystem::registerLua();
+		// Dipakai layar mode buatan Lua: GameModeApi.select(mode) mengatur s_GameMode + handler C++
+		GameModeSystem::registerLua();
 	}
 } // namespace Internal

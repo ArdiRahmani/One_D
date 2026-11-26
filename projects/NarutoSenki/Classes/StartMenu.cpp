@@ -1,4 +1,6 @@
 #include "StartMenu.h"
+#include "Constants/UiFlowKeys.hpp"
+#include "Data/Config.h"
 
 GameMode s_GameMode = GameMode::Classic;
 std::array<std::unique_ptr<IGameModeHandler>, GameMode::__Internal_Max_Length> s_ModeHandlers = {
@@ -534,7 +536,13 @@ void StartMenu::onHardLayerCallBack()
 
 void StartMenu::onTrainingCallBack()
 {
-	// Enter game mode scene
+	// Logo di GameScene.lua diklik 7 kali (Cheats >= kMaxCheats, ikon berubah jadi logo2.png):
+	// layar pilih mode memakai Lua (lua/ui/GameModeLayer.lua). Kalau tidak 7 kali, atau fungsi Lua
+	// tidak ada / error, pakai GameModeLayer C++ di bawah.
+	if (Cheats >= kMaxCheats && lua_call_func(UiFlowKeys::kEnterGameModeLayer))
+		return;
+
+	// Enter game mode scene (cadangan C++)
 	auto modeScene = Scene::create();
 	auto gameModeLayer = GameModeLayer::create();
 	modeScene->addChild(gameModeLayer);
