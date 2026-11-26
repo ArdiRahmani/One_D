@@ -1,0 +1,28 @@
+#pragma once
+#include "Systems/AssetSystem.hpp"
+#include "Systems/CommandSystem.hpp"
+#include "Systems/HeroSystem.hpp"
+#include "Systems/MonsterAISystem.hpp"
+#include "Systems/MonsterSystem.hpp"
+#include "Systems/ProviderSystem.hpp"
+#include "Systems/TransformSystem.hpp"
+
+namespace Internal
+{
+	static void initAllSystems()
+	{
+		CommandSystem::reset();
+		// Harus sebelum main.lua: lua/Hook/Heroes.lua mengisi daftar hero lewat tabel ini
+		HeroSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/CloneAI.lua mengisi alias AI lewat tabel `CloneAI`
+		ProviderSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/Monster.lua mengisi alias AI monster lewat tabel `CloneMon`
+		MonsterSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/MonsterAI.lua mengisi alias Monster::setAI lewat tabel `CloneMonAI`
+		MonsterAISystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/Transform.lua mengisi daftar transformasi lewat tabel `Transform`
+		TransformSystem::registerLua();
+		// Harus sebelum main.lua: lua/Hook/Assets.lua mengisi aset per karakter lewat tabel `Assets`
+		AssetSystem::registerLua();
+	}
+} // namespace Internal
