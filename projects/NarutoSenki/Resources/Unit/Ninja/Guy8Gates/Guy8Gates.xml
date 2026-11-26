@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Guy8Gates</p>
+        <p type="attackValue">5000</p>
+        <p type="attackRangeX">63</p>
+        <p type="attackRangeY">85</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>Guy8Gates_Idle_001</f>
+        <f>Guy8Gates_Idle_002</f>
+        <f>Guy8Gates_Idle_003</f>
+        <f>Guy8Gates_Idle_004</f> 
+        <f>Guy8Gates_Idle_004</f>
+        <f>Guy8Gates_Idle_003</f>
+        <f>Guy8Gates_Idle_002</f>
+        <f>Guy8Gates_Idle_001</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>Guy8Gates_Walk_01</f> 
+          <e type="setMove">5</e>
+        <f>Guy8Gates_Walk_02</f>
+<e type="setMove">5</e>
+        <f>Guy8Gates_Walk_03</f>
+<e type="setMove">5</e>
+        <f>Guy8Gates_Walk_04</f>
+<e type="setMove">5</e>
+        <f>Guy8Gates_Walk_05</f>
+<e type="setMove">5</e>
+        <f>Guy8Gates_Walk_06</f>
+<e type="setMove">5</e>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+        <f>Guy8Gates_Hurt_01</f>
+        <f>Guy8Gates_Hurt_02</f>
+        <e type="setSound">Audio/Guy8Gates/hurt.ogg</e>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+         <f>Guy8Gates_AirHurt_01</f>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+          <f>Guy8Gates_KnockDown_01</f>
+           <e type="setDelay">10</e>
+          <f>Guy8Gates_KnockDown_02</f>         
+  <e type="setDelay">60</e>
+          <f>Guy8Gates_KnockDown_03</f>
+          <f>Guy8Gates_KnockDown_04</f>
+         <f>Guy8Gates_KnockDown_05</f>
+          <f>Guy8Gates_KnockDown_06</f>
+          <f>Guy8Gates_KnockDown_07</f>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+          <f>Guy8Gates_Float_01</f>
+          <e type="setDelay">10</e>
+          <f>Guy8Gates_Float_02</f>
+          <e type="setDelay">10</e>
+          <f>Guy8Gates_Float_03</f>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+          <f>Guy8Gates_KnockDown_01</f>
+          <f>Guy8Gates_KnockDown_02</f>
+          <e type="setSound">Audio/Guy8Gates/dead.ogg</e>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">80</p>
+        <p type="attackRangeX">16</p>
+        <p type="attackRangeY">48</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+        <f>Guy8Gates_NAttack_01</f>
+        <f>Guy8Gates_NAttack_02</f>
+        <f>Guy8Gates_NAttack_03</f>  
+ <e type="setMove">8</e>       
+ <e type="setSound">Audio/Guy8Gates/nattack.ogg</e>
+        <e type="setSound">Audio/Effect/damage_h.ogg</e>
+        <e type="setAttackBox">n_hit</e>
+        <f>Guy8Gates_NAttack_04</f>     
+<e type="setAttackBox">n_hit</e>
+        <f>Guy8Gates_NAttack_05</f>  
+   <e type="setAttackBox">n_hit</e>
+        <f>Guy8Gates_NAttack_07</f>
+        <f>Guy8Gates_NAttack_08</f>
+ <e type="setSound">Audio/Guy8Gates/Attack.ogg</e>
+    <f>Guy8Gates_NAttack_09</f>     
+  <e type="setSound">Audio/Effect/damage_i.ogg</e>
+        <e type="setMove">16</e>
+<e type="setAttackBox">l_hit</e>
+        <f>Guy8Gates_NAttack_10</f>  
+     <e type="setAttackBox">l_hit</e>  
+      <f>Guy8Gates_NAttack_11</f>
+        <e type="setAttackBox">l_hit</e>
+      </frame>
+    </action>
+
+   <action name="skill01">
+     <data>
+	   <p type="attackType">Summon</p>
+       <p type="attackValue">0</p>
+       <p type="attackRangeX">0</p>
+       <p type="attackRangeY">0</p>
+       <p type="cd">7</p>
+         <p type="combatPoint">1040</p> 
+     </data>
+     <frame>
+       <f>Guy8Gates_Skill01_001</f>
+      <f>Guy8Gates_Skill01_002</f>  
+     <e type="setSound">Audio/Guy8Gates/Hirudora.ogg</e>
+   <e type="setMon">Tiger8Gates</e>   
+    <f>Guy8Gates_Skill01_003</f>
+  <f>Guy8Gates_Skill01_004</f> 
+      <f>Guy8Gates_Skill01_005</f>
+      <f>Guy8Gates_Skill01_006</f>  
+     <f>Guy8Gates_Skill01_007</f>
+       <f>Guy8Gates_Skill01_008</f>
+<e type="setMon">Tiger8Gates</e> 
+  <f>Guy8Gates_Skill01_009</f>
+    <f>Guy8Gates_Skill01_010</f>
+   <f>Guy8Gates_Skill01_011</f>   
+  
+     </frame>
+   </action>
+    <action name="skill02">
+        <data>
+        <p type="attackType">aAttack</p>
+        <p type="attackValue">300</p>
+        <p type="attackRangeX">50</p>
+        <p type="attackRangeY">70</p>
+          <p type="cd">12</p>
+         <p type="combatPoint">1840</p> 
+        </data>
+        <frame>
+          <f>Guy8Gates_Skill02_001</f>
+        <e type="setDelay">5</e>
+          <f>Guy8Gates_Skill02_002</f>
+        <e type="setDelay">5</e>
+          <f>Guy8Gates_Skill02_003</f>
+<e type="setDelay">2</e>
+          <f>Guy8Gates_Skill02_004</f>
+    <e type="setDelay">2</e>     
+ <e type="setSound">Audio/Effect/pup.ogg</e>
+          <f>Guy8Gates_Skill02_005</f>
+<e type="setDelay">2</e>   
+     <e type="setCommand">setInvincible</e>
+          <f>Guy8Gates_Skill02_006</f>
+<e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+        <e type="setDelay">2</e>
+          <f>Guy8Gates_Skill02_007</f>
+<e type="setDelay">6</e>
+ <e type="setSound">Audio/Guy8Gates/Skill 2.ogg</e>
+<e type="setAttackBox">b_hit</e> 
+          <f>Guy8Gates_Skill02_008</f>
+        <e type="setDelay">6</e>    <e type="setMon">TigerStream</e>   
+<e type="setAttackBox">b_hit</e> 
+   <f>Guy8Gates_Skill02_010</f>
+<e type="setDelay">50</e>
+     <f>Guy8Gates_Skill02_011</f>
+<e type="setDelay">5</e>
+          <f>Guy8Gates_Skill02_012</f>  <e type="setDelay">2</e>
+     <f>Guy8Gates_Skill02_013</f>
+<e type="setDelay">2</e>
+<e type="setCommand">setTransport</e>     
+   <e type="setCommand">reInvincible</e>
+        </frame>
+    </action>
+    <action name="skill03">
+        <data>
+          <p type="attackType">cAttack</p>
+          <p type="attackValue">450</p>
+          <p type="attackRangeX">48</p>
+          <p type="attackRangeY">48</p>
+          <p type="cd">16</p>
+          <p type="combatPoint">3440</p> 
+        </data>
+        <frame>
+        <e type="setSound">Audio/Guy8Gates/Guy8Gates_skill3.ogg</e>  
+       <f>Guy8Gates_Skill03_001</f>  <e type="setDelay">2</e>
+        <e type="setSound">Audio/Guy8Gates/Guy8Gates_skill10.ogg</e>  
+          <f>Guy8Gates_Skill03_002</f>
+  <e type="setDelay">2</e>
+          <f>Guy8Gates_Skill03_003</f>
+       <e type="setDelay">2</e>
+ <e type="setSound">Audio/Guy8Gates/Skill 3.ogg</e>
+     <f>Guy8Gates_Skill03_004</f>  
+  <e type="setAttackBox">f_hit</e>  
+<e type="setSound">Audio/Effect/damage_o.ogg</e>
+     <e type="setDelay">3</e>
+          <f>Guy8Gates_Skill03_005</f>
+    <e type="setAttackBox">ac_hit</e> 
+            <e type="setDelay">3</e>
+          <f>Guy8Gates_Skill03_006</f>
+    <e type="setAttackBox">ac_hit</e> 
+  <e type="setDelay">3</e>
+          <f>Guy8Gates_Skill03_007</f>
+    <e type="setAttackBox">ac_hit</e>  
+<e type="setDelay">3</e>
+          <f>Guy8Gates_Skill03_008</f>
+     <e type="setAttackBox">ac_hit</e>
+  <e type="setDelay">3</e>     
+ <e type="setJump">true</e>
+<f>Guy8Gates_Skill03_009</f>
+   <e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+  <e type="setDelay">5</e>
+          <f>Guy8Gates_Skill03_010</f>
+           <e type="setDelay">5</e>
+          <f>Guy8Gates_Skill03_011</f>
+  <e type="setDelay">5</e>
+          <f>Guy8Gates_Skill03_012</f>     
+<e type="setDelay">2</e>
+          <f>Guy8Gates_Skill03_013</f>
+  <e type="setSound">Audio/Guy8Gates/Skill 3_1.ogg</e>
+   <e type="setDelay">2</e>
+          <f>Guy8Gates_Skill03_014</f>
+  <e type="setDelay">2</e> 
+ <e type="setSound">Audio/Effect/break_sound3.ogg</e>
+          <f>Guy8Gates_Skill03_015</f>
+    <e type="setAttackBox">b_hit</e>  
+<e type="setDelay">2</e>
+      <f>Guy8Gates_Skill03_016</f>
+  <e type="setDelay">2</e>       
+  <e type="setAttackBox">b_hit</e> 
+<f>Guy8Gates_Skill03_017</f>   
+<e type="setAttackBox">b_hit</e> 
+<e type="setDelay">2</e>   
+<f>Guy8Gates_Skill03_018</f>  
+ <e type="setAttackBox">b_hit</e>
+   <e type="setDelay">2</e>
+          <f>Guy8Gates_Skill03_019</f>
+   <e type="setAttackBox">b_hit</e>
+ <e type="setDelay">2</e>   
+          <f>Guy8Gates_Skill03_020</f>
+ <e type="setDelay">2</e>   
+       <f>Guy8Gates_Skill03_021</f>
+   <e type="setDelay">20</e>   
+       </frame>
+    </action>
+   <action name="skill04">
+     <data>
+    <p type="attackType">Summon</p>
+        <p type="attackValue">800</p>
+        <p type="attackRangeX">100</p>
+        <p type="attackRangeY">50</p>
+        <p type="cd">1</p>
+          <p type="combatPoint">3440</p> 
+     </data>
+     <frame>   
+  <e type="setCommand">setInvincible</e>
+          <e type="setSound">Audio/Effect/ougis.ogg</e>
+        <f>Guy8Gates_Skill04_001</f>      
+  <e type="setSound">Audio/Guy8Gates/Skill 4.ogg</e>
+      <e type="setDelay">3</e>
+    <f>Guy8Gates_Skill04_002</f>  
+     <e type="setDelay">2</e>
+<e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+         <f>Guy8Gates_Skill04_003</f> 
+       <f>Guy8Gates_Skill04_004</f>  
+  <f>Guy8Gates_Skill04_005</f>     
+      <f>Guy8Gates_Skill04_006</f>         
+    <f>Guy8Gates_Skill04_007</f>
+   <e type="setSound">Audio/Effect/damage_o.ogg</e>
+  <e type="setDelay">4</e>
+ <e type="setAttackBox">o_hit</e> 
+         <f>Guy8Gates_Skill04_008</f>   
+<e type="setDelay">4</e>
+<e type="setAttackBox">o2_hit</e> 
+          <f>Guy8Gates_Skill04_009</f> 
+  <f>Guy8Gates_Skill04_010</f>    
+        <f>Guy8Gates_Skill04_011</f>
+    <f>Guy8Gates_Skill04_012</f> 
+         <f>Guy8Gates_Skill04_013</f><e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+      <f>Guy8Gates_Skill04_024</f>  
+  <f>Guy8Gates_Skill04_025</f>   
+   <f>Guy8Gates_Skill04_026</f>      
+    <f>Guy8Gates_Skill04_027</f>
+   <f>Guy8Gates_Skill04_028</f>
+     <f>Guy8Gates_Skill04_029</f>     
+  <e type="setSound">Audio/Effect/damage_o.ogg</e>
+<e type="setAttackBox">o_hit</e>   
+  <f>Guy8Gates_Skill04_030</f>   
+   <e type="setAttackBox">o2_hit</e>   
+     <e type="setDelay">5</e>
+<e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+     <f>Guy8Gates_Skill04_001</f>  <e type="setDelay">3</e>
+       <f>Guy8Gates_Skill04_002</f> <e type="setDelay">2</e>
+         <f>Guy8Gates_Skill04_003</f>
+  <e type="setDelay">1</e>
+       <f>Guy8Gates_Skill04_004</f>  
+  <f>Guy8Gates_Skill04_005</f>     
+      <f>Guy8Gates_Skill04_006</f>         
+    <f>Guy8Gates_Skill04_007</f> 
+   <e type="setSound">Audio/Effect/damage_o.ogg</e>
+  <e type="setDelay">4</e>
+ <e type="setAttackBox">b_hit</e> 
+         <f>Guy8Gates_Skill04_008</f>   
+<e type="setDelay">4</e>
+<e type="setAttackBox">b_hit</e> 
+       <f>Guy8Gates_Skill04_009</f> 
+  <f>Guy8Gates_Skill04_010</f>    
+        <f>Guy8Gates_Skill04_011</f>
+    <f>Guy8Gates_Skill04_012</f> 
+         <f>Guy8Gates_Skill04_013</f>
+  <e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+       <f>Guy8Gates_Skill04_024</f> 
+  <e type="setDelay">3</e>
+  <f>Guy8Gates_Skill04_025</f>    <e type="setDelay">2</e>
+       <f>Guy8Gates_Skill04_026</f>       <e type="setDelay">1</e>
+    <f>Guy8Gates_Skill04_027</f>    
+         <f>Guy8Gates_Skill04_028</f>      
+          <f>Guy8Gates_Skill04_029</f>       
+<e type="setSound">Audio/Effect/damage_o.ogg</e>
+<e type="setAttackBox">c_hit</e>   
+  <f>Guy8Gates_Skill04_030</f>   
+   <e type="setAttackBox">l_hit</e>   
+     <e type="setDelay">5</e>
+<e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+  <f>Guy8Gates_Skill04_001</f>      
+      <e type="setDelay">3</e>
+    <f>Guy8Gates_Skill04_002</f>  
+     <e type="setDelay">2</e>
+         <f>Guy8Gates_Skill04_003</f> 
+       <f>Guy8Gates_Skill04_004</f>  
+  <f>Guy8Gates_Skill04_005</f>     
+      <f>Guy8Gates_Skill04_006</f>         
+    <f>Guy8Gates_Skill04_007</f> 
+   <e type="setSound">Audio/Effect/damage_o.ogg</e>
+  <e type="setDelay">4</e>
+ <e type="setAttackBox">b_hit</e> 
+         <f>Guy8Gates_Skill04_008</f>   
+<e type="setDelay">4</e>
+<e type="setAttackBox">b_hit</e> 
+        <f>Guy8Gates_Skill04_009</f> 
+  <f>Guy8Gates_Skill04_010</f>    
+        <f>Guy8Gates_Skill04_011</f>
+    <f>Guy8Gates_Skill04_012</f> 
+         <f>Guy8Gates_Skill04_013</f>
+<e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+  <e type="setFilpped">10</e>
+       <f>Guy8Gates_Skill04_014</f> <e type="setDelay">3</e> 
+  <f>Guy8Gates_Skill04_015</f>   <e type="setDelay">2</e>
+  <f>Guy8Gates_Skill04_016</f> <e type="setDelay">1</e>
+    <f>Guy8Gates_Skill04_017</f>    
+         <f>Guy8Gates_Skill04_018</f>    
+   <e type="setSound">Audio/Effect/damage_o.ogg</e>
+  <e type="setAttackBox">o_hit</e> 
+     <f>Guy8Gates_Skill04_019</f>    
+<e type="setAttackBox">o2_hit</e>   
+  <f>Guy8Gates_Skill04_020</f>       <f>Guy8Gates_Skill04_021</f>      
+     <f>Guy8Gates_Skill04_022</f>       <f>Guy8Gates_Skill04_023</f>    
+<e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+    <f>Guy8Gates_Skill04_001</f>      
+      <e type="setDelay">3</e>
+    <f>Guy8Gates_Skill04_002</f>  
+     <e type="setDelay">2</e>    <f>Guy8Gates_Skill04_003</f>
+       <f>Guy8Gates_Skill04_004</f>  
+  <f>Guy8Gates_Skill04_005</f>     
+      <f>Guy8Gates_Skill04_006</f> 
+    <e type="setSound">Audio/Effect/damage_o.ogg</e>
+   <f>Guy8Gates_Skill04_007</f> 
+  <e type="setDelay">4</e>
+ <e type="setAttackBox">b_hit</e> 
+  <f>Guy8Gates_Skill04_008</f>   
+<e type="setDelay">4</e>
+<e type="setAttackBox">b_hit</e> 
+        <f>Guy8Gates_Skill04_009</f> 
+  <f>Guy8Gates_Skill04_010</f>    
+        <f>Guy8Gates_Skill04_011</f>
+    <f>Guy8Gates_Skill04_012</f> 
+         <f>Guy8Gates_Skill04_013</f>
+   <e type="setCommand">findTarget</e> 
+  <e type="setCommand">setTransport</e>
+       <f>Guy8Gates_Skill04_024</f>  
+  <f>Guy8Gates_Skill04_025</f>   
+       <f>Guy8Gates_Skill04_026</f>      
+    <f>Guy8Gates_Skill04_027</f>    
+         <f>Guy8Gates_Skill04_028</f>      
+          <f>Guy8Gates_Skill04_029</f>   
+    <e type="setSound">Audio/Effect/damage_o2.ogg</e>
+<e type="setAttackBox">f2_hit</e>   
+  <f>Guy8Gates_Skill04_030</f>   
+   <e type="setAttackBox">f_hit</e>   
+     <e type="setDelay">5</e>
+     <e type="setCommand">reInvincible</e>
+     </frame>
+   </action>
+    <action name="skill05">
+     <data>
+       <p type="attackType">oAttack</p>
+       <p type="attackValue">1000</p>
+       <p type="attackRangeX">500</p>
+       <p type="attackRangeY">408</p>
+       <p type="cd">1</p>
+         <p type="combatPoint">9280</p> 
+     </data>
+     <frame>
+        <e type="setSound">Audio/Effect/ougis.ogg</e>   
+        <e type="setCommand">setInvincible</e>
+     <f>Guy8Gates_Skill05_01</f>
+    <e type="setSound">Audio/Guy8Gates/Skill 5.ogg</e>
+  <e type="setDelay">4</e>  
+        <f>Guy8Gates_Skill05_03</f>
+<e type="setDelay">4</e>
+        <f>Guy8Gates_Skill05_04</f>
+<e type="setDelay">4</e>
+        <f>Guy8Gates_Skill05_05</f>
+<e type="setDelay">4</e>
+        <f>Guy8Gates_Skill05_06</f>
+<e type="setDelay">4</e>
+        <f>Guy8Gates_Skill05_07</f> 
+<e type="setOugis">10</e>
+<e type="setDelay">10</e>
+        <f>Guy8Gates_Skill05_08</f>  
+ <e type="setSound">Audio/Guy8Gates/Skill 5_1.ogg</e>
+        <e type="setChargeB">80</e>   
+<e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>   
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>
+   <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>  
+ <e type="setAttackBox">o_hit</e>     
+  <f>Guy8Gates_Skill05_08</f>   
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>
+   <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>  
+ <e type="setAttackBox">o_hit</e>   
+    <f>Guy8Gates_Skill05_08</f>   
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>
+   <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>  
+ <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>   
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>
+   <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>  
+ <e type="setAttackBox">o_hit</e>
+               <f>Guy8Gates_Skill05_08</f>   
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>
+   <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>  
+ <e type="setAttackBox">o_hit</e>
+        <f>Guy8Gates_Skill05_08</f>   
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>
+   <e type="setAttackBox">o_hit</e>
+       <f>Guy8Gates_Skill05_08</f>
+<e type="setSound">Audio/Effect/break_sound2.ogg</e>
+        <e type="setChargeB">80</e>  
+ <e type="setAttackBox">o_hit</e>       
+ <f>Guy8Gates_Skill05_09</f> 
+<e type="setSound">Audio/Guy8Gates/dead.ogg</e>
+<e type="setDelay">400</e>
+        <e type="setCommand">reInvincible</e>
+     </frame>
+   </action>
+
+     <action name="skill06">
+        <frame></frame>
+    </action>
+    <action name="skill07">
+        <frame></frame>
+    </action>
+    <action name="skill08">
+        <frame></frame>
+    </action>
+    <action name="skill09">
+        <frame></frame>
+    </action>
+    <action name="skill10">
+        <data>
+            <p type="attackType">Idle</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">32</p>
+            <p type="attackRangeY">48</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+        </frame>
+    </action>
+
+     <action name="skill10">
+        <data>
+            <p type="attackType">Walk</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+        </frame>
+    </action>
+
+     <action name="skill10">
+        <data>
+            <p type="attackType">cAttack</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+        </frame>
+    </action>
+</unit>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">xuanzhuan</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+      <e type="setDelay">0</e>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+      <e type="setDetonation">0</e>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">200</p>
+        <p type="attackRangeX">50</p>
+        <p type="attackRangeY">50</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+
+<f>Zabuza_Skill01_09</f>
+      <e type="setMove">20</e>
+
+<f>Zabuza_Skill01_10</f>
+      <e type="setMove">30</e>
+
+<f>Zabuza_Skill01_11</f>
+      <e type="setMove">40</e>
+
+<f>Zabuza_Skill01_09</f>
+      <e type="setAttackBox">c_hit</e>
+      <e type="setSound">Audio/Zabuza/skill1.2.ogg</e>
+      <e type="setMove">-8</e>
+
+<f>Zabuza_Skill01_10</f>
+      <e type="setAttackBox">c_hit</e>
+      <e type="setMove">-8</e>
+
+<f>Zabuza_Skill01_11</f>
+      <e type="setAttackBox">c_hit</e>
+      <e type="setSound">Audio/Zabuza/skill1.2.ogg</e>
+      <e type="setMove">-8</e>
+
+<f>Zabuza_Skill01_09</f>
+      <e type="setAttackBox">c_hit</e>
+      <e type="setSound">Audio/Zabuza/skill1.2.ogg</e>
+      <e type="setMove">-8</e>
+
+<f>Zabuza_Skill01_10</f>
+      <e type="setAttackBox">c_hit</e>
+      <e type="setMove">-8</e>
+      <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>
