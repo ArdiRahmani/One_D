@@ -118,7 +118,7 @@ local config = {
         frame = '{}_CutIn.png',
         file = {},
         bind = {},
-        defaultScale = 1.0,
+        defaultScale = 0.8,
         scale = {
             Chiyo = 0.5,
             },

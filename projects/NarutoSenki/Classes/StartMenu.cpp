@@ -204,6 +204,7 @@ StartMenu::StartMenu()
 	isDrag = false;
 	menuText = nullptr;
 	hardCoreLayer = nullptr;
+	exitLayer = nullptr;
 	notice_layer = nullptr;
 	noticeLabel = nullptr;
 	login_btn = nullptr;
@@ -369,6 +370,7 @@ bool StartMenu::init()
 void StartMenu::onEnter()
 {
 	Layer::onEnter();
+	setKeypadEnabled(true); // tombol Back Android -> keyBackClicked()
 	// SimpleAudioEngine::sharedEngine()->end();
 	SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 
@@ -380,6 +382,7 @@ void StartMenu::onEnter()
 
 void StartMenu::onExit()
 {
+	setKeypadEnabled(false);
 	Layer::onExit();
 	// Keep audio engine alive across scene transitions (e.g. Credits),
 	// otherwise newly started BGM can be cut off when StartMenu exits.
@@ -675,23 +678,70 @@ void StartMenu::scrollMenu(int posY)
 
 void StartMenu::keyBackClicked()
 {
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+	// Back saat dialog sudah tampil = batal. Saat dialog HardCore tampil, Back diabaikan.
+	if (exitLayer)
+	{
+		closeExitDialog();
+		return;
+	}
+	if (hardCoreLayer)
+		return;
+	showExitDialog();
+}
 
-	// JniMethodInfo minfo;
-	// bool isHave = JniHelper::getStaticMethodInfo(minfo, "net/zakume/game/DialogUtils", "showTipDialog", "(Ljava/lang/String;Ljava/lang/String;)V");
+void StartMenu::showExitDialog()
+{
+	if (exitLayer)
+		return;
 
-	// if (isHave)
-	// {
-	// 	jstring jTitle = minfo.env->NewStringUTF("Exit Game");
-	// 	jstring jMsg = minfo.env->NewStringUTF("Do you really want to exit?");
-	// 	minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jTitle, jMsg);
-	// 	minfo.env->DeleteLocalRef(jTitle);
-	// 	minfo.env->DeleteLocalRef(jMsg);
-	// }
-#else
+	SimpleAudioEngine::sharedEngine()->playEffect("Audio/Menu/cancel.ogg");
+	exitLayer = Layer::create();
+
+	Sprite *confirm_bg = Sprite::createWithSpriteFrameName("confirm_bg.png");
+	confirm_bg->setPosition(Vec2(winSize.width / 2, winSize.height / 2));
+
+	auto title = CCLabelTTF::create("Exit Game", "Fonts/Roboto-Medium.ttf", 16);
+	title->setPosition(Vec2(winSize.width / 2, winSize.height / 2 + 38));
+
+	auto text = CCLabelTTF::create("Do you really want to exit?", "Fonts/Roboto-Medium.ttf", 12);
+	text->setPosition(Vec2(winSize.width / 2, winSize.height / 2 + 8));
+
+	MenuItem *yes_btn = MenuItemSprite::create(Sprite::createWithSpriteFrameName("yes_btn1.png"), Sprite::createWithSpriteFrameName("yes_btn2.png"), this, menu_selector(StartMenu::onExitYes));
+	MenuItem *no_btn = MenuItemSprite::create(Sprite::createWithSpriteFrameName("no_btn1.png"), Sprite::createWithSpriteFrameName("no_btn2.png"), this, menu_selector(StartMenu::onExitNo));
+
+	Menu *confirm_menu = Menu::create(yes_btn, no_btn, nullptr);
+	confirm_menu->alignItemsHorizontallyWithPadding(24);
+	confirm_menu->setPosition(Vec2(winSize.width / 2, winSize.height / 2 - 30));
+
+	exitLayer->addChild(confirm_bg, 600);
+	exitLayer->addChild(confirm_menu, 650);
+	exitLayer->addChild(title, 650);
+	exitLayer->addChild(text, 650);
+	addChild(exitLayer, 710);
+}
+
+void StartMenu::closeExitDialog()
+{
+	if (exitLayer)
+	{
+		exitLayer->removeAllChildren();
+		exitLayer->removeFromParent();
+		exitLayer = nullptr;
+	}
+}
+
+void StartMenu::onExitYes(Ref *sender)
+{
 	Director::sharedDirector()->end();
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
 	exit(0);
 #endif
+}
+
+void StartMenu::onExitNo(Ref *sender)
+{
+	SimpleAudioEngine::sharedEngine()->playEffect("Audio/Menu/cancel.ogg");
+	closeExitDialog();
 }
 
 void StartMenu::setCheats(int cheats)
@@ -701,5 +751,5 @@ void StartMenu::setCheats(int cheats)
 
 void StartMenu::onExitCallBack()
 {
-	keyBackClicked();
+	showExitDialog();
 }

@@ -84,6 +84,13 @@ public:
 
 	void keyBackClicked();
 
+	// Dialog konfirmasi keluar (native Cocos2d-x, tanpa Java)
+	Layer *exitLayer;
+	void showExitDialog();
+	void closeExitDialog();
+	void onExitYes(Ref *sender);
+	void onExitNo(Ref *sender);
+
 	void setCheats(int cheats);
 
 	static const int _pos01 = 48;
