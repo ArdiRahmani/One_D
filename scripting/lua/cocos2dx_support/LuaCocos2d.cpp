@@ -103,6 +103,7 @@ using namespace CocosDenshion;
 #include "PauseLayer.h"
 #include "SelectLayer.h"
 #include "StartMenu.h"
+#include "UI/GameModeLayer.h"
 
 /* function to release collected object via destructor */
 #ifdef __cplusplus
@@ -584,6 +585,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"CCLayerGradient");
  tolua_usertype(tolua_S,"CCStopGrid");
  tolua_usertype(tolua_S,"StartMenu");
+ tolua_usertype(tolua_S,"GameModeLayer");
  tolua_usertype(tolua_S,"CCTMXMapInfo");
  tolua_usertype(tolua_S,"CCTableViewCell");
  tolua_usertype(tolua_S,"CCLayerColor");
@@ -67004,6 +67006,150 @@ static int tolua_Cocos2d_StartMenu_setCheats00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: create of class  GameModeLayer */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_create00
+static int tolua_Cocos2d_GameModeLayer_create00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"GameModeLayer",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   GameModeLayer* tolua_ret = (GameModeLayer*)  GameModeLayer::create();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"GameModeLayer");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'create'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getModeCount of class  GameModeLayer */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_getModeCount00
+static int tolua_Cocos2d_GameModeLayer_getModeCount00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"GameModeLayer",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   int tolua_ret = (int)  GameModeLayer::getModeCount();
+   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getModeCount'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getModeImage of class  GameModeLayer */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_getModeImage00
+static int tolua_Cocos2d_GameModeLayer_getModeImage00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"GameModeLayer",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  int mode = ((int)  tolua_tonumber(tolua_S,2,0));
+  {
+   const char* tolua_ret = (const char*)  GameModeLayer::getModeImage(mode);
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getModeImage'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: startMode of class  GameModeLayer */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_startMode00
+static int tolua_Cocos2d_GameModeLayer_startMode00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"GameModeLayer",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  int mode = ((int)  tolua_tonumber(tolua_S,2,0));
+  {
+   GameModeLayer::startMode(mode);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'startMode'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setCheats of class  GameModeLayer */
+#ifndef TOLUA_DISABLE_tolua_Cocos2d_GameModeLayer_setCheats00
+static int tolua_Cocos2d_GameModeLayer_setCheats00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"GameModeLayer",0,&tolua_err) ||
+     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  int cheats = ((int)  tolua_tonumber(tolua_S,2,0));
+  {
+   GameModeLayer::setCheats(cheats);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setCheats'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: create of class  LoadLayer */
 #ifndef TOLUA_DISABLE_tolua_Cocos2d_LoadLayer_create00
 static int tolua_Cocos2d_LoadLayer_create00(lua_State* tolua_S)
@@ -72067,6 +72213,14 @@ TOLUA_API int tolua_Cocos2d_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"StartMenu");
    tolua_function(tolua_S,"create",tolua_Cocos2d_StartMenu_create00);
    tolua_function(tolua_S,"setCheats",tolua_Cocos2d_StartMenu_setCheats00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"GameModeLayer","GameModeLayer","CCLayer",NULL);
+  tolua_beginmodule(tolua_S,"GameModeLayer");
+   tolua_function(tolua_S,"create",tolua_Cocos2d_GameModeLayer_create00);
+   tolua_function(tolua_S,"getModeCount",tolua_Cocos2d_GameModeLayer_getModeCount00);
+   tolua_function(tolua_S,"getModeImage",tolua_Cocos2d_GameModeLayer_getModeImage00);
+   tolua_function(tolua_S,"startMode",tolua_Cocos2d_GameModeLayer_startMode00);
+   tolua_function(tolua_S,"setCheats",tolua_Cocos2d_GameModeLayer_setCheats00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"LoadLayer","LoadLayer","CCLayer",NULL);
   tolua_beginmodule(tolua_S,"LoadLayer");
