@@ -107,7 +107,7 @@ void GameOver::listResult()
 	half->setAnchorPoint(Vec2(0, 0));
 	half->setPosition(Vec2(
 		winSize.width / 2 - half->getContentSize().width * halfScale / 2,
-		bgBottom + 38 // naik supaya ada ruang untuk gambar Defeat di bawahnya
+		bgBottom + 5 // naik supaya ada ruang untuk gambar Defeat di bawahnya
 	));
 	addChild(half, 5);
 
@@ -421,7 +421,7 @@ void GameOver::listResult()
 		recordSprite->setScale(rankScale);
 		recordSprite->setPosition(Vec2(
 			winSize.width / 2 - recordSprite->getContentSize().width * rankScale / 2,
-			bgBottom + 2
+			bgBottom + 5
 		));
 		addChild(recordSprite, 7);
 

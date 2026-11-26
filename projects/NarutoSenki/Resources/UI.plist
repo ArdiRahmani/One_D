@@ -1772,7 +1772,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>HanET_skill1.png</key>
+    <key>Han_skill1.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -1789,7 +1789,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>HanET_skill2.png</key>
+    <key>Han_skill2.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -1806,7 +1806,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>HanET_skill3.png</key>
+    <key>Han_skill3.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -1823,7 +1823,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>HanET_skill4.png</key>
+    <key>Han_skill4.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -1840,7 +1840,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>HanET_skill5.png</key>
+    <key>Han_skill5.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -8555,6 +8555,74 @@
       <key>textureRotated</key>
       <false/>
     </dict>
+    <key>TobiMasked_skill1.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{44,44}</string>
+      <key>spriteSourceSize</key>
+      <string>{44,44}</string>
+      <key>textureRect</key>
+      <string>{{1023,322},{44,44}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
+    <key>TobiMasked_skill2.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{44,44}</string>
+      <key>spriteSourceSize</key>
+      <string>{44,44}</string>
+      <key>textureRect</key>
+      <string>{{1048,276},{44,44}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
+    <key>TobiMasked_skill3.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{44,44}</string>
+      <key>spriteSourceSize</key>
+      <string>{44,44}</string>
+      <key>textureRect</key>
+      <string>{{1066,184},{44,44}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
+    <key>TobiMasked_skill4.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{44,44}</string>
+      <key>spriteSourceSize</key>
+      <string>{44,44}</string>
+      <key>textureRect</key>
+      <string>{{1066,230},{44,44}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
     <key>Tobi_skill1.png</key>
     <dict>
       <key>aliases</key>
@@ -8624,6 +8692,23 @@
       <false/>
     </dict>
     <key>Tobi_skill5.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{44,44}</string>
+      <key>spriteSourceSize</key>
+      <string>{44,44}</string>
+      <key>textureRect</key>
+      <string>{{1071,92},{44,44}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
+    <key>TobiMasked_skill5.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -9439,6 +9524,23 @@
       <key>textureRotated</key>
       <false/>
     </dict>
+    <key>Zabuza_skill1.png</key>
+    <dict>
+      <key>aliases</key>
+      <array/>
+      <key>anchor</key>
+      <string>{0.5,0.5}</string>
+      <key>spriteOffset</key>
+      <string>{0,0}</string>
+      <key>spriteSize</key>
+      <string>{44,44}</string>
+      <key>spriteSourceSize</key>
+      <string>{44,44}</string>
+      <key>textureRect</key>
+      <string>{{1104,552},{44,44}}</string>
+      <key>textureRotated</key>
+      <false/>
+    </dict>
     <key>Zabuza_skill2.png</key>
     <dict>
       <key>aliases</key>
@@ -9507,7 +9609,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>ZabuzaRvp_skill1.png</key>
+    <key>ZabuzaET_skill1.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -9524,7 +9626,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>ZabuzaRvp_skill2.png</key>
+    <key>ZabuzaET_skill2.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -9541,7 +9643,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>ZabuzaRvp_skill3.png</key>
+    <key>ZabuzaET_skill3.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -9558,7 +9660,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>ZabuzaRvp_skill4.png</key>
+    <key>ZabuzaET_skill4.png</key>
     <dict>
       <key>aliases</key>
       <array/>
@@ -9575,7 +9677,7 @@
       <key>textureRotated</key>
       <false/>
     </dict>
-    <key>ZabuzaRvp_skill5.png</key>
+    <key>ZabuzaET_skill5.png</key>
     <dict>
       <key>aliases</key>
       <array/>
