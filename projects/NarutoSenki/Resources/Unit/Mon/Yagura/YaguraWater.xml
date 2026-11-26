@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action value="Idle">
+	 <date>
+	    <p type="attackType">InkBird</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">224</p>
+      </date>
+      <frame>
+        <f>V3_01</f>
+      </frame>
+    </action>
+   
+    <action value="Walk">
+      <frame>
+       <f>V3_01</f>
+      </frame>
+    </action>
+   
+    <action value="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action value="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action value="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Dead">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="nAttack">
+      <date>
+	    <p type="attackType">oAttack</p>
+        <p type="attackValue">140</p>
+        <p type="attackRangeX">-15</p>
+        <p type="attackRangeY">32</p>
+        <p type="cd">0</p>
+      </date>
+      <frame>
+          <f>V3_01</f>
+          <f>V3_02</f>
+          <e type="setSound">Audio/Yagura/Yagura_SFX3_4.ogg</e>
+          <f>V3_03</f>
+          <e type="setAttackBox">a_hit</e>
+          <f>V3_04</f>
+          <f>V3_05</f>
+          <e type="setAttackBox">a_hit</e>
+          <e type="setSound">Audio/Yagura/Yagura_SFX3_4B.ogg</e>
+          <f>V3_06</f>
+          <f>V3_07</f>
+          <e type="setAttackBox">a_hit</e>
+          <f>V3_08</f>
+          <e type="setAttackBox">a_hit</e>
+          <e type="setSound">Audio/Yagura/Yagura_SFX3_4C.ogg</e>
+          <f>V3_09</f>
+          <f>V3_10</f>
+          <f>V3_11</f>
+          <f>V3_12</f>
+          <f>V3_13</f>
+          <f>V3_14</f>
+        <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>

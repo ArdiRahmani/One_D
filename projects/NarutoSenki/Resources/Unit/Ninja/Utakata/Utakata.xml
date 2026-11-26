@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Utakata</p>
+        <p type="attackValue">5000</p>
+        <p type="attackRangeX">63</p>
+        <p type="attackRangeY">78</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>Utakata_Idle_001</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>Utakata_Walk_01</f>
+        <f>Utakata_Walk_02</f>
+        <f>Utakata_Walk_03</f>
+        <f>Utakata_Walk_04</f>
+        <f>Utakata_Walk_05</f>
+        <f>Utakata_Walk_06</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+        <e type="setMove">32</e>
+        <f>Utakata_Hurt_01</f>
+        <f>Utakata_Hurt_02</f>
+        <e type="setSound">Audio/Utakata/Utakata_hurt.ogg</e>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+         <f>Utakata_AirHurt_01</f>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+          <f>Utakata_KnockDown_001</f>
+           <e type="setDelay">10</e>
+          <f>Utakata_KnockDown_002</f>
+           <e type="setDelay">60</e>
+          <f>Utakata_KnockDown_003</f>
+          <f>Utakata_KnockDown_004</f>
+          <f>Utakata_KnockDown_005</f>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+          <f>Utakata_Float_001</f>
+          <e type="setDelay">10</e>
+          <f>Utakata_Float_002</f>
+          <e type="setDelay">10</e>
+          <f>Utakata_Float_003</f>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+          <f>Utakata_KnockDown_001</f>
+          <f>Utakata_KnockDown_002</f>
+          <e type="setSound">Audio/Utakata/Utakata_dead.ogg</e>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">80</p>
+        <p type="attackRangeX">20</p>
+        <p type="attackRangeY">20</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+<f>Utakata_NAttack_001</f>
+<f>Utakata_NAttack_002</f>
+<f>Utakata_NAttack_003</f>
+<f>Utakata_NAttack_004</f>
+<e type="setBullet">Utakata/Utakata_BalonKecil01</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+<f>Utakata_NAttack_001</f>
+<f>Utakata_NAttack_002</f>
+<f>Utakata_NAttack_003</f>
+<f>Utakata_NAttack_004</f>
+<e type="setMove">-40</e>
+<e type="setBullet">Utakata/Utakata_BalonKecil02</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+<f>Utakata_NAttack_005</f>
+<e type="setMove">-20</e>
+<f>Utakata_NAttack_006</f>
+<e type="setMove">-10</e>
+<e type="setBullet">Utakata/Utakata_BalonKecil03</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+<f>Utakata_NAttack_007</f>
+<f>Utakata_NAttack_008</f>
+<f>Utakata_NAttack_009</f>
+<f>Utakata_NAttack_010</f>
+<e type="setBullet">Utakata/Utakata_MultiBalonKecil</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+<f>Utakata_NAttack_011</f>
+<e type="setDelay">40</e>
+<f>Utakata_NAttack_012</f>
+<e type="setAttackBox">n_hit</e>
+<e type="setBullet">Utakata/Utakata_BalonKecil03</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+<f>Utakata_NAttack_013</f>
+<e type="setAttackBox">n_hit</e>
+<f>Utakata_NAttack_014</f>
+<e type="setAttackBox">n_hit</e>
+<e type="setBullet">Utakata/Utakata_BalonKecil02</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+<f>Utakata_NAttack_015</f>
+<e type="setAttackBox">n_hit</e>
+<f>Utakata_NAttack_016</f>
+<e type="setAttackBox">n_hit</e>
+<f>Utakata_NAttack_017</f>
+<e type="setAttackBox">n_hit</e>
+<e type="setBullet">Utakata/Utakata_BalonKecil01</e>
+<e type="setSound">Audio/Utakata/MiniGelembung.ogg</e>
+      </frame>
+    </action>
+
+    <action name="skill01">
+        <data>
+          <p type="attackType">Summon</p>
+          <p type="attackValue">0</p>
+          <p type="attackRangeX">0</p>
+          <p type="attackRangeY">0</p>
+          <p type="cd">10</p>
+        </data>
+        <frame>
+<e type="setSound">Audio/Utakata/Utakata02.ogg</e>
+<f>Utakata_Skill03_001</f>
+<f>Utakata_Skill03_002</f>
+<f>Utakata_Skill03_003</f>
+<f>Utakata_Skill03_004</f>
+<f>Utakata_Skill03_005</f>
+<e type="setMon">Utakata_Balon</e>
+<f>Utakata_NAttack_004</f>
+<e type="setDelay">15</e>
+        </frame>
+    </action>
+    
+     
+     <action name="skill02">
+     <data>
+	   <p type="attackType">aAttack</p>
+       <p type="attackValue">300</p>
+       <p type="attackRangeX">40</p>
+       <p type="attackRangeY">40</p>
+       <p type="cd">15</p>
+     </data>
+     <frame>
+<e type="setSound">Audio/Utakata/Utakata01.ogg</e>
+<f>Utakata_Skill01_001</f>
+<f>Utakata_Skill01_002</f>
+<f>Utakata_Skill01_003</f>
+<f>Utakata_Skill01_004</f>
+<f>Utakata_Skill01_005</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_006</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_007</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_008</f>
+<e type="setSound">Audio/Utakata/Water02.ogg</e>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_009</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_010</f>
+<e type="setAttackBox">c_hit</e> 
+<f>Utakata_Skill01_011</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_012</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill01_013</f>
+<e type="setSound">Audio/Utakata/Utakata01-02.ogg</e>
+<e type="setAttackBox">ct_hit</e>
+<f>Utakata_Skill01_014</f>
+<e type="setAttackBox">ct_hit</e>
+<f>Utakata_Skill01_015</f>
+<e type="setAttackBox">ct_hit</e>
+<f>Utakata_Skill01_016</f>
+<e type="setSound">Audio/Utakata/DuarBalon.ogg</e>
+<e type="setSound">Audio/Utakata/Water03.ogg</e>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill01_017</f>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill01_018</f>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill01_019</f>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill01_020</f>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill01_021</f>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill01_022</f>
+     </frame>
+   </action>
+    
+    <action name="skill03">
+        <data>
+	    	<p type="attackType">cBuff</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">20</p>
+        </data>
+        <frame>
+<e type="setSound">Audio/Utakata/Utakata03.ogg</e>
+<f>Utakata_Skill03_001</f>
+<f>Utakata_Skill03_002</f>
+<f>Utakata_Skill03_003</f>
+<f>Utakata_Skill03_004</f>
+<f>Utakata_Skill03_005</f>
+<f>Utakata_Skill03_006</f>
+<f>Utakata_Skill03_007</f>
+<f>Utakata_Skill03_008</f>
+<f>Utakata_Skill03_009</f>
+<e type="setBuff">17</e>
+       </frame>
+    </action>
+    
+    
+   <action name="skill04">
+     <data>
+        <p type="attackType">aAttack</p>
+        <p type="attackValue">450</p>
+        <p type="attackRangeX">50</p>
+        <p type="attackRangeY">10</p>
+        <p type="cd">1</p>
+     </data>
+     <frame>
+<e type="setSound">Audio/Utakata/Water01.ogg</e>
+<f>Utakata_Skill04_001</f>
+<e type="setSound">Audio/Utakata/Suiryudan.ogg</e>
+<f>Utakata_Skill04_002</f>
+<f>Utakata_Skill04_003</f>
+<f>Utakata_Skill04_004</f>
+<e type="setSound">Audio/Utakata/Utakata04.ogg</e>
+<f>Utakata_Skill04_005</f>
+<f>Utakata_Skill04_006</f>
+<f>Utakata_Skill04_007</f>
+<f>Utakata_Skill04_008</f>
+<f>Utakata_Skill04_009</f>
+<e type="setDelay">-2</e>
+<f>Utakata_Skill04_010</f>
+<e type="setDelay">-2</e>
+<f>Utakata_Skill04_011</f>
+<e type="setDelay">-2</e>
+<f>Utakata_Skill04_012</f>
+<e type="setDelay">-2</e>
+<f>Utakata_Skill04_013</f>
+<e type="setDelay">-2</e>
+<f>Utakata_Skill04_014</f>
+<e type="setDelay">-4</e>
+<f>Utakata_Skill04_015</f>
+<e type="setDelay">-6</e>
+<e type="setAttackBox">a_hit</e>
+<f>Utakata_Skill04_016</f>
+<e type="setSound">Audio/Utakata/Suiryudan2.ogg</e>
+<e type="setDelay">-6</e>
+<e type="setAttackBox">a_hit</e>
+<f>Utakata_Skill04_017</f>
+<e type="setDelay">-6</e>
+<e type="setAttackBox">a_hit</e>
+<f>Utakata_Skill04_018</f>
+<e type="setSound">Audio/Utakata/Water02.ogg</e>
+<e type="setSound">Audio/Utakata/Duar Balon.ogg</e>
+<e type="setDelay">-1</e>
+<e type="setAttackBox">b_hit</e>
+<f>Utakata_Skill04_019</f>
+<e type="setDelay">-1</e>
+<e type="setAttackBox">b_hit</e>
+<f>Utakata_Skill04_020</f>
+<e type="setDelay">-1</e>
+<e type="setAttackBox">c_hit</e> 
+<f>Utakata_Skill04_021</f>
+<e type="setDelay">-1</e>
+<e type="setAttackBox">c_hit</e> 
+<f>Utakata_Skill04_022</f>
+<e type="setDelay">-1</e>
+<e type="setAttackBox">c_hit</e> 
+<f>Utakata_Skill04_023</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setDelay">-1</e>
+<e type="setAttackBox">ac_hit</e> 
+<f>Utakata_Skill04_024</f>
+<e type="setAttackBox">ac_hit</e> 
+<f>Utakata_Skill04_025</f>
+<e type="setAttackBox">ac_hit</e> 
+<f>Utakata_Skill04_026</f>
+<e type="setAttackBox">ac_hit</e> 
+<f>Utakata_Skill04_027</f>
+     </frame>
+   </action>
+   
+   
+    <action name="skill05">
+     <data>
+       <p type="attackType">aAttack</p>
+       <p type="attackValue">500</p>
+       <p type="attackRangeX">50</p>
+       <p type="attackRangeY">48</p>
+       <p type="cd">1</p>
+     </data>
+     <frame>
+<e type="setSound">Audio/Utakata/Utakata05.ogg</e>
+<f>Utakata_Skill05_001</f>
+<f>Utakata_Skill05_002</f>
+<e type="setCommand">setInvincible</e>
+<f>Utakata_Skill05_003</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill05_004</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill05_005</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill05_006</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill05_007</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill05_008</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill05_009</f>
+<e type="setOugis">10</e>
+<f>Utakata_Skill05_010</f>
+<e type="setSound">Audio/Utakata/BijjuDamma.ogg</e>
+<f>Utakata_Skill05_011</f>
+<f>Utakata_Skill05_012</f>
+<f>Utakata_Skill05_013</f>
+<f>Utakata_Skill05_014</f>
+<f>Utakata_Skill05_015</f>
+<f>Utakata_Skill05_016</f>
+<f>Utakata_Skill05_017</f>
+<f>Utakata_Skill05_018</f>
+<f>Utakata_Skill05_019</f>
+<e type="setSound">Audio/Utakata/Tembak.ogg</e>
+<f>Utakata_Skill05_020</f>
+<f>Utakata_Skill05_021</f>
+<f>Utakata_Skill05_022</f>
+<e type="setMon">Utakata_Bom</e>
+<e type="setDelay">100</e>
+<e type="setSound">Audio/Utakata/Duar.ogg</e>
+<f>Utakata_Skill05_023</f>
+<f>Utakata_Skill05_024</f>
+<f>Utakata_Skill05_025</f>
+<f>Utakata_Skill05_026</f>
+<f>Utakata_Skill05_027</f>
+<f>Utakata_Skill05_028</f>
+<f>Utakata_Skill05_029</f>
+<e type="setCommand">reInvincible</e>
+<f>Utakata_Idle_001</f>
+<e type="setDelay">5</e>
+     </frame>
+   </action>
+   
+    <action name="skill06">
+        <frame></frame>
+    </action>
+    <action name="skill07">
+        <frame></frame>
+    </action>
+    <action name="skill08">
+        <frame></frame>
+    </action>
+      <action name="skill09">
+        <frame></frame>
+    </action>
+    <action name="skill10">      
+        <data>
+            <p type="attackType">idle</p>
+            <p type="attackValue">660</p>
+            <p type="attackRangeX">64</p>
+            <p type="attackRangeY">32</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+<f>Utakata_Skill03_IdleWalk_001</f>
+<e type="setDelay">-7</e>  
+<f>Utakata_Skill03_IdleWalk_002</f>
+<e type="setDelay">-7</e>
+<f>Utakata_Skill03_IdleWalk_003</f>
+<e type="setDelay">-7</e>
+<f>Utakata_Skill03_IdleWalk_004</f>
+<e type="setDelay">-7</e>
+        </frame>  
+    </action>
+
+    <action name="skill11">      
+        <data>
+            <p type="attackType">walk</p>
+            <p type="attackValue">660</p>
+            <p type="attackRangeX">64</p>
+            <p type="attackRangeY">32</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+            <f>Utakata_Skill03_IdleWalk_001</f>
+<e type="setDelay">3</e>
+<f>Utakata_Skill03_IdleWalk_002</f>
+<e type="setDelay">3</e>
+<f>Utakata_Skill03_IdleWalk_003</f>
+<e type="setDelay">3</e>
+<f>Utakata_Skill03_IdleWalk_004</f>
+<e type="setDelay">3</e>
+        </frame>
+    </action> 
+
+      <action name="skill12">
+           <data>
+            <p type="attackType">aAttack</p>
+            <p type="attackValue">200</p>
+            <p type="attackRangeX">128</p>
+            <p type="attackRangeY">48</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+<e type="setSound">Audio/Utakata/Utakata03-02.ogg</e>
+<f>Utakata_Skill03_End_001</f>
+<e type="setSound">Audio/Utakata/DuarBalon.ogg</e>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill03_End_002</f>
+<e type="setAttackBox">f_hit</e>
+<e type="setActionResume">20</e>
+<f>Utakata_Skill03_End_003</f>
+<e type="setAttackBox">b_hit</e>
+<f>Utakata_Skill03_End_004</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill03_End_005</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill03_End_006</f>
+<e type="setAttackBox">c_hit</e>
+ </frame>
+    </action>   
+     
+   <action name="spawn">
+           <data>
+            <p type="attackType">aAttack</p>
+            <p type="attackValue">200</p>
+            <p type="attackRangeX">128</p>
+            <p type="attackRangeY">48</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+<e type="setSound">Audio/Utakata/Utakata03-02.ogg</e>
+<f>Utakata_Skill03_End_001</f>
+<e type="setSound">Audio/Utakata/DuarBalon.ogg</e>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill03_End_002</f>
+<e type="setAttackBox">f_hit</e>
+<f>Utakata_Skill03_End_003</f>
+<e type="setAttackBox">b_hit</e>
+<f>Utakata_Skill03_End_004</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill03_End_005</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Skill03_End_006</f>
+<e type="setAttackBox">c_hit</e>
+<e type="setActionResume">20</e>
+
+     </frame>
+    </action>      
+</unit>

@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">SageHashirama</p>
+        <p type="attackValue">5000</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">80</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>SageHashirama_Idle_01</f>
+      </frame>
+    </action>
+
+    <action name="Walk">
+      <frame>
+        <f>SageHashirama_Walk_01</f>
+        <f>SageHashirama_Walk_02</f>
+        <f>SageHashirama_Walk_03</f>
+        <f>SageHashirama_Walk_04</f>
+        <f>SageHashirama_Walk_05</f>
+        <f>SageHashirama_Walk_06</f>
+      </frame>
+    </action>
+
+    <action name="Hurt">
+      <frame>
+        <e type="setMove">32</e>
+        <f>SageHashirama_Hurt_01</f>
+        <f>SageHashirama_Hurt_02</f>
+        <e type="setSound">Audio/SageHashirama/受伤.ogg</e>
+      </frame>
+    </action>
+
+   <action name="AirHurt">
+     <frame>
+         <f>SageHashirama_AirHurt_01</f>
+     </frame>
+   </action>
+
+   <action name="KnockDown">
+      <frame>
+        <f>SageHashirama_KnockDown_01</f>
+        <f>SageHashirama_KnockDown_02</f>
+        <e type="setDelay">70</e>
+        <f>SageHashirama_KnockDown_03</f>
+        <f>SageHashirama_KnockDown_04</f>
+      </frame>
+    </action>
+
+    <action name="Float">
+      <frame>
+          <f>SageHashirama_Float_01</f>
+          <f>SageHashirama_Float_02</f>
+          <f>SageHashirama_Float_03</f>
+      </frame>
+    </action>
+
+    <action name="Dead">
+      <frame>
+          <f>SageHashirama_KnockDown_01</f>
+          <f>SageHashirama_KnockDown_02</f>
+          <e type="setSound">Audio/SageHashirama/H_Dead.ogg</e>
+      </frame>
+    </action>
+
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">100</p>
+        <p type="attackRangeX">16</p>
+        <p type="attackRangeY">16</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+        <f>SageHashirama_NAttack_01</f>
+        <f>SageHashirama_NAttack_02</f>
+        <f>SageHashirama_NAttack_03</f>
+        <e type="setSound">Audio/Effect/combo1.ogg</e>
+        <e type="setAttackBox">n_hit</e>
+        <f>SageHashirama_NAttack_04</f>
+        <e type="setMove">8</e>
+        <f>SageHashirama_NAttack_05</f>
+        <f>SageHashirama_NAttack_06</f>
+        <e type="setAttackBox">n_hit</e>
+        <e type="setSound">Audio/Effect/combo2.ogg</e>
+        <f>SageHashirama_NAttack_07</f>
+        <e type="setSound">Audio/SageHashirama/H_NAttack.ogg</e>
+        <e type="setDelay">10</e>
+        <e type="setMove">16</e>
+        <f>SageHashirama_NAttack_08</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+        <e type="setAttackBox">l_hit</e>
+        <f>SageHashirama_NAttack_09</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+        <e type="setAttackBox">l_hit</e>
+        <f>SageHashirama_NAttack_10</f>
+        <e type="setSound">Audio/Effect/combo3.ogg</e>
+        <e type="setAttackBox">l_hit</e>
+        <f>SageHashirama_NAttack_11</f>
+        <e type="setDelay">10</e>
+      </frame>
+    </action>
+
+   <action name="skill01">
+     <data>
+	   <p type="attackType">GroupHeal</p>
+       <p type="attackValue">0</p>
+       <p type="attackRangeX">460</p>
+       <p type="attackRangeY">16</p>
+       <p type="cd">10</p>
+     </data>
+     <frame>
+        <f>SageHashirama_Skill01_06</f>
+        <e type="setSound">Audio/SageHashirama/sagehashirama_skill1.ogg</e>
+       <f>SageHashirama_Skill01_07</f>
+        <e type="setMon">Hayashi</e>
+       <f>SageHashirama_Skill01_08</f>
+        <e type="setDelay">20</e>
+        <e type="setAttackBox">f_hit</e>
+        <e type="setBuff">600</e>
+     </frame>
+   </action>
+
+    <action name="skill02">
+        <data>
+		    <p type="attackType">cAttack</p>
+            <p type="attackValue">900</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">48</p>
+            <p type="cd">15</p>
+        </data>
+        <frame>
+            <e type="setSound">Audio/SageHashirama/yonjinmon.ogg</e>
+            <f>SageHashirama_Skill02_01</f>
+            <f>SageHashirama_Skill02_02</f>
+        <e type="setCommand">setInvincible</e>
+            <f>SageHashirama_Skill02_03</f>
+            <f>SageHashirama_Skill02_04</f>
+         <e type="setSound">Audio/Orochimaru/Orochimaru_skill5_1.ogg</e>
+        <e type="setAttackBox">b_hit</e>
+            <f>SageHashirama_Skill02_05</f>
+            <f>SageHashirama_Skill02_06</f>
+            <f>SageHashirama_Skill02_07</f>
+            <f>SageHashirama_Skill02_08</f>
+         <e type="setSound">Audio/Orochimaru/Orochimaru_skill5_1.ogg</e>
+        <e type="setAttackBox">b_hit</e>
+            <f>SageHashirama_Skill02_09</f>
+            <f>SageHashirama_Skill02_10</f>
+            <f>SageHashirama_Skill02_11</f>
+            <f>SageHashirama_Skill02_12</f>
+         <e type="setSound">Audio/Orochimaru/Orochimaru_skill5_1.ogg</e>
+        <e type="setAttackBox">b_hit</e>
+            <f>SageHashirama_Skill02_13</f>
+            <f>SageHashirama_Skill02_14</f>
+            <f>SageHashirama_Skill02_15</f>
+            <f>SageHashirama_Skill02_16</f>
+            <f>SageHashirama_Skill02_17</f>
+         <e type="setCommand">reInvincible</e>
+        </frame>
+    </action>
+
+    <action name="skill03">
+        <data>
+			<p type="attackType">hamBuff</p>
+            <p type="attackValue">1500</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">15</p>
+            <p type="cd">25</p>
+        </data>
+        <frame>
+         <e type="setSound">Audio/Effect/ougis.ogg</e>
+        <e type="setSound">Audio/SageHashirama/jukaikoutan.ogg</e>
+        <f>SageHashirama_Skill01_06</f>
+       <f>SageHashirama_Skill01_07</f>
+       <f>SageHashirama_Skill01_09</f>
+        <e type="setDelay">10</e>
+       <f>SageHashirama_Skill01_08</f>
+        <e type="setDelay">10</e>
+       <f>SageHashirama_Skill01_10</f>
+        <e type="setBuff">260</e>
+        <e type="setDelay">10</e>
+        <f>SageHashirama_Skill01_03</f>
+        <e type="setSound">Audio/Effect/pup.ogg</e>
+        <f>SageHashirama_Skill01_04</f>
+            <e type="setMon">FakeSageHashirama</e>
+        <e type="setDelay">40</e>
+        </frame>
+    </action>
+
+   <action name="skill04">
+     <data>
+       <p type="attackType">cAttack</p>
+       <p type="attackValue">500</p>
+       <p type="attackRangeX">692</p>
+       <p type="attackRangeY">36</p>
+       <p type="cd">1</p>
+     </data>
+     <frame>
+         <e type="setSound">Audio/Effect/ougis.ogg</e>
+        <e type="setCommand">setInvincible</e>
+        <f>SageHashirama_Skill01_06</f>
+         <e type="setSound">Audio/SageHashirama/mokuryu.ogg</e>
+       <f>SageHashirama_Skill01_07</f>
+       <f>SageHashirama_Skill01_08</f>
+        <e type="setDelay">10</e>
+        <f>SageHashirama_Skill04_01</f>
+        <e type="setSound">Audio/Effect/poof2.ogg</e>
+        <f>SageHashirama_Skill04_02</f>
+        <f>SageHashirama_Skill04_03</f>
+        <f>SageHashirama_Skill04_04</f>
+        <f>SageHashirama_Skill04_05</f>
+        <e type="setSound">Audio/Effect/地.ogg</e>
+        <f>SageHashirama_Skill04_06</f>
+        <f>SageHashirama_Skill04_07</f>
+        <f>SageHashirama_Skill04_08</f>
+        <e type="setAttackBox">b_hit</e>
+        <e type="setSound">Audio/Effect/damage_k.ogg</e>
+        <f>SageHashirama_Skill04_09</f>
+        <f>SageHashirama_Skill04_10</f>
+        <e type="setAttackBox">b_hit</e>
+        <f>SageHashirama_Skill04_11</f>
+        <f>SageHashirama_Skill04_12</f>
+        <e type="setAttackBox">b_hit</e>
+        <f>SageHashirama_Skill04_13</f>
+        <f>SageHashirama_Skill04_14</f>
+        <f>SageHashirama_Skill04_15</f>
+        <f>SageHashirama_Skill04_16</f>
+        <f>SageHashirama_Skill04_17</f>
+        <e type="setSound">Audio/SageHashirama/H_skill04_02.ogg</e>
+         <e type="setSound">Audio/SageHashirama/dragon.ogg</e>
+        <e type="setSound">Audio/Effect/poof2.ogg</e>
+        <f>SageHashirama_Skill04_18</f>
+        <f>SageHashirama_Skill04_19</f>
+        <f>SageHashirama_Skill04_20</f>
+        <f>SageHashirama_Skill01_06</f>
+       <f>SageHashirama_Skill01_07</f>
+        <e type="setSound">Audio/Effect/地.ogg</e>
+        <f>SageHashirama_Skill04_21</f>
+        <e type="setAttackBox">ac_hit</e>
+        <e type="setSound">Audio/SageHashirama/H_skill05_01SFX.ogg</e>
+        <f>SageHashirama_Skill04_22</f>
+        <e type="setSound">Audio/Effect/damage_h.ogg</e>
+        <f>SageHashirama_Skill04_23</f>
+        <e type="setAttackBox">ac_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <f>SageHashirama_Skill04_24</f>
+        <f>SageHashirama_Skill04_25</f>
+        <e type="setAttackBox">ac_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <f>SageHashirama_Skill04_26</f>
+        <f>SageHashirama_Skill04_27</f>
+        <e type="setAttackBox">ac_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <f>SageHashirama_Skill04_28</f>
+        <e type="setMove">8</e>
+        <f>SageHashirama_Skill04_29</f>
+        <e type="setMove">8</e>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <f>SageHashirama_Skill04_30</f>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">o_hit</e>
+        <e type="setSound">Audio/Effect/damage_l.ogg</e>
+        <e type="setMove">40</e>
+        <f>SageHashirama_Skill04_31</f>
+        <e type="setAttackBox">h_hit</e>
+        <e type="setSound">Audio/Effect/damage_h.ogg</e>
+        <e type="setMove">8</e>
+        <f>SageHashirama_Skill04_32</f>
+        <e type="setMove">8</e>
+        <f>SageHashirama_Skill04_33</f>
+        <e type="setMove">8</e>
+        <f>SageHashirama_Skill04_34</f>
+        <e type="setDelay">20</e>
+         <e type="setCommand">reInvincible</e>
+     </frame>
+   </action>
+
+    <action name="skill05">
+         <data>
+        <p type="attackType">cAttack</p>
+        <p type="attackValue">300</p>
+        <p type="attackRangeX">50</p>
+        <p type="attackRangeY">50</p>
+        <p type="cd">1</p>
+        </data>
+        <frame>
+        <e type="setSound">Audio/Effect/ougis.ogg</e>
+        <e type="setCommand">setInvincible</e>
+        <f>SageHashirama_Skill01_06</f>
+        <e type="setSound">Audio/SageHashirama/H_Senpo.ogg</e>
+       <f>SageHashirama_Skill01_07</f>
+       <f>SageHashirama_Skill01_09</f>
+       <f>SageHashirama_Skill01_10</f>
+        <f>SageHashirama_Skill05_01</f>
+        <e type="setAttackBox">b_hit</e>
+        <f>SageHashirama_Skill05_02</f>
+        <f>SageHashirama_Skill05_03</f>
+        <f>SageHashirama_Skill05_04</f>
+        <e type="setSound">Audio/SageHashirama/H_Mokuton.ogg</e>
+        <f>SageHashirama_Skill05_05</f>
+        <f>SageHashirama_Skill05_06</f>
+        <f>SageHashirama_Skill05_07</f>
+        <f>SageHashirama_Skill05_08</f>
+        <f>SageHashirama_Skill05_09</f>
+            <e type="setOugis">20</e>
+        <f>SageHashirama_Skill05_10</f>
+        <f>SageHashirama_Skill05_11</f>
+        <f>SageHashirama_Skill05_12</f>
+            <e type="setSound">Audio/SageHashirama/jinpachi.ogg</e>
+        <e type="setAttackBox">ac_hit</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_12</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_12</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_12</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_12</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">b_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_12</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_12</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_13</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_14</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_15</f>
+        <e type="setAttackBox">ac_hit</e>
+            <e type="setSound">Audio/SageHashirama/skill05.ogg</e>
+        <f>SageHashirama_Skill05_17</f>
+        <e type="setAttackBox">b_hit</e>
+       <f>SageHashirama_Skill01_10</f>
+        <e type="setDelay">20</e>
+         <e type="setCommand">reInvincible</e>
+        </frame>
+    </action>
+    <action name="skill06">
+        <frame></frame>
+    </action>
+    <action name="skill07">
+        <frame></frame>
+    </action>
+    <action name="skill08">
+        <frame></frame>
+    </action>
+    <action name="skill09">
+        <frame></frame>
+    </action>
+    <action name="skill10">
+        <data>
+            <p type="attackType">aAttack</p>
+            <p type="attackValue">100</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">16</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+
+        </frame>
+    </action>
+    <action name="skill11">
+        <data>
+            <p type="attackType">fly</p>
+            <p type="attackValue">0</p>
+            <p type="attackRangeX">0</p>
+            <p type="attackRangeY">0</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+        </frame>
+    </action>
+
+    <action name="skill12">
+        <data>
+            <p type="attackType">aAttack</p>
+            <p type="attackValue">160</p>
+            <p type="attackRangeX">32</p>
+            <p type="attackRangeY">32</p>
+            <p type="cd">0</p>
+        </data>
+        <frame>
+        </frame>
+    </action>
+
+</unit>
