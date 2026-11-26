@@ -9,7 +9,7 @@
 -- Jenis (tidak peka huruf besar/kecil)  ->  frame bawaan:
 --   rp       {}_rp.png       ikon kecil laporan kill (pembunuh maupun korban)
 --   rpf      {}_rpf.png      NAMA hero di laporan kill. Sekarang digambar sebagai TEKS
---                            (Roboto-Medium putih 42 + glow, lihat createNameGlowLabel di HudLayer.cpp),
+--                            (font / ukuran / warna / glow / buang kata Sage-Rikudo diatur di `rpf.text` di bawah),
 --                            bukan gambar lagi. Teksnya diambil dari nama frame hasil bind / file / frame
 --                            tanpa ".png" dan "_rpf" (bind TobiMasked = 'Tobi' -> tampil "Tobi").
 --                            Skala (defaultScale / scale) tetap berlaku untuk teks.
@@ -61,6 +61,12 @@
 --   Icons.resolve('rpf', 'Madara')                -- 'Obito'
 --   Icons.frame('rpf', 'Madara')                  -- 'Obito_rpf.png' (atau frame sendiri kalau tidak ada)
 --
+-- Teks nama rpf (bisa diubah dari modul Lua lain sebelum match):
+--   Icons.setText({ font = 'Fonts/Foo.ttf', size = 24, color = {255,255,0}, glow = false })
+--   Icons.setStrip({'Sage', 'Rikudo', 'Immortal'})   -- ganti daftar kata yang dibuang
+--   Icons.setName('MadaraRikudo', 'Madara')          -- teks khusus satu unit (nil = hapus)
+--   Icons.name('SageNaruto')                         -- 'Naruto' (teks yang tampil di laporan kill)
+--
 local IconsHook = {}
 
 local config = {
@@ -87,6 +93,26 @@ local config = {
 },
         defaultScale = 0.8,
         scale = {},
+
+        -- Gaya TEKS nama hero di laporan kill (dulu hard-coded di HudLayer.cpp)
+        text = {
+            font = 'Fonts/Roboto-Medium.ttf',   -- ganti font: taruh .ttf di Resources/Fonts lalu tulis path-nya
+            size = 21,
+            color = {255, 255, 255},            -- warna teks {r, g, b}
+            glow = {                            -- glow = false untuk mematikan
+                color = {34, 138, 32},
+                blur = 5,
+                intensity = 0.8,                -- 0..1
+            },
+            -- Kata yang DIBUANG dari nama (peka huruf besar/kecil):
+            --   SageNaruto -> Naruto, SageJiraiya -> Jiraiya, SageKabuto -> Kabuto,
+            --   ObitoRikudo -> Obito, RikudoNaruto -> Naruto
+            strip = {'Sage', 'Rikudo'},
+            -- Teks khusus per unit (mengalahkan semuanya), mis. MadaraRikudo = 'Madara (Rikudo)'
+            names = {
+                -- Madara = 'Uchiha Madara',
+            },
+        },
     },
     CutIn = {
         frame = '{}_CutIn.png',

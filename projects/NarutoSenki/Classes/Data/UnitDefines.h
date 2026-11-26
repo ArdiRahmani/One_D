@@ -773,6 +773,10 @@ namespace AssetRegistry
  * Khusus hero: nama banner kill-streak (DoubleKill, KillingSpree, ..., MonsterKill) dan Tower
  * ditolak dari binding, jadi KillingSpree_rpf.png dkk tidak pernah ikut terganti.
  *
+ * Khusus rpf (nama hero di laporan kill, digambar sebagai TEKS) ada `text` = TextStyle:
+ *   font, size, color, glow (aktif/tidak, warna, blur, intensitas), strip (kata yang dibuang
+ *   dari nama, mis. "Sage" / "Rikudo": SageNaruto -> Naruto), names (unit -> teks tampil).
+ *
  * Satu langkah saja (tidak berantai). Unit yang tidak terdaftar memakai namanya sendiri.
  * Diisi dari Lua lewat tabel global `Icons` (lihat Systems/IconSystem.hpp dan lua/Hook/Icons.lua).
  * Pencarian frame (termasuk fallback bila frame tujuan tidak ada) ada di iconFrameName()
@@ -851,6 +855,31 @@ namespace IconRegistry
 		std::unordered_map<std::string, float> scale;	// unit -> skala
 	};
 
+	// Gaya TEKS nama hero di laporan kill (khusus jenis Rpf). Diisi dari Lua: Icons.rpf.text / Icons.setText.
+	struct RGB
+	{
+		unsigned char r = 255, g = 255, b = 255;
+	};
+
+	struct TextStyle
+	{
+		std::string font = "Fonts/Roboto-Medium.ttf"; // path file .ttf di Resources
+		float size = 21.0f;
+		RGB color = {255, 255, 255};
+		bool glow = true;
+		RGB glowColor = {34, 138, 32};
+		float glowBlur = 5.0f;
+		float glowIntensity = 0.8f;				  // 0..1
+		std::vector<std::string> strip;			  // potongan kata yang dibuang dari nama, mis. "Sage", "Rikudo"
+		std::unordered_map<std::string, std::string> names; // unit -> teks tampil (mengalahkan semuanya)
+	};
+
+	inline TextStyle &textStyle()
+	{
+		static TextStyle t;
+		return t;
+	}
+
 	inline std::string defaultTemplate(Kind k) { return std::string("{}_") + info(k).suffix + ".png"; }
 
 	inline Config &config(Kind k)
@@ -885,6 +914,8 @@ namespace IconRegistry
 		c.frameTemplate = defaultTemplate(k);
 		c.defaultScale = 1.0f;
 		c.scale.clear();
+		if (k == Rpf)
+			textStyle() = TextStyle();
 	}
 
 	inline void clearAll()
@@ -905,6 +936,7 @@ namespace IconRegistry
 			if (c.defaultScale != 1.0f)
 				n++;
 		}
+		n += textStyle().strip.size() + textStyle().names.size();
 		return n;
 	}
 
@@ -989,6 +1021,42 @@ namespace IconRegistry
 		Config &c = config(k);
 		auto it = c.scale.find(unit);
 		return it != c.scale.end() ? it->second : c.defaultScale;
+	}
+
+	// Hapus semua potongan kata `strip` dari `name` (peka huruf besar/kecil). Kalau hasilnya
+	// kosong, nama asli dipakai supaya laporan kill tidak pernah menampilkan teks kosong.
+	inline std::string stripWords(const std::string &name, const std::vector<std::string> &words)
+	{
+		std::string out = name;
+		for (const std::string &w : words)
+		{
+			if (w.empty())
+				continue;
+			size_t pos = 0;
+			while ((pos = out.find(w, pos)) != std::string::npos)
+				out.erase(pos, w.size());
+		}
+		return out.empty() ? name : out;
+	}
+
+	// Teks nama hero di laporan kill (rpf). Urutan:
+	//   1. names[unit] dari Lua (dipakai apa adanya)
+	//   2. nama dari frame hasil file / bind / frame (tanpa ".png" dan "_rpf"), lalu dibuang `strip`
+	inline std::string displayName(const std::string &unit)
+	{
+		const TextStyle &t = textStyle();
+		auto it = t.names.find(unit);
+		if (it != t.names.end() && !it->second.empty())
+			return it->second;
+
+		std::string name = frameFor(Rpf, unit);
+		const std::string kPng = ".png";
+		const std::string kSuffix = "_rpf";
+		if (name.size() > kPng.size() && name.compare(name.size() - kPng.size(), kPng.size(), kPng) == 0)
+			name.erase(name.size() - kPng.size());
+		if (name.size() > kSuffix.size() && name.compare(name.size() - kSuffix.size(), kSuffix.size(), kSuffix) == 0)
+			name.erase(name.size() - kSuffix.size());
+		return isHeroUnit(unit) ? stripWords(name, t.strip) : name;
 	}
 } // namespace IconRegistry
 

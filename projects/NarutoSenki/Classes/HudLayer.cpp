@@ -1059,58 +1059,57 @@ Sprite *HudLayer::createSPCReport(uint32_t killNum, int num)
 	return reportSPCSprite;
 }
 
-// Nama hero di laporan kill (pengganti <Hero>_rpf.png):
-// teks Roboto-Medium putih ukuran 42 dengan glow.
-//   Glow : blur 5, warna HSB (33%, 77%, 54%) = RGB (34, 138, 32), intensitas 80%
+// Nama hero di laporan kill (pengganti <Hero>_rpf.png), digambar sebagai teks.
+// SEMUA pengaturannya dari Lua (lua/Hook/Icons.lua -> rpf.text), tidak ada lagi yang hard-coded di sini:
+//   font / size / color     -> font .ttf, ukuran, warna teks
+//   glow                    -> aktif/tidak, warna, blur, intensitas
+//   strip                   -> kata yang dibuang dari nama (mis. "Sage", "Rikudo": SageNaruto -> "Naruto")
+//   names                   -> teks tampil khusus per unit
 // Glow dibuat dari salinan tekstur teks yang digeser (3 lingkaran sampai radius = blur) dan diwarnai,
 // jadi tidak butuh shader / RenderTexture.
 //
-// Pengaturan `rpf` dari lua/Hook/Icons.lua tetap berlaku:
+// Pengaturan `rpf` lain dari lua/Hook/Icons.lua tetap berlaku:
 //   bind / file / frame -> teks diambil dari nama frame hasilnya tanpa ".png" dan "_rpf"
 //                          (mis. TobiMasked = 'Tobi' -> "Tobi"; file Madara = 'MadaraEdo_rpf.png' -> "MadaraEdo")
 //   defaultScale / scale -> skala seluruh teks + glow
 static Sprite *createNameGlowLabel(const string &unit)
 {
-	string name = IconRegistry::frameFor(IconRegistry::Rpf, unit);
-	const string kPng = ".png";
-	const string kSuffix = "_rpf";
-	if (name.size() > kPng.size() && name.compare(name.size() - kPng.size(), kPng.size(), kPng) == 0)
-		name.erase(name.size() - kPng.size());
-	if (name.size() > kSuffix.size() && name.compare(name.size() - kSuffix.size(), kSuffix.size(), kSuffix) == 0)
-		name.erase(name.size() - kSuffix.size());
+	const IconRegistry::TextStyle &style = IconRegistry::textStyle();
+	const string name = IconRegistry::displayName(unit);
 
-	const char *kFont = "Fonts/Roboto-Medium.ttf";
-	const float kFontSize = 21.0f;
-	const float kBlur = 5.0f;
-	const float kIntensity = 0.8f;
-	const ccColor3B kGlowColor = {34, 138, 32};
-
-	auto label = CCLabelTTF::create(name.c_str(), kFont, kFontSize);
-	label->setColor(ccWHITE);
+	auto label = CCLabelTTF::create(name.c_str(), style.font.c_str(), style.size);
+	label->setColor(ccc3(style.color.r, style.color.g, style.color.b));
 	const CCSize textSize = label->getContentSize();
 
-	const float pad = kBlur + 1;
+	const bool glow = style.glow && style.glowBlur > 0 && style.glowIntensity > 0;
+	const float blur = glow ? style.glowBlur : 0.0f;
+	const float pad = blur + 1;
 	auto holder = Sprite::create();
 	holder->setContentSize(CCSize(textSize.width + pad * 2, textSize.height + pad * 2));
 	const Vec2 center(holder->getContentSize().width / 2, holder->getContentSize().height / 2);
 
-	// jumlah salinan: 1 (tengah) + 8 (radius 1/2 blur) + 12 (radius blur)
-	const int kRings[3] = {1, 8, 12};
-	const float kRadius[3] = {0.0f, kBlur * 0.5f, kBlur};
-	const int total = kRings[0] + kRings[1] + kRings[2];
-	// opacity per salinan supaya tumpukan salinan di dalam teks mencapai `kIntensity`
-	const float perCopy = 1.0f - powf(1.0f - kIntensity, 1.0f / total);
-
-	for (int r = 0; r < 3; r++)
+	if (glow)
 	{
-		for (int k = 0; k < kRings[r]; k++)
+		const ccColor3B glowColor = ccc3(style.glowColor.r, style.glowColor.g, style.glowColor.b);
+		// jumlah salinan: 1 (tengah) + 8 (radius 1/2 blur) + 12 (radius blur)
+		const int kRings[3] = {1, 8, 12};
+		const float kRadius[3] = {0.0f, blur * 0.5f, blur};
+		const int total = kRings[0] + kRings[1] + kRings[2];
+		// opacity per salinan supaya tumpukan salinan di dalam teks mencapai intensitas glow
+		const float intensity = std::min(style.glowIntensity, 0.999f);
+		const float perCopy = 1.0f - powf(1.0f - intensity, 1.0f / total);
+
+		for (int r = 0; r < 3; r++)
 		{
-			float angle = 2.0f * (float)M_PI * k / kRings[r];
-			auto copy = Sprite::createWithTexture(label->getTexture());
-			copy->setColor(kGlowColor);
-			copy->setOpacity((GLubyte)(perCopy * 255.0f + 0.5f));
-			copy->setPosition(center + Vec2(cosf(angle) * kRadius[r], sinf(angle) * kRadius[r]));
-			holder->addChild(copy, 0);
+			for (int k = 0; k < kRings[r]; k++)
+			{
+				float angle = 2.0f * (float)M_PI * k / kRings[r];
+				auto copy = Sprite::createWithTexture(label->getTexture());
+				copy->setColor(glowColor);
+				copy->setOpacity((GLubyte)(perCopy * 255.0f + 0.5f));
+				copy->setPosition(center + Vec2(cosf(angle) * kRadius[r], sinf(angle) * kRadius[r]));
+				holder->addChild(copy, 0);
+			}
 		}
 	}
 

@@ -32,8 +32,15 @@ extern "C"
  *   Icons.clear([kind])                           (kembalikan ke bawaan: tanpa binding, skala 1.0)
  *   Icons.count()                      -> integer
  *
+ * Teks nama hero di laporan kill (khusus rpf):
+ *   Icons.setText(t)                   -> integer  (gabung ke gaya teks; t = {font=, size=, color={r,g,b},
+ *                                                   glow=true|false|{color=,blur=,intensity=}, strip={..}, names={..}})
+ *   Icons.setStrip(list)               -> integer  (ganti daftar kata yang dibuang, mis. {'Sage','Rikudo'})
+ *   Icons.setName(unit, text)          -> boolean  (teks tampil khusus unit; text nil = hapus)
+ *   Icons.name(unit)                   -> string   (teks yang akan tampil di laporan kill)
+ *
  * kind (tidak peka huruf besar/kecil): rp, rpf, CutIn, Avator, small
- * cfg  = { rp = {frame=, file={}, bind={}, defaultScale=, scale={}}, rpf = {...}, CutIn = {...}, ... }
+ * cfg  = { rp = {frame=, file={}, bind={}, defaultScale=, scale={}}, rpf = {..., text={...}}, CutIn = {...}, ... }
  *
  * Khusus hero: nama banner kill-streak (DoubleKill, KillingSpree, ..., MonsterKill) dan Tower
  * ditolak (setBind / setFile / setScale mengembalikan false).
@@ -56,6 +63,128 @@ namespace IconSystem
 			return true;
 		CCLOG("[IconSystem] jenis gambar tidak dikenal: %s (rp, rpf, CutIn, Avator, small)", key);
 		return false;
+	}
+
+	// {r, g, b} (0..255) di indeks `idx` -> out. Return false kalau bukan tabel angka.
+	static bool readColor(lua_State *L, int idx, IconRegistry::RGB &out)
+	{
+		if (!lua_istable(L, idx))
+			return false;
+		idx = absIndex(L, idx);
+		int v[3];
+		for (int i = 0; i < 3; i++)
+		{
+			lua_rawgeti(L, idx, i + 1);
+			if (lua_type(L, -1) != LUA_TNUMBER)
+			{
+				lua_pop(L, 1);
+				return false;
+			}
+			v[i] = std::max(0, std::min(255, (int)lua_tonumber(L, -1)));
+			lua_pop(L, 1);
+		}
+		out.r = (unsigned char)v[0];
+		out.g = (unsigned char)v[1];
+		out.b = (unsigned char)v[2];
+		return true;
+	}
+
+	// Daftar string (array) di indeks `idx` -> out (menggantikan isi out).
+	static void readStringList(lua_State *L, int idx, std::vector<std::string> &out)
+	{
+		idx = absIndex(L, idx);
+		out.clear();
+		const int n = (int)lua_objlen(L, idx);
+		for (int i = 1; i <= n; i++)
+		{
+			lua_rawgeti(L, idx, i);
+			if (isStr(L, -1) && lua_objlen(L, -1) > 0)
+				out.emplace_back(lua_tostring(L, -1));
+			lua_pop(L, 1);
+		}
+	}
+
+	// Gabungkan tabel gaya teks di indeks `idx` ke IconRegistry::textStyle(). Field yang tidak ada tidak diubah.
+	// Return jumlah field yang terbaca.
+	static int applyText(lua_State *L, int idx)
+	{
+		idx = absIndex(L, idx);
+		IconRegistry::TextStyle &t = IconRegistry::textStyle();
+		int added = 0;
+
+		lua_getfield(L, idx, "font");
+		if (isStr(L, -1) && lua_objlen(L, -1) > 0)
+		{
+			t.font = lua_tostring(L, -1);
+			added++;
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, idx, "size");
+		if (lua_type(L, -1) == LUA_TNUMBER && lua_tonumber(L, -1) > 0)
+		{
+			t.size = (float)lua_tonumber(L, -1);
+			added++;
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, idx, "color");
+		if (readColor(L, -1, t.color))
+			added++;
+		lua_pop(L, 1);
+
+		lua_getfield(L, idx, "glow");
+		if (lua_type(L, -1) == LUA_TBOOLEAN)
+		{
+			t.glow = lua_toboolean(L, -1) != 0;
+			added++;
+		}
+		else if (lua_istable(L, -1))
+		{
+			t.glow = true;
+			added++;
+			const int g = lua_gettop(L);
+			lua_getfield(L, g, "color");
+			readColor(L, -1, t.glowColor);
+			lua_pop(L, 1);
+			lua_getfield(L, g, "blur");
+			if (lua_type(L, -1) == LUA_TNUMBER && lua_tonumber(L, -1) >= 0)
+				t.glowBlur = (float)lua_tonumber(L, -1);
+			lua_pop(L, 1);
+			lua_getfield(L, g, "intensity");
+			if (lua_type(L, -1) == LUA_TNUMBER)
+				t.glowIntensity = std::max(0.0f, std::min(1.0f, (float)lua_tonumber(L, -1)));
+			lua_pop(L, 1);
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, idx, "strip");
+		if (lua_istable(L, -1))
+		{
+			readStringList(L, -1, t.strip);
+			added += (int)t.strip.size();
+		}
+		lua_pop(L, 1);
+
+		lua_getfield(L, idx, "names");
+		if (lua_istable(L, -1))
+		{
+			const int n = lua_gettop(L);
+			t.names.clear();
+			lua_pushnil(L);
+			while (lua_next(L, n) != 0)
+			{
+				if (isStr(L, -2) && isStr(L, -1) && IconRegistry::isHeroUnit(lua_tostring(L, -2)) && lua_objlen(L, -1) > 0)
+				{
+					t.names[lua_tostring(L, -2)] = lua_tostring(L, -1);
+					added++;
+				}
+				lua_pop(L, 1);
+			}
+		}
+		lua_pop(L, 1);
+
+		return added;
 	}
 
 	// Isi satu jenis dari tabel cfg di indeks `idx`. Setelan jenis ini direset lebih dulu.
@@ -119,6 +248,14 @@ namespace IconSystem
 			}
 		}
 		lua_pop(L, 1);
+
+		if (kind == IconRegistry::Rpf)
+		{
+			lua_getfield(L, idx, "text");
+			if (lua_istable(L, -1))
+				added += applyText(L, -1);
+			lua_pop(L, 1);
+		}
 
 		return added;
 	}
@@ -302,6 +439,48 @@ namespace IconSystem
 		return 1;
 	}
 
+	static int icSetText(lua_State *L)
+	{
+		luaL_checktype(L, 1, LUA_TTABLE);
+		lua_pushinteger(L, (lua_Integer)applyText(L, 1));
+		return 1;
+	}
+
+	static int icSetStrip(lua_State *L)
+	{
+		luaL_checktype(L, 1, LUA_TTABLE);
+		IconRegistry::TextStyle &t = IconRegistry::textStyle();
+		readStringList(L, 1, t.strip);
+		lua_pushinteger(L, (lua_Integer)t.strip.size());
+		return 1;
+	}
+
+	static int icSetName(lua_State *L)
+	{
+		const char *unit = luaL_checkstring(L, 1);
+		IconRegistry::TextStyle &t = IconRegistry::textStyle();
+		if (lua_isnoneornil(L, 2))
+		{
+			lua_pushboolean(L, t.names.erase(unit) > 0 ? 1 : 0);
+			return 1;
+		}
+		const char *text = luaL_checkstring(L, 2);
+		if (!IconRegistry::isHeroUnit(unit) || *text == '\0')
+		{
+			lua_pushboolean(L, 0);
+			return 1;
+		}
+		t.names[unit] = text;
+		lua_pushboolean(L, 1);
+		return 1;
+	}
+
+	static int icName(lua_State *L)
+	{
+		lua_pushstring(L, IconRegistry::displayName(luaL_checkstring(L, 1)).c_str());
+		return 1;
+	}
+
 	static void registerLua()
 	{
 		if (!LuaBridge::isReady())
@@ -331,6 +510,10 @@ namespace IconSystem
 			{"has", icHas},
 			{"clear", icClear},
 			{"count", icCount},
+			{"setText", icSetText},
+			{"setStrip", icSetStrip},
+			{"setName", icSetName},
+			{"name", icName},
 		};
 
 		lua_newtable(L);
