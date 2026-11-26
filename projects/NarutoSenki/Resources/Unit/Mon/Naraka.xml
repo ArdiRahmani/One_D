@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">Naraka</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>Pakura_Skill04_16</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>Pakura_Skill04_16</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+            </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">400</p>
+        <p type="attackRangeX">48</p>
+        <p type="attackRangeY">32</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+      <e type="setAttackBox">f_hit</e>
+        <f>Pakura_Skill04_16</f>
+        <e type="setSound">Audio/Pakura/stick_damage.ogg</e>
+        <f>Pakura_Skill04_17</f>
+        <e type="setAttackBox">c_hit</e>
+        <f>Pakura_Skill04_18</f>
+        <e type="setAttackBox">s_hit</e>
+        <f>Pakura_Skill04_19</f>
+        <e type="setAttackBox">c_hit</e>
+        <f>Pakura_Skill04_20</f>
+        <e type="setAttackBox">s_hit</e>
+        <f>Pakura_Skill04_21</f>
+        <e type="setAttackBox">c_hit</e>
+        <f>Pakura_Skill04_22</f>
+        <e type="setAttackBox">s_hit</e>
+        <f>Pakura_Skill04_23</f>
+        <e type="setAttackBox">c_hit</e>
+        <f>Pakura_Skill04_24</f>
+        <e type="setAttackBox">s_hit</e>
+        <f>Pakura_Skill04_25</f>
+        <e type="setAttackBox">c_hit</e>
+        <f>Pakura_Skill04_26</f>
+        <e type="setAttackBox">s_hit</e>
+        <f>Pakura_Skill04_27</f>
+        <e type="setAttackBox">c_hit</e>
+        <f>Pakura_Skill04_28</f>
+        <e type="setAttackBox">s_hit</e>
+        <f>Pakura_Skill04_29</f>
+        <e type="setAttackBox">a_hit</e>
+        <f>Pakura_Skill04_30</f>
+        <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>
