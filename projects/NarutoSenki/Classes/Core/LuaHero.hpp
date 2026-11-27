@@ -16,6 +16,7 @@
  *       resumeAction = function(self, dt) ... end,      -- opsional
  *       setActionResume = function(self) ... end,       -- opsional (setara override setActionResume, mis. Hashirama)
  *       createClone  = function(self, cloneTime) ... end, -- opsional, return self:createSummon('Slug')
+ *       onSetTrap    = function(self, trapType) ... end,  -- opsional (setara override onSetTrap, mis. Karin)
  *   }
  *
  * `self` dan hasil self:target() adalah proxy "unit". Aturan umum:
@@ -54,6 +55,10 @@
  *    baseChangeAction()  baseResumeAction(dt)    (panggil versi C++ CharacterBase)
  *    createSummon('Slug') createClone('Nama') createKugutsu('Nama') -> unit|nil
  *        (Provider::create dengan Role::Summon / Clone / Kugutsu; AI unit itu ikut LuaAI/CloneAI)
+ *    setItem('Item1')  cancelResumeAction()  releaseControlledHeroes([idleAfter])  (Ino)
+ *    createTrap('Kusuri', offsetX, offsetY)   (Karin)
+ *    knockDown()   unit:resetDefenseValue(v)   setupSpcSkill1Clone(clone)
+ *    createClone('Nama'[, native=true])  native: abaikan binding LuaAI, pakai class C++ (mis. NarutoClone)
  *    revealEnemies([range=kAttackRange])   (musuh invisible dalam jarak jadi terlihat; dipakai Kakashi)
  *    setSkillButtonFrame(1|2, 'frame.png')  (ikon tombol HUD, hanya jika self Player)
  *    unit:setPosition(x, y)  unit:setAnchorPoint(x, y)   (unit mana pun, mis. hasil createSummon)
@@ -68,6 +73,8 @@
  *    nAttackValue nAttackType isFlog isNotFlog isTower isNotTower isCom isPlayer isPlayerOrCom
  *    isClone isKugutsu isSummon isMon isBullet isGuardian isArmored isInvincible isControlled
  *    isHealing canGear06 originSpeed(r/w) tempAttackValue1(r/w)
+ *    battleCondiction canItem1 buffStartTime (self, baca)
+ *    def(r/w) hasArmorBroken(r/w) spcAttackRangeX3/Y3(self)
  *    isSticking isFlipped skillUPBuffValue spcAttackValue1 sAttackValue1(r/w) isVisable(r/w)
  *    role  : 'Com' 'Player' 'Hero' 'Flog' 'Tower' 'Bullet' 'Clone' 'Kugutsu' 'Mon' 'Summon'
  *    state : 'IDLE' 'WALK' 'NATTACK' 'SATTACK' 'OATTACK' 'O2ATTACK' 'HURT' 'KNOCKDOWN' ...
@@ -106,12 +113,16 @@ public:
 	using HeroFactoryFn = Hero *(*)(const string &, Role, Group);
 	static inline HeroFactoryFn heroFactory = nullptr;
 
+	/** true = Provider::create() mengabaikan binding LuaAI (dipakai createClone(name, true)) */
+	static inline bool bypassLuaAI = false;
+
 	~LuaHero();
 
 	void perform() override;
 	void changeAction() override;
 	void resumeAction(float dt) override;
 	void setActionResume() override;
+	void onSetTrap(const string &trapType) override;
 	Hero *createClone(int cloneTime) override;
 
 private:
@@ -378,7 +389,6 @@ struct LuaHeroBinding
 			LH_NUM("hp", c->getHP()),
 			LH_NUM("maxHp", c->getMaxHP()),
 			LH_NUM("hpPercent", c->getHpPercent()),
-			LH_NUM("def", c->getDEF()),
 			LH_NUM("level", c->getLV()),
 			LH_NUM("exp", c->getEXP()),
 			LH_NUM("ckr", c->getCKR()),
@@ -415,6 +425,8 @@ struct LuaHeroBinding
 			{"nAttackType", {LH_GET(lua_pushstring(L, c->getNAttackType().c_str())), LH_SET(c->setNAttackType(string(luaL_checkstring(L, v)))), false}},
 			{"walkSpeed", {LH_GET(lua_pushnumber(L, (lua_Number)c->getWalkSpeed())), LH_SET(c->setWalkSpeed((int)luaL_checkinteger(L, v))), false}},
 			{"originSpeed", {LH_GET(lua_pushnumber(L, (lua_Number)c->_originSpeed)), LH_SET(c->_originSpeed = (int)luaL_checkinteger(L, v)), false}},
+			{"def", {LH_GET(lua_pushnumber(L, (lua_Number)c->getDEF())), LH_SET(c->setDEF((int)luaL_checkinteger(L, v))), false}},
+			{"hasArmorBroken", {LH_GET(lua_pushboolean(L, c->hasArmorBroken ? 1 : 0)), LH_SET(c->hasArmorBroken = lua_toboolean(L, v) != 0), false}},
 			{"sAttackValue1", {LH_GET(lua_pushnumber(L, (lua_Number)c->getSAttackValue1())), LH_SET(c->setSAttackValue1((uint32_t)luaL_checknumber(L, v))), false}},
 			{"isVisable", {LH_GET(lua_pushboolean(L, c->_isVisable ? 1 : 0)), LH_SET(c->_isVisable = lua_toboolean(L, v) != 0), false}},
 			{"tempAttackValue1", {LH_GET(lua_pushnumber(L, (lua_Number)c->getTempAttackValue1())), LH_SET(c->setTempAttackValue1((uint32_t)luaL_checknumber(L, v))), false}},
@@ -433,6 +445,11 @@ struct LuaHeroBinding
 			LH_SELF_BOOL("isOugis2Game", getGameLayer()->_isOugis2Game),
 			LH_SELF_BOOL("isFreeState", h->isFreeState()),
 			LH_SELF_NUM("gearCount", h->getGearArray().size()),
+			LH_SELF_NUM("battleCondiction", h->battleCondiction),
+			LH_SELF_BOOL("canItem1", h->_isCanItem1),
+			LH_SELF_NUM("buffStartTime", h->_buffStartTime),
+			LH_SELF_NUM("spcAttackRangeX3", h->_spcAttackRangeX3),
+			LH_SELF_NUM("spcAttackRangeY3", h->_spcAttackRangeY3),
 			LH_SELF_STR("spcAttackType1", h->_spcAttackType1.c_str()),
 			LH_SELF_STR("spcAttackType2", h->_spcAttackType2.c_str()),
 			LH_SELF_STR("spcAttackType3", h->_spcAttackType3.c_str()),
@@ -917,7 +934,12 @@ struct LuaHeroBinding
 			lua_pushnil(L);
 			return 1;
 		}
+		// arg ke-3 (opsional, boolean): true = pakai class C++ bawaan unit itu, abaikan binding LuaAI.
+		// Perlu untuk klon bernama sama dengan pemiliknya (mis. NarutoClone bernama "Naruto").
+		const bool native = lua_toboolean(L, 3) != 0;
+		LuaHero::bypassLuaAI = native;
 		Hero *unit = LuaHero::heroFactory(string(name), role, h->getGroup());
+		LuaHero::bypassLuaAI = false;
 		pushUnit(L, unit, true, false);
 		return 1;
 	}
@@ -932,6 +954,100 @@ struct LuaHeroBinding
 	{
 		LuaHero *h = selfOrError(L);
 		h->_monsterArray.push_back(aliveUnit(L, 2));
+		return 0;
+	}
+
+	// setItem('Item1'): pakai item (setara setItem(Item1))
+	static int m_setItem(lua_State *L)
+	{
+		LuaHero *h = selfOrError(L);
+		ABType t;
+		if (!parseAttack(L, 2, t))
+			return luaL_error(L, "tipe item tidak dikenal (pakai 'Item1')");
+		h->setItem(t);
+		return 0;
+	}
+
+	// cancelResumeAction(): unschedule(schedule_selector(CharacterBase::resumeAction))
+	static int m_cancelResumeAction(lua_State *L)
+	{
+		selfOrError(L)->unschedule(schedule_selector(CharacterBase::resumeAction));
+		return 0;
+	}
+
+	// releaseControlledHeroes([idleAfter=false]): lepas semua hero yang sedang DIKENDALIKAN self
+	// (possession Shintenshin Ino): _isControlled=false, tukar grup balik, lepas controller, buka kunci HUD.
+	// GUARD sama seperti Ino.hpp: hanya hero yang controller-nya bernama Ino (bukan stun-lock Kabuto).
+	// idleAfter=true  -> urutan Ino::resumeAction  (self idle() dulu kalau belum DEAD, sebelum changeGroup)
+	// idleAfter=false -> urutan Ino::setActionResume
+	static int m_releaseControlledHeroes(lua_State *L)
+	{
+		LuaHero *h = selfOrError(L);
+		const bool idleAfter = lua_toboolean(L, 2) != 0;
+		for (auto hero : getGameLayer()->_CharacterArray)
+		{
+			if (!hero->_isControlled || !hero->getController() || hero->getController()->getName() != HeroEnum::Ino)
+				continue;
+
+			hero->_isControlled = false;
+			if (!idleAfter)
+				hero->changeGroup();
+			if (hero->isPlayer())
+			{
+				hero->_isAI = false;
+				hero->unschedule(schedule_selector(CharacterBase::setAI));
+				getGameLayer()->getHudLayer()->_isAllButtonLocked = false;
+			}
+			if (h->isPlayer())
+				getGameLayer()->controlChar = nullptr;
+			if (idleAfter)
+			{
+				if (h->getState() != State::DEAD)
+					h->idle();
+				hero->changeGroup();
+			}
+			hero->setController(nullptr);
+		}
+		return 0;
+	}
+
+	// createTrap('Kusuri', offsetX, offsetY): Bullet trap (Role::Mon) di posisi self + offset, langsung attack(NAttack)
+	// (setara blok di Karin::onSetTrap; flip & offset dihitung di Lua)
+	static int m_createTrap(lua_State *L)
+	{
+		LuaHero *h = selfOrError(L);
+		const char *type = luaL_checkstring(L, 2);
+		const float ox = (float)luaL_checknumber(L, 3);
+		const float oy = (float)luaL_checknumber(L, 4);
+		auto trap = Bullet::create();
+		trap->setAnchorPoint(Vec2(0.5f, 0));
+		trap->setMaster(h);
+		trap->setID(string(type), Role::Mon, h->getGroup());
+		trap->setPosition(Vec2(h->getPositionX() + ox, h->getPositionY() + oy));
+		trap->attack(NAttack);
+		getGameLayer()->addChild(trap, -trap->getPositionY());
+		return 0;
+	}
+
+	static int m_knockDown(lua_State *L) { selfOrError(L)->knockDown(); return 0; }
+
+	// resetDefenseValue(v): def = (def > v) ? def - v : 0   (unit mana pun)
+	static int m_resetDefenseValue(lua_State *L)
+	{
+		aliveUnit(L, 1)->resetDefenseValue((int)luaL_checkinteger(L, 2));
+		return 0;
+	}
+
+	// setupSpcSkill1Clone(clone): klon memakai SKILL1 versi spc milik self
+	// (setara blok di Naruto::createClone_SageNaruto / createClone_RikudoNaruto)
+	static int m_setupSpcSkill1Clone(lua_State *L)
+	{
+		LuaHero *h = selfOrError(L);
+		CharacterBase *c = aliveUnit(L, 2);
+		c->setSkill1Action(c->createAnimation(c->skillSPC1Array, 10, false, true));
+		c->setSAttackValue1(h->getSAttackValue1());
+		c->setSAttackType1(h->_spcAttackType1);
+		c->_sAttackCD1 = h->_spcAttackCD1;
 		return 0;
 	}
 
@@ -1071,6 +1187,13 @@ struct LuaHeroBinding
 			{"createClone", m_createClone},
 			{"createKugutsu", m_createKugutsu},
 			{"addMonster", m_addMonster},
+			{"setItem", m_setItem},
+			{"cancelResumeAction", m_cancelResumeAction},
+			{"releaseControlledHeroes", m_releaseControlledHeroes},
+			{"createTrap", m_createTrap},
+			{"knockDown", m_knockDown},
+			{"resetDefenseValue", m_resetDefenseValue},
+			{"setupSpcSkill1Clone", m_setupSpcSkill1Clone},
 			{"setPosition", m_setPosition},
 			{"setAnchorPoint", m_setAnchorPoint},
 			{"revealEnemies", m_revealEnemies},
@@ -1267,6 +1390,20 @@ inline void LuaHero::setActionResume()
 		return;
 	const int top = lua_gettop(L);
 	callHook(L, "setActionResume", 0, 0, [](lua_State *) {});
+	lua_settop(L, top);
+}
+
+// hook opsional: onSetTrap(self, trapType)   (setara override Karin::onSetTrap)
+inline void LuaHero::onSetTrap(const string &trapType)
+{
+	if (_scriptRef == LUA_NOREF || !LuaBridge::isReady())
+		return;
+
+	lua_getL;
+	if (!hasHook(L, "onSetTrap"))
+		return;
+	const int top = lua_gettop(L);
+	callHook(L, "onSetTrap", 0, 1, [&trapType](lua_State *L) { lua_pushstring(L, trapType.c_str()); });
 	lua_settop(L, top);
 }
 

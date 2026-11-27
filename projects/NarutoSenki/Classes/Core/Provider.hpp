@@ -101,7 +101,7 @@ public:
 
 		// LuaAI (lua/Hook/LuaAI.lua): unit yang di-bind ke script Lua memakai LuaHero.
 		// Prioritas di atas CloneAI / class native; kalau script gagal dimuat -> jatuh ke bawah.
-		if (LuaAIRegistry::has(name))
+		if (!LuaHero::bypassLuaAI && LuaAIRegistry::has(name))
 		{
 			ptr = LuaHero::createFromScript(LuaAIRegistry::get(name));
 			if (!ptr)
