@@ -54,6 +54,9 @@
  *    baseChangeAction()  baseResumeAction(dt)    (panggil versi C++ CharacterBase)
  *    createSummon('Slug') createClone('Nama') createKugutsu('Nama') -> unit|nil
  *        (Provider::create dengan Role::Summon / Clone / Kugutsu; AI unit itu ikut LuaAI/CloneAI)
+ *    revealEnemies([range=kAttackRange])   (musuh invisible dalam jarak jadi terlihat; dipakai Kakashi)
+ *    setSkillButtonFrame(1|2, 'frame.png')  (ikon tombol HUD, hanya jika self Player)
+ *    unit:setPosition(x, y)  unit:setAnchorPoint(x, y)   (unit mana pun, mis. hasil createSummon)
  *    addMonster(unit)  lockSkill4Button() unlockSkill4Button() lockSkill5Button() unlockSkill5Button()
  *    data() -> tabel per-instance
  *
@@ -65,6 +68,7 @@
  *    nAttackValue nAttackType isFlog isNotFlog isTower isNotTower isCom isPlayer isPlayerOrCom
  *    isClone isKugutsu isSummon isMon isBullet isGuardian isArmored isInvincible isControlled
  *    isHealing canGear06 originSpeed(r/w) tempAttackValue1(r/w)
+ *    isSticking isFlipped skillUPBuffValue spcAttackValue1 sAttackValue1(r/w) isVisable(r/w)
  *    role  : 'Com' 'Player' 'Hero' 'Flog' 'Tower' 'Bullet' 'Clone' 'Kugutsu' 'Mon' 'Summon'
  *    state : 'IDLE' 'WALK' 'NATTACK' 'SATTACK' 'OATTACK' 'O2ATTACK' 'HURT' 'KNOCKDOWN' ...
  * ---- Properti khusus self (baca) ---------------------------------------------------------
@@ -400,6 +404,10 @@ struct LuaHeroBinding
 			LH_BOOL("isControlled", c->_isControlled),
 			LH_BOOL("isHealing", c->_isHealing),
 			LH_BOOL("canGear06", c->_isCanGear06),
+			LH_BOOL("isSticking", c->_isSticking),
+			LH_BOOL("isFlipped", c->_isFlipped),
+			LH_NUM("skillUPBuffValue", c->_skillUPBuffValue),
+			LH_NUM("spcAttackValue1", c->getSpcAttackValue1()),
 
 			// ---- semua unit (baca + tulis) ----
 			{"isArmored", {LH_GET(lua_pushboolean(L, c->_isArmored ? 1 : 0)), LH_SET(c->_isArmored = lua_toboolean(L, v) != 0), false}},
@@ -407,6 +415,8 @@ struct LuaHeroBinding
 			{"nAttackType", {LH_GET(lua_pushstring(L, c->getNAttackType().c_str())), LH_SET(c->setNAttackType(string(luaL_checkstring(L, v)))), false}},
 			{"walkSpeed", {LH_GET(lua_pushnumber(L, (lua_Number)c->getWalkSpeed())), LH_SET(c->setWalkSpeed((int)luaL_checkinteger(L, v))), false}},
 			{"originSpeed", {LH_GET(lua_pushnumber(L, (lua_Number)c->_originSpeed)), LH_SET(c->_originSpeed = (int)luaL_checkinteger(L, v)), false}},
+			{"sAttackValue1", {LH_GET(lua_pushnumber(L, (lua_Number)c->getSAttackValue1())), LH_SET(c->setSAttackValue1((uint32_t)luaL_checknumber(L, v))), false}},
+			{"isVisable", {LH_GET(lua_pushboolean(L, c->_isVisable ? 1 : 0)), LH_SET(c->_isVisable = lua_toboolean(L, v) != 0), false}},
 			{"tempAttackValue1", {LH_GET(lua_pushnumber(L, (lua_Number)c->getTempAttackValue1())), LH_SET(c->setTempAttackValue1((uint32_t)luaL_checknumber(L, v))), false}},
 
 			// ---- khusus self (baca) ----
@@ -925,6 +935,66 @@ struct LuaHeroBinding
 		return 0;
 	}
 
+	// setPosition(x, y) / setAnchorPoint(x, y): untuk unit mana pun (mis. hasil createSummon)
+	static int m_setPosition(lua_State *L)
+	{
+		aliveUnit(L, 1)->setPosition(Vec2((float)luaL_checknumber(L, 2), (float)luaL_checknumber(L, 3)));
+		return 0;
+	}
+	static int m_setAnchorPoint(lua_State *L)
+	{
+		aliveUnit(L, 1)->setAnchorPoint(Vec2((float)luaL_checknumber(L, 2), (float)luaL_checknumber(L, 3)));
+		return 0;
+	}
+
+	// revealEnemies([range=kAttackRange]): musuh (hero Player/Com, bukan HURT/DEAD) yang tak terlihat dan
+	// berada dalam jarak x < range jadi terlihat lagi (setara loop di Kakashi::changeAction / Sharingan)
+	static int m_revealEnemies(lua_State *L)
+	{
+		LuaHero *h = selfOrError(L);
+		const float range = (float)luaL_optnumber(L, 2, (lua_Number)kAttackRange);
+		for (auto hero : getGameLayer()->_CharacterArray)
+		{
+			if (h->getGroup() == hero->getGroup() ||
+				!hero->isPlayerOrCom() ||
+				hero->getState() == State::HURT ||
+				hero->getState() == State::DEAD)
+				continue;
+			if ((hero->getPosition() - h->getPosition()).x >= range || hero->_isVisable)
+				continue;
+
+			if (hero->getName() == HeroEnum::Konan || hero->getName() == HeroEnum::Deidara)
+				hero->unschedule(schedule_selector(CharacterBase::disableBuff));
+
+			hero->setOpacity(255);
+			hero->setVisible(true);
+			if (hero->_hpBar)
+				hero->_hpBar->setVisible(true);
+			if (hero->_shadow)
+				hero->_shadow->setVisible(true);
+			hero->_isVisable = true;
+		}
+		return 0;
+	}
+
+	// setSkillButtonFrame(slot 1|2, 'Kakashi_skill1_1.png'): ganti ikon tombol HUD (hanya jika self Player)
+	static int m_setSkillButtonFrame(lua_State *L)
+	{
+		LuaHero *h = selfOrError(L);
+		const int slot = (int)luaL_checkinteger(L, 2);
+		const char *frameName = luaL_checkstring(L, 3);
+		if (!h->isPlayer())
+			return 0;
+		auto frame = getSpriteFrame(string(frameName));
+		if (!frame)
+			return luaL_error(L, "SpriteFrame '%s' tidak ditemukan", frameName);
+		auto hud = getGameLayer()->getHudLayer();
+		if (slot == 1) hud->skill1Button->setDisplayFrame(frame);
+		else if (slot == 2) hud->skill2Button->setDisplayFrame(frame);
+		else return luaL_error(L, "slot tombol harus 1 atau 2");
+		return 0;
+	}
+
 	static int m_lockSkill4Button(lua_State *L) { selfOrError(L)->lockSkill4Button(); return 0; }
 	static int m_unlockSkill4Button(lua_State *L) { selfOrError(L)->unlockSkill4Button(); return 0; }
 	static int m_lockSkill5Button(lua_State *L) { selfOrError(L)->lockSkill5Button(); return 0; }
@@ -1001,6 +1071,10 @@ struct LuaHeroBinding
 			{"createClone", m_createClone},
 			{"createKugutsu", m_createKugutsu},
 			{"addMonster", m_addMonster},
+			{"setPosition", m_setPosition},
+			{"setAnchorPoint", m_setAnchorPoint},
+			{"revealEnemies", m_revealEnemies},
+			{"setSkillButtonFrame", m_setSkillButtonFrame},
 			{"lockSkill4Button", m_lockSkill4Button},
 			{"unlockSkill4Button", m_unlockSkill4Button},
 			{"lockSkill5Button", m_lockSkill5Button},

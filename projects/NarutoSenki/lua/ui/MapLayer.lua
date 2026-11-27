@@ -1,7 +1,8 @@
 --
 -- MapLayer
 -- Layar pilih map (dibuka dari SelectLayer setelah tombol Start ditekan).
--- Panah kiri/kanan = ganti map (loop). Tekan teks "MapsN" = lanjut ke game.
+-- Panah kiri/kanan = ganti map (loop). Teks "MapsN" hanya menampilkan pilihan.
+-- Tombol Start = konfirmasi map lalu lanjut ke SelectLayer:onGameStart().
 -- Tombol return = kembali ke layar pilih hero.
 --
 
@@ -19,7 +20,7 @@ local function countMaps()
         return c
     end)
     if ok and n and n > 0 then return n end
-    return 5 -- cadangan kalau pengecekan file tidak tersedia
+    return 7 -- cadangan kalau pengecekan file tidak tersedia
 end
 
 function MapLayer:ctor(selectLayer)
@@ -27,6 +28,7 @@ function MapLayer:ctor(selectLayer)
     self._mapCount = countMaps()
     self._current = 1
     self._confirmed = false
+    self._ready = false
     self:init()
 end
 
@@ -57,13 +59,12 @@ function MapLayer:init()
     title:setPosition(2, height - title:getContentSize().height - 2)
     self:addChild(title, 3)
 
-    -- teks "MapsN": ditekan = pilih map ini dan lanjut
+    -- teks "MapsN" (hanya tampilan, tidak bisa ditekan)
     self._mapLabel = ui.newTTFLabel({
         text = 'Maps1', font = MAP_FONT, size = MAP_SIZE})
-    local mapItem = CCMenuItemLabel:create(self._mapLabel)
-    mapItem:setAnchorPoint(0.5, 0.5)
-    mapItem:registerScriptHandler(handler(self, MapLayer.onConfirm))
-    self._mapItem = mapItem
+    self._mapLabel:setAnchorPoint(0.5, 0.5)
+    self._mapLabel:setPosition(width / 2, height / 2 + 30)
+    self:addChild(self._mapLabel, 5)
 
     local prevItem = ui.newImageMenuItem({
         image = 'Img/Prev.png', imageSelected = 'Img/Prev_1.png',
@@ -75,7 +76,6 @@ function MapLayer:init()
     nextItem:setScale(0.60)
 
     local midY = height / 2 + 30
-    mapItem:setPosition(width / 2, midY)
     prevItem:setPosition(width / 2 - 150, midY)
     nextItem:setPosition(width / 2 + 150, midY)
     local mvPrev = CCMoveBy:create(1, CCPoint(-8, 0))
@@ -85,14 +85,26 @@ function MapLayer:init()
     nextItem:runAction(CCRepeatForever:create(
                            transition.sequence({mvNext, mvNext:reverse()})))
 
-    local menu = ui.newMenu({mapItem, prevItem, nextItem})
+    local menu = ui.newMenu({prevItem, nextItem})
     menu:setPosition(0, 0)
     self:addChild(menu, 5)
 
-    local hint = ui.newTTFLabel({
-        text = 'Tap Maps to start', font = 'Fonts/ReggaeOne.ttf', size = 14})
-    hint:setPosition(width / 2, midY - 40)
-    self:addChild(hint, 5)
+    -- tombol Start (posisi sama seperti di SelectLayer): konfirmasi map -> onGameStart.
+    -- Baru aktif setelah 0.5 detik supaya ketukan dari tombol Start di SelectLayer
+    -- (atau ketukan ganda) tidak langsung melewati pemilihan map.
+    local start_btn = ui.newImageMenuItem({
+        image = '#start_btn.png',
+        listener = handler(self, MapLayer.onConfirm)})
+    local smenu = ui.newMenu({start_btn})
+    smenu:setAnchorPoint(0, 0)
+    smenu:setPosition(width - 40, 36)
+    self:addChild(smenu, 5)
+
+    self._ready = false
+    self:runAction(transition.sequence({
+        CCDelayTime:create(0.5),
+        CCCallFunc:create(function() self._ready = true end)
+    }))
 
     -- tombol return (sama seperti SkillLayer)
     local return_btn = ui.newImageMenuItem({
@@ -132,7 +144,7 @@ end
 -- Map terpilih: simpan (dibaca C++ GameLayer::initTileMap), kembali ke
 -- SelectLayer lalu teruskan ke tujuan asli (SelectLayer:onGameStart).
 function MapLayer:onConfirm()
-    if self._confirmed then return end
+    if self._confirmed or not self._ready then return end
     self._confirmed = true
 
     save.integer('selectedMap', self._current)

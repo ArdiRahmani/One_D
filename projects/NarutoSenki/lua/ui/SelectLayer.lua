@@ -379,7 +379,7 @@ function SelectLayer:init()
     local start_btn = ui.newImageMenuItem({
         image = '#start_btn.png',
         -- call c++ layer function
-        -- tampilkan pilihan map dulu; lanjut ke onGameStart setelah teks Maps ditekan
+        -- tampilkan pilihan map dulu; lanjut ke onGameStart setelah tombol Start di layar map ditekan
         listener = function() self:showMapSelect() end
     })
     local menu = ui.newMenu({start_btn})
