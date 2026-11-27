@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <data>
+	    <p type="attackType">ExpPapper</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">49</p>
+        <p type="attackRangeY">47</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+        <f>ExpPapper_01</f>
+          <f>ExpPapper_02</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <data>
+	    <p type="attackType">nAttack</p>
+        <p type="attackValue">20</p>
+        <p type="attackRangeX">32</p>
+        <p type="attackRangeY">0</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+<e type="setFlipped">10</e> 
+
+<e type="setCharge">200</e>
+          <f>ExpPapper_01</f>
+<e type="setCharge">25</e>
+          <f>ExpPapper_01</f>
+<e type="setCharge">25</e>
+          <f>ExpPapper_01</f>
+<e type="setCharge">25</e>
+          <f>ExpPapper_01</f>
+<e type="setCharge">25</e>
+          <f>ExpPapper_02</f>
+            <e type="setSound">Audio/TobiMasked/break.ogg</e>
+<e type="setAttackBox">ac_hit</e>
+<e type="setCharge">25</e>
+          <f>ExpPapper_03</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_04</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_05</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_06</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_07</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_08</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_09</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_10</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_11</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_12</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_13</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_14</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_15</f>
+<e type="setAttackBox">ac_hit</e> 
+<e type="setCharge">25</e>
+          <f>ExpPapper_16</f>
+<e type="setCharge">25</e>
+          <f>ExpPapper_17</f>
+<e type="setCharge">25</e>
+          <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>

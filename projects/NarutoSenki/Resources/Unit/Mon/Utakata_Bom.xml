@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action name="Idle">
+	 <date>
+	    <p type="attackType">Tuji</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">0</p>
+        <p type="attackRangeY">0</p>
+        <p type="cd">0</p>
+      </date>
+      <frame>
+        <f>Utakata_Bom_001</f>
+      </frame>
+    </action>
+   
+    <action name="Walk">
+      <frame>
+        <f>Utakata_Bom_001</f>
+      </frame>
+    </action>
+   
+    <action name="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action name="AirHurt">
+     <frame>
+     </frame>
+   </action>
+   
+   <action name="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action name="Dead">     
+      <frame>
+       <f>Utakata_Bom_001</f>
+<f>Utakata_Bom_002</f>
+<f>Utakata_Bom_003</f>
+<f>Utakata_Bom_004</f>
+<f>Utakata_Bom_005</f>
+<f>Utakata_Bom_006</f>
+<f>Utakata_Bom_007</f>
+<f>Utakata_Bom_008</f>
+<f>Utakata_Bom_009</f>
+<f>Utakata_Bom_010</f>
+<f>Utakata_Bom_011</f>
+<f>Utakata_Bom_012</f>
+<f>Utakata_Bom_013</f>
+<f>Utakata_Bom_014</f>
+<f>Utakata_Bom_015</f>
+<f>Utakata_Bom_016</f>
+<f>Utakata_Bom_017</f>
+      </frame>
+    </action>
+   
+    <action name="nAttack">
+      <date>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">500</p>
+        <p type="attackRangeX">40</p>
+        <p type="attackRangeY">40</p>
+        <p type="cd">0</p>
+      </date>
+      <frame>
+<f>Utakata_Bom_001</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_002</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_003</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_004</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_005</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_006</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_007</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_008</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_009</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_010</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_011</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_012</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_013</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_014</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_015</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_016</f>
+<e type="setAttackBox">c_hit</e>
+<f>Utakata_Bom_017</f>
+           <e type="setDetonation">0</e>
+      </frame>
+    </action>
+</unit>

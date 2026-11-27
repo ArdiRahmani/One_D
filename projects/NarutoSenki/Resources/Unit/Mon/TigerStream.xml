@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action value="Idle">
+	 <data>
+	    <p type="attackType">TigerStream</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">224</p>
+      </data>
+      <frame>
+        <f>TigerStream_Move_001</f>
+      </frame>
+    </action>
+   
+    <action value="Walk">
+      <frame>
+          <f>TigerStream_Move_001</f>
+      </frame>
+    </action>
+   
+    <action value="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action value="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action value="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Dead">
+      <frame>
+          <f>TigerStream_Move_001</f>
+      </frame>
+    </action>
+   
+    <action value="nAttack">
+      <data>
+	    <p type="attackType">aAttack</p>
+        <p type="attackValue">460</p>
+        <p type="attackRangeX">100</p>
+        <p type="attackRangeY">48</p>
+        <p type="cd">0</p>
+      </data>
+      <frame>
+<e type="setSound">Audio/Effect/bom.ogg</e>
+        <f>TigerStream_Move_001</f>    <e type="setAttackBox">f_hit</e>
+        <e type="setDelay">2</e>
+        <f>TigerStream_Move_002</f>    <e type="setAttackBox">b_hit</e>
+ <e type="setDelay">2</e>
+        <f>TigerStream_Move_003</f>    <e type="setAttackBox">b_hit</e>
+   <e type="setDelay">2</e>
+        <f>TigerStream_Move_004</f>    <e type="setAttackBox">b_hit</e>
+ <e type="setDelay">2</e>
+        <f>TigerStream_Move_005</f>    <e type="setAttackBox">b_hit</e>
+ <e type="setDelay">2</e>
+        <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>

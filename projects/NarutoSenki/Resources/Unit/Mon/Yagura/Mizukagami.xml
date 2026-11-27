@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <unit>
+   
+    <action value="Idle">
+	 <date>
+	    <p type="attackType">Suiji</p>
+        <p type="attackValue">0</p>
+        <p type="attackRangeX">51</p>
+        <p type="attackRangeY">11</p>
+        <p type="cd">224</p>
+      </date>
+      <frame>
+        <f>Skill02_01</f>
+      </frame>
+    </action>
+   
+    <action value="Walk">
+      <frame>
+          <f>Skill02_01</f>
+      </frame>
+    </action>
+   
+    <action value="Hurt">
+      <frame>
+      </frame>
+    </action>
+   
+   <action value="AirHurt">
+     <frame>
+
+     </frame>
+   </action>
+   
+   <action value="KnockDown">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Float">
+      <frame>
+      </frame>
+    </action>
+   
+    <action value="Dead">
+      <frame>
+       </frame>
+    </action>
+   
+    <action value="nAttack">
+      <date>
+	    <p type="attackType">sAttack</p>
+        <p type="attackValue">156</p>
+        <p type="attackRangeX">36</p>
+        <p type="attackRangeY">36</p>
+        <p type="cd">0</p>
+      </date>
+      <frame>
+          <e type="setDelay">-1</e>
+          <f>Skill02_01</f>
+          <e type="setDelay">-1</e>
+          <e type="setSound">Audio/Yagura/Yagura_SFX2_3.ogg</e>
+          <f>Skill02_02</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">s_hit</e>
+          <f>Skill02_03</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_04</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">s_hit</e>
+          <f>Skill02_05</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_06</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">s_hit</e>
+          <f>Skill02_07</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_08</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">s_hit</e>
+          <f>Skill02_09</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_10</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">s_hit</e>
+          <f>Skill02_11</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">s_hit</e>
+          <f>Skill02_12</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_13</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_14</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_15</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_16</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_17</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">f_hit</e>
+          <e type="setSound">Audio/Yagura/Yagura_SFX2_4.ogg</e>
+          <f>Skill02_18</f>
+          <e type="setDelay">-1</e>
+          <e type="setAttackBox">f_hit</e>
+          <f>Skill02_19</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_20</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_21</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_22</f>
+          <e type="setDelay">-1</e>
+          <f>Skill02_23</f>
+          <e type="setDetonation">0</e>
+      </frame>
+    </action>
+
+</unit>
